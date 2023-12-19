@@ -6,6 +6,14 @@
     text-align: center;
 }
 
+nav {
+    border-bottom: 10px solid black;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+    background-color: rgb(92, 10, 10);
+    text-align: center;
+}
+
 /* TODO: Add Montserrat font and use it in .footerblock p and .footerblock address since is the one we used in the sketches */
 .footerblock p {
     font-family: "Lucida Console", "Courier New", monospace; /* Placeholder Font */
