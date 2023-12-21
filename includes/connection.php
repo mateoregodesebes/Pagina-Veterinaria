@@ -1,13 +1,14 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$servername = getenv('DB_HOST');
-$username = getenv('DB_USER');
-$password = getenv('DB_PASS');
-$database = "veterinaria";
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USERNAME'];
+$password = $_ENV['DB_PASSWORD'];
+
+$database = "veterinaria-sql";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);

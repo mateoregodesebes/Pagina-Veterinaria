@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '../../includes/connection.php');
+require_once(__DIR__ . '/../../../includes/connection.php');
 $query = "SELECT * FROM mascotas";
 $result = mysqli_query($conn, $query);
 
@@ -22,12 +22,24 @@ $result = mysqli_query($conn, $query);
         <th scope="row">
           <?php $i ?>
         </th>
-        <td>$row['id']</td>
-        <td>$row['nombre']</td>
-        <td>$row['raza']</td>
-        <td>$row['color']</td>
-        <td>$row['fecha_de_nac']</td>
-        <td>$row['fecha_muerte']</td>
+        <td>
+          <?= $row['id'] ?>
+        </td>
+        <td>
+          <?= $row['nombre'] ?>
+        </td>
+        <td>
+          <?= $row['raza'] ?>
+        </td>
+        <td>
+          <?= $row['color'] ?>
+        </td>
+        <td>
+          <?= $row['fecha_de_nac'] ?>
+        </td>
+        <td>
+          <?= $row['fecha_muerte'] ?>
+        </td>
         <?php $i++ ?>
       </tr>
       <?php
