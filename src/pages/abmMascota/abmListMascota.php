@@ -13,15 +13,13 @@ $result = mysqli_query($conn, $query);
       <th scope="col">Color</th>
       <th scope="col">Fecha Nac</th>
       <th scope="col">Fecha Muerte</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <?php $i = 0;
-    while ($row = mysqli_fetch_array($result)): ?>
+    <?php while ($row = mysqli_fetch_array($result)): ?>
       <tr>
-        <th scope="row">
-          <?php $i ?>
-        </th>
         <td>
           <?= $row['id'] ?>
         </td>
@@ -40,12 +38,31 @@ $result = mysqli_query($conn, $query);
         <td>
           <?= $row['fecha_muerte'] ?>
         </td>
-        <?php $i++ ?>
+        <td>
+          <form method="post">
+            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+            <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
+            <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
       </tr>
       <?php
     endwhile;
     mysqli_free_result($result);
-    mysqli_close($conn);
     ?>
   </tbody>
 </table>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_POST['action'] == 'update') {
+    echo $_POST['id'];
+    header('Location: abmFormMascota.php');
+  } elseif ($_POST['action'] == 'delete') {
+    require_once(__DIR__ . '/../../entity-dbs/mascotas/bajaMascota.php');
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
+  }
+}
+mysqli_close($conn);
+?>

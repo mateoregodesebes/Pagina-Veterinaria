@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '../../includes/connection.php');
+require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
   $vId = $_POST['id'];
