@@ -2,7 +2,18 @@
 require_once(__DIR__ . '/../../../includes/connection.php');
 $query = "SELECT * FROM mascotas";
 $result = mysqli_query($conn, $query);
-
+if (isset($_SESSION['error'])) {
+  if ($_SESSION['error']) {
+    echo '<div class="alert alert-danger" role="alert">
+    Error al subir la imagen, intente nuevamente
+          </div>';
+  } else {
+    echo '<div class="alert alert-success" role="alert">
+    Mascota actualizada con exito
+          </div>';
+  }
+  unset($_SESSION['error']);
+}
 ?>
 <table class="table table-hover table-striped-columns">
   <thead>
@@ -43,6 +54,7 @@ $result = mysqli_query($conn, $query);
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
             <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
             <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+            <?php //! Agregar un modal aca para el delete  ?>
           </form>
         </td>
       </tr>
@@ -56,8 +68,10 @@ $result = mysqli_query($conn, $query);
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'update') {
-    echo $_POST['id'];
-    header('Location: abmFormMascota.php');
+    $_SESSION["currentPage"] = '../src/pages/abmMascota/abmFormMascota.php';
+    $_SESSION["idMascota"] = $_POST['id'];
+    echo '<script>window.location.replace("index.php");</script>';
+
   } elseif ($_POST['action'] == 'delete') {
     require_once(__DIR__ . '/../../entity-dbs/mascotas/bajaMascota.php');
     echo '<script>window.location.replace("index.php");</script>';
