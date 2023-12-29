@@ -26,12 +26,14 @@ try {
   $vFoto = $name;
   $vRaza = $_POST['raza'];
   $vColor = $_POST['color'];
+  //nunca deberia venir null porque es required
   if (!empty($_POST['fechaNac'])) {
     $date = DateTime::createFromFormat('Y-m-d', $_POST['fechaNac']);
     $vFechaNac = $date->format('Y-m-d');
   } else {
     $vFechaNac = null;
   }
+
   if (!empty($_POST['fechaMuerte'])) {
     $date = DateTime::createFromFormat('Y-m-d', $_POST['fechaMuerte']);
     $vFechaMuerte = $date->format('Y-m-d');
