@@ -1,30 +1,43 @@
+:root {
+    --main-color: rgb(92, 10, 10);
+    --main-font: 'Montserrat';
+    --text-color: white;
+}
+
 .footerblock {
     border-top: 10px solid black;
     border-left: 5px solid black;
     border-right: 5px solid black;
-    background-color: rgb(92, 10, 10);
+    background-color: var(--main-color);
     text-align: center;
 }
 
 /* TODO: Add Montserrat font and use it in .footerblock p and .footerblock address since is the one we used in the sketches */
 .footerblock p {
-    font-family: "Lucida Console", "Courier New", monospace; /* Placeholder Font */
-    color: white;
+    font-family: var(--main-font);
+    color: var(--text-color);
     text-decoration: none;
     text-align: left;
 }
 
 .footerblock address {
-    font-family: "Lucida Console", "Courier New", monospace; /* Placeholder Font */
-    color: white;
+    font-family: var(--main-font);
+    color: var(--text-color);
     text-decoration: none;
 }
 
 /* Selecciona solo aquellos <p> que son hijos directos de una etiqueta que posea la clase row*/
 .row > p{
-    font-family: "Lucida Console", "Courier New", monospace; /* Placeholder Font */
+    font-family: var(--main-font);
     color: black;
     background-color: rgb(255, 255, 206);
     display: inline-block;
     text-align: center;
+}
+
+a {
+    font-family: var(--main-font);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 900;
 }
