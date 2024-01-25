@@ -1,4 +1,6 @@
 <?php
+$_SESSION["currentPage"] = '../src/pages/abmMascota/abmListMascota.php';
+
 require_once(__DIR__ . '/../../../includes/connection.php');
 $query = "SELECT * FROM mascotas";
 $result = mysqli_query($conn, $query);
@@ -23,17 +25,20 @@ if (isset($_SESSION['error'])) {
   $_SESSION['error'] = null;
 }
 ?>
-<table class="table table-hover table-striped-columns">
+
+<h3> Mascotas </h3>
+<table class="table table-bordered border-3 table-hover table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Raza</th>
       <th scope="col">Color</th>
       <th scope="col">Fecha Nac</th>
       <th scope="col">Fecha Muerte</th>
       <form method="post">
-        <th scope="col"><button type="submit" name="action" value="create"><i class="fa-solid fa-plus"></i></button>
+        <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
+              class="fa-solid fa-plus"></i></button>
         </th>
       </form>
     </tr>
