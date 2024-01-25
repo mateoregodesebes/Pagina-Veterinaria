@@ -24,21 +24,33 @@ session_start();
 
     <title>Página Principal</title>
 </head>
+<?php
+/* TODO: 
+        -   Add the links to their respective pages to each list item from the navbar, default is "#".
+        -   Add another list item for the profile thing. */
+?>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <div class="container">
-        <div class="row">
-            <?php
-            if (!isset($_SESSION["currentPage"])) {
-                require_once("../src/pages/abmMascota/abmListMascota.php");
-            } elseif (isset($_SESSION["currentPage"])) {
-                require_once($_SESSION["currentPage"]);
-            }
-            ?>
-        </div>
+    <?php
+    /* Although Bootstrap usually uses the container class, the container-fluid class makes it so the page includes all of the viewport */
+    ?>
+    <div class="container-fluid">
+        <?php
+        require_once("../src/partials/navbar.php");
+
+        if (!isset($_SESSION["currentPage"])) {
+            //?Aca lo que habria que hacer es que en vez de abmList cuando tengamos el home hecho poner eso
+            //?y que cuando se apreta el boton de home se ponga el home como current page
+            require_once("../src/pages/abmMascota/abmListMascota.php");
+        } elseif (isset($_SESSION["currentPage"])) {
+            require_once($_SESSION["currentPage"]);
+        }
+
+        require_once("../src/partials/footer.php");
+        ?>
     </div>
 </body>
 
