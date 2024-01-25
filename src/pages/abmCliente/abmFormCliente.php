@@ -1,21 +1,18 @@
 <?php
 require_once(__DIR__ . '/../../../includes/connection.php');
 
-if (isset($_SESSION["idMascota"])) {
-  $id = $_SESSION["idMascota"];
-  $query = "SELECT * FROM mascotas WHERE id = '$id' ";
+if (isset($_SESSION["idCliente"])) {
+  $id = $_SESSION["idCliente"];
+  $query = "SELECT * FROM clientes WHERE id = '$id' ";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result);
-  $id_cliente = $row['cliente_id'];
+  $id_cliente = $row['id'];
   $nombre = $row['nombre'];
-  $raza = $row['raza'];
-  $color = $row['color'];
-  $fecha_de_nac = $row['fecha_de_nac'];
-  if (isset($row['fecha_muerte'])) {
-    $fecha_muerte = $row['fecha_muerte'];
-  } else {
-    $fecha_muerte = '';
-  }
+  $apellido = $row['apellido'];
+  $email = $row['email'];
+  $ciudad = $row['ciudad'];
+  $direccion = $row['direccion'];
+  $telefono = $row['telefono'];
 } else {
   $id = null;
 }
@@ -32,7 +29,7 @@ if (isset($_SESSION["idMascota"])) {
 
   <form method="post" enctype="multipart/form-data">
     <div class="mb-3">
-      <label class="form-label">Id de cliente dueño</label>
+      <label class="form-label">Id de cliente</label>
       <input type="text" required name="idCliente" class="form-control" placeholder="Id de cliente"
         value="<?php echo isset($id_cliente) ? $id_cliente : ""; ?>">
     </div>
@@ -42,30 +39,29 @@ if (isset($_SESSION["idMascota"])) {
         value="<?php echo isset($nombre) ? $nombre : ""; ?>">
     </div>
     <div class="mb-3">
-      <label class="form-label">Raza</label>
-      <input type="text" required name="raza" class="form-control" placeholder="Raza"
-        value="<?php echo isset($raza) ? $raza : ""; ?>">
+      <label class="form-label">Apellido</label>
+      <input type="text" required name="apellido" class="form-control" placeholder="Apellido"
+        value="<?php echo isset($apellido) ? $apellido : ""; ?>">
     </div>
     <div class="mb-3">
-      <label for="formFile" class="form-label">Foto de la mascota</label>
-      <input required class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
-    </div>
-    <?php //!Este ver que onda como guardar solamente el nombre de la foto y guardar el archivo en assets/mascotas/ ?>
-    <div class="mb-3">
-      <label class="form-label">Color</label>
-      <input type="text" required name="color" class="form-control" placeholder="Color"
-        value="<?php echo isset($color) ? $color : ""; ?>">
+      <label class="form-label">Email</label>
+      <input type="text" required name="email" class="form-control" placeholder="Email"
+        value="<?php echo isset($email) ? $email : ""; ?>">
     </div>
     <div class="mb-3">
-      <label class="form-label">Fecha de nacimiento</label>
-      <input type="date" required name="fechaNac" class="form-control" placeholder="Fecha de nacimiento"
-        value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
+      <label class="form-label">Ciudad</label>
+      <input type="text" required name="ciudad" class="form-control" placeholder="Ciudad"
+        value="<?php echo isset($ciudad) ? $ciudad : ""; ?>">
     </div>
     <div class="mb-3">
-      <label for="formFile" class="form-label" style="<?php echo isset($id) ? "" : "display: none" ?>">Fecha de
-        muerte</label>
-      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" class="form-control"
-        placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
+      <label class="form-label">Direccion</label>
+      <input type="text" required name="direccion" class="form-control" placeholder="Direccion"
+        value="<?php echo isset($direccion) ? $direccion : ""; ?>">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Telefono</label>
+      <input type="text" required name="telefono" class="form-control" placeholder="Telefono"
+        value="<?php echo isset($telefono) ? $telefono : ""; ?>">
     </div>
 
     <div class="row justify-content-center">
@@ -85,7 +81,7 @@ if (isset($_SESSION["idMascota"])) {
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="staticBackdropLabel">Usted esta a punto de
-              <?php echo isset($id) ? "modificar" : "crear" ?> una mascota
+              <?php echo isset($id) ? "modificar" : "crear" ?> un cliente
             </h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -106,27 +102,27 @@ if (isset($_SESSION["idMascota"])) {
 
 <?php
 if (isset($_POST['id'])) {
-  require_once(__DIR__ . '/../../entity-dbs/mascotas/updateMascota.php');
-  $_SESSION['currentPage'] = '../src/pages/abmMascota/abmListMascota.php';
+  require_once(__DIR__ . '/../../entity-dbs/clientes/updateCliente.php');
+  $_SESSION['currentPage'] = '../src/pages/abmCliente/abmListCliente.php';
   echo '<script>window.location.replace("index.php");</script>';
 }
 ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'updateEntity') {
-    if (isset($_SESSION["idMascota"])) {
-      require_once(__DIR__ . '/../../entity-dbs/mascotas/updateMascota.php');
-      $_SESSION['idMascota'] = null;
+    if (isset($_SESSION["idCliente"])) {
+      require_once(__DIR__ . '/../../entity-dbs/clientes/updateCliente.php');
+      $_SESSION['idCliente'] = null;
     }
 
   } elseif ($_POST['action'] == 'goBack') {
-    $_SESSION['idMascota'] = null;
+    $_SESSION['idCliente'] = null;
 
   } elseif ($_POST['action'] == 'createEntity') {
-    require_once(__DIR__ . '/../../entity-dbs/mascotas/altaMascota.php');
+    require_once(__DIR__ . '/../../entity-dbs/clientes/altaCliente.php');
   }
 
-  $_SESSION['currentPage'] = '../src/pages/abmMascota/abmListMascota.php';
+  $_SESSION['currentPage'] = '../src/pages/abmCliente/abmListCliente.php';
   echo '<script>window.location.replace("index.php");</script>';
   exit();
 }

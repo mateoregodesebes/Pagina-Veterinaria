@@ -1,19 +1,19 @@
 <?php
-$_SESSION["currentPage"] = '../src/pages/abmMascota/abmListMascota.php';
+$_SESSION["currentPage"] = '../src/pages/abmCliente/abmListCliente.php';
 
 require_once(__DIR__ . '/../../../includes/connection.php');
-$query = "SELECT * FROM mascotas";
+$query = "SELECT * FROM clientes";
 $result = mysqli_query($conn, $query);
 
 //!Decidir despues si se agrega un efecto con js aca, si se agrega recomiendo hacer un script aparte y ponerlo aca
 if (isset($_SESSION['error'])) {
   if ($_SESSION['error']) {
     echo '<div id="alert" class="alert alert-danger" role="alert">
-    Error al subir la imagen, intente nuevamente
+    Error al cargar cliente, intente nuevamente
           </div>';
   } else {
     echo '<div id="alert" class="alert alert-success" role="alert">
-    Mascota actualizada con exito
+    Cliente actualizado con exito
           </div>';
   }
   echo '<script type="text/javascript">
@@ -26,16 +26,17 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<h3> Mascotas </h3>
+<h3> Clientes </h3>
 <table class="table table-bordered border-3 table-hover table-striped">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Raza</th>
-      <th scope="col">Color</th>
-      <th scope="col">Fecha Nac</th>
-      <th scope="col">Fecha Muerte</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Email</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Telefono</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -53,16 +54,19 @@ if (isset($_SESSION['error'])) {
           <?= $row['nombre'] ?>
         </td>
         <td>
-          <?= $row['raza'] ?>
+          <?= $row['apellido'] ?>
         </td>
         <td>
-          <?= $row['color'] ?>
+          <?= $row['email'] ?>
         </td>
         <td>
-          <?= $row['fecha_de_nac'] ?>
+          <?= $row['ciudad'] ?>
         </td>
         <td>
-          <?= $row['fecha_muerte'] ?>
+          <?= $row['direccion'] ?>
+        </td>
+        <td>
+          <?= $row['telefono'] ?>
         </td>
         <td>
           <form method="post">
@@ -76,7 +80,7 @@ if (isset($_SESSION['error'])) {
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Usted esta a punto de borrar una mascota</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Usted esta a punto de borrar un cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -103,16 +107,16 @@ if (isset($_SESSION['error'])) {
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'update') {
-    $_SESSION["currentPage"] = '../src/pages/abmMascota/abmFormMascota.php';
-    $_SESSION["idMascota"] = $_POST['id'];
+    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
+    $_SESSION["idCliente"] = $_POST['id'];
     echo '<script>window.location.replace("index.php");</script>';
 
   } elseif ($_POST['action'] == 'delete') {
-    require_once(__DIR__ . '/../../entity-dbs/mascotas/bajaMascota.php');
+    require_once(__DIR__ . '/../../entity-dbs/Clientes/bajaCliente.php');
     echo '<script>window.location.replace("index.php");</script>';
     exit();
   } elseif ($_POST['action'] == 'create') {
-    $_SESSION["currentPage"] = '../src/pages/abmMascota/abmFormMascota.php';
+    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
     echo '<script>window.location.replace("index.php");</script>';
   }
 }

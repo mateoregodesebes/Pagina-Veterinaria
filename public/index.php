@@ -14,9 +14,9 @@ session_start();
     <?php
     if (isset($_SESSION["currentPage"])) {
         switch ($_SESSION["currentPage"]) {
-            case '../src/pages/abmMascota/abmListMascota.php':
-            case '../src/pages/abmMascota/abmFormMascota.php':
-                echo '<link rel="stylesheet" href="css/abmMascota.css">';
+            case '../src/pages/abmCliente/abmListCliente.php':
+            case '../src/pages/abmCliente/abmFormCliente.php':
+                echo '<link rel="stylesheet" href="css/abmCliente.css">';
                 break;
         }
     }
@@ -33,7 +33,7 @@ session_start();
         <div class="row">
             <?php
             if (!isset($_SESSION["currentPage"])) {
-                require_once("../src/pages/abmMascota/abmListMascota.php");
+                require_once("../src/pages/abmCliente/abmListCliente.php");
             } elseif (isset($_SESSION["currentPage"])) {
                 require_once($_SESSION["currentPage"]);
             }

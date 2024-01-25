@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
   $vId = $_POST['id'];
-  $stmt = $conn->prepare("DELETE FROM mascotas WHERE id = ?");
+  $stmt = $conn->prepare("DELETE FROM clientes WHERE id = ?");
 
   if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);
