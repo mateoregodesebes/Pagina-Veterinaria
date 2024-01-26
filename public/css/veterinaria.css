@@ -1,0 +1,44 @@
+:root {
+  --main-color: rgb(92, 10, 10);
+  --text-color: white;
+  --main-background: #eee3e7;
+  --table-color: #b070af;
+  --main-font: 'Montserrat', sans-serif;
+  --form-color: #8e1732;
+}
+
+.footerblock {
+  border-top: 10px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  background-color: var(--main-color);
+  text-align: center;
+}
+
+.footerblock p {
+  font-family: var(--main-font);
+  color: var(--text-color);
+  text-decoration: none;
+  text-align: left;
+}
+
+.footerblock address {
+  font-family: var(--main-font);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.row > p {
+  font-family: var(--main-font);
+  color: black;
+  background-color: rgb(255, 255, 206);
+  display: inline-block;
+  text-align: center;
+}
+
+a {
+  font-family: var(--main-font);
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 900;
+}
