@@ -1,6 +1,7 @@
 :root {
   --main-color: rgb(92, 10, 10);
   --text-color: white;
+  --link-color: white;
   --main-background: #eee3e7;
   --table-color: #b070af;
   --main-font: 'Montserrat', sans-serif;
