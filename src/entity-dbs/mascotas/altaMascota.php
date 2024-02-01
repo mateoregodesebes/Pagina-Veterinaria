@@ -1,5 +1,8 @@
 <?php
 
+//?Podria ver si se mueve la carpeta padre de este archivo(entity-dbs) a la carpeta abmMascotas
+//?Para una coherencia con respecto a contact
+
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
