@@ -17,3 +17,18 @@ a.nav-link {
 a.nav-link:hover {
   outline: 2px solid white;
 }
+
+.form-group * {
+  color: var(--main-color);
+  font-family: var(--main-font);
+}
+
+.form-check * {
+  color: solid black;
+  font-family: var(--main-font);
+}
+
+.iniciar_sesion {
+  display: block
+  /* test also width:100% */
+}
