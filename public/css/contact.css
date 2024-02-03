@@ -1,0 +1,57 @@
+.contact-container {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+.contact-container h2 {
+  font-family: var(--main-font);
+  font-weight: 900;
+}
+
+.main-inputs {
+  padding: 2%;
+  border-radius: 2%;
+}
+.main-inputs h2 {
+  padding-bottom: 1%;
+}
+
+.user-info input,
+.message input,
+.message textarea {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.email {
+  margin-left: 2px;
+}
+
+.user-info input,
+.message input,
+textarea {
+  padding: 5px;
+}
+
+.static-info {
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.static-info span,
+.static-info p,
+.static-info h2,
+.static-info a {
+  font-family: var(--main-font);
+  color: white;
+  text-decoration: none;
+}
+
+.socials {
+  font-size: 110%;
+  padding: 2%;
+}
