@@ -23,18 +23,30 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <?php 
+                    if(isset($_SESSION["user"]) && $_SESSION["user"] != null){
+                        echo '
+                        <a class="dropdown-item" href="#">Perfil</a>
+                        <a class="dropdown-item" href="#">Mis Mascotas</a>
+                        <a class="dropdown-item" href="#">Mis Turnos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Cerrar Sesion</a>
+                        ';
+                    
+                    }
+                    // ToDo: Make the remember me button work 
+                    else echo '
                     <form class="px-4 py-3">
                         <div class="form-group">
                             <label>Mail</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@ejemplo.com" required>
+                            <input type="email" class="form-control mt-1" id="exampleDropdownFormEmail1" placeholder="email@ejemplo.com" required>
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1" title="Ingrese una contraseña de al menos 8 caracteres" required>
+                            <input type="password" class="form-control mt-1" id="exampleDropdownFormPassword1" title="Ingrese una contraseña de al menos 8 caracteres" required>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check mt-2">
                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                            <!-- ToDo: Make the remember me work -->
                             <label class="form-check-label" for="dropdownCheck">
                                 Recordarme
                             </label>
@@ -42,8 +54,11 @@
                         <button type="submit" class="btn btn-primary mx-auto iniciar_sesion">Iniciar Sesion</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">No tenes una cuenta? Registrate</a>
+                    <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
                     <a class="dropdown-item" href="#">Olvidaste tu contraseña?</a>
+                    ';
+                        ?>
+
                 </div>
             </li>
         </ul>
