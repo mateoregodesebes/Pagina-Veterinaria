@@ -17,7 +17,9 @@ session_start();
         switch ($_SESSION["currentPage"]) {
             case '../src/pages/abmMascota/abmListMascota.php':
             case '../src/pages/abmMascota/abmFormMascota.php':
-                echo '<link rel="stylesheet" href="css/abmMascota.css">';
+            case '../src/pages/abmCliente/abmListCliente.php':
+            case '../src/pages/abmCliente/abmFormCliente.php':
+                echo '<link rel="stylesheet" href="css/abm.css">';
                 break;
             case '../src/pages/contact/contact.php':
                 echo '<link rel="stylesheet" href="css/contact.css">';
