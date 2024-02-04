@@ -3,7 +3,10 @@
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
-
+  /* The id is autoincremental, so we don't need to pass it 
+  * ToDo: There should be a checks to see if everything is correctly. E.g.: if the email is already in use, if the phone number is already in use, etc.
+  * ToDo: The password should be hashed, stored in some variable and then sent into the db.
+  */
   $vIdClient = $_POST['idCliente'];
   $vNombre = $_POST['nombre'];
   $vApellido = $_POST['apellido'];
