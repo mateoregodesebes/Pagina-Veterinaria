@@ -25,7 +25,9 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <?php 
                     if(isset($_SESSION["user"]) && $_SESSION["user"] != null){
+                        # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
                         echo '
+                        <div class="alert alert-success" role="alert">Bienvenido $user_name</div>
                         <a class="dropdown-item" href="#">Perfil</a>
                         <a class="dropdown-item" href="#">Mis Mascotas</a>
                         <a class="dropdown-item" href="#">Mis Turnos</a>
@@ -51,7 +53,7 @@
                                 Recordarme
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary mx-auto iniciar_sesion">Iniciar Sesion</button>
+                        <button type="submit" class="btn btn-primary mx-auto iniciar_sesion" name="login">Iniciar Sesion</button>
                     </form>
                     <div class="dropdown-divider"></div>
                     <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
