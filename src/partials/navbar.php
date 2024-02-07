@@ -24,20 +24,23 @@
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <?php 
-                    if(isset($_SESSION["user"]) && $_SESSION["user"] != null){
-                        # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
-                        echo '
+                    if(isset($_SESSION["user"]))
+                    {
+                    # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
+                    ?>
                         <div class="alert alert-success" role="alert">Bienvenido $user_name</div>
                         <a class="dropdown-item" href="#">Perfil</a>
                         <a class="dropdown-item" href="#">Mis Mascotas</a>
                         <a class="dropdown-item" href="#">Mis Turnos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Cerrar Sesion</a>
-                        ';
-                    
+                    <?php
                     }
                     // ToDo: Make the remember me button work 
-                    else echo '
+                    else
+                    {
+                        require_once(__DIR__ . '/../scripts/login.php');
+                    ?>
                     <form class="px-4 py-3">
                         <div class="form-group">
                             <label>Mail</label>
@@ -58,8 +61,9 @@
                     <div class="dropdown-divider"></div>
                     <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
                     <a class="dropdown-item" href="#">Olvidaste tu contraseña?</a>
-                    ';
-                        ?>
+                    <?php
+                    }
+                    ?>
 
                 </div>
             </li>
