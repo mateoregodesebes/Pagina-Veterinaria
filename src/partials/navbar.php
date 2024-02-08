@@ -68,7 +68,9 @@
                             <button type="submit" class="btn btn-primary mx-auto iniciar_sesion" name="login">Iniciar Sesion</button>
                         </form>
                         <div class="dropdown-divider"></div>
-                        <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
+                        <form method="post">
+                            <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
+                        </form>
                         <a class="dropdown-item" href="#">Olvidaste tu contraseña?</a>
                     <?php
                     }
