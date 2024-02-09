@@ -28,13 +28,23 @@
                     <?php
                     if (isset($_SESSION["user"])) {
                         # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
+                        if (isset($_POST["logoutButton"]))
+                        {
+                            // Is it correct to destroy the session here? Or should I only unset the user related $_SESSION variables?
+                            session_destroy();
+                            echo '<script>window.location.replace("index.php");</script>';
+                            exit();
+                        }
                     ?>
-                        <div class="alert alert-success" role="alert">Bienvenido $user_name</div>
+                        <div class='alert alert-success' role='alert'>Bienvenido <?php $_SESSION["user_name"] ?></div>
                         <a class="dropdown-item" href="#">Perfil</a>
                         <a class="dropdown-item" href="#">Mis Mascotas</a>
                         <a class="dropdown-item" href="#">Mis Turnos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cerrar Sesion</a>
+                        <div class="dropdown-item">
+                            <form method="post">
+                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">Cerrar Sesión</button>
+                            </form>
+                        </div>
                     <?php
                     }
                     // ToDo: Make the remember me button work 
@@ -58,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Contraseña</label>
-                                <input type="password" class="form-control mt-1" name="password" title="Ingrese una contraseña de al menos 8 caracteres" required>
+                                <input type="password" class="form-control mt-1" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
                             </div>
                             <div class="form-check mt-2">
                                 <input type="checkbox" class="form-check-input" id="dropdownCheck">
