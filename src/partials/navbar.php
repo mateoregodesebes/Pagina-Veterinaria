@@ -3,10 +3,9 @@
         <?php
         #ToDo: Make so that the logo change the $_SESSION['currentPage'] to contact.php
         ?>
-        <a class="navbar-brand mx-3" href="index.php">
+        <a class="navbar-brand mx-3">
             <img src="../assets/logo.png" width="50" height="50" alt="Logo">
         </a>
-
         <ul class="navbar-nav mr-auto mt-1">
             <li class="nav-item">
                 <a class="nav-link" href="#">Sobre Nosotros</a>
@@ -43,6 +42,8 @@
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["login"])) {
                                 require_once(__DIR__ . '/../scripts/login.php');
+                                echo '<script>window.location.replace("index.php");</script>';
+                                exit();
                             } elseif (isset($_POST["registerButton"])) {
                                 $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
                                 echo '<script>window.location.replace("index.php");</script>';
@@ -50,14 +51,14 @@
                             }
                         }
                     ?>
-                        <form class="px-4 py-3">
+                        <form class="px-4 py-3" action="index.php" method="POST">
                             <div class="form-group">
                                 <label>Mail</label>
-                                <input type="email" class="form-control mt-1" id="exampleDropdownFormEmail1" placeholder="email@ejemplo.com" required>
+                                <input type="email" class="form-control mt-1" name="email" placeholder="email@ejemplo.com" required>
                             </div>
                             <div class="form-group">
                                 <label>Contraseña</label>
-                                <input type="password" class="form-control mt-1" id="exampleDropdownFormPassword1" title="Ingrese una contraseña de al menos 8 caracteres" required>
+                                <input type="password" class="form-control mt-1" name="password" title="Ingrese una contraseña de al menos 8 caracteres" required>
                             </div>
                             <div class="form-check mt-2">
                                 <input type="checkbox" class="form-check-input" id="dropdownCheck">
