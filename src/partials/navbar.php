@@ -36,7 +36,7 @@
                             exit();
                         }
                     ?>
-                        <div class='alert alert-success' role='alert'>Bienvenido <?php $_SESSION["user_name"] ?></div>
+                        <div class='alert alert-success' role='alert'>Bienvenido <?php echo $_SESSION["user_name"] ?></div>
                         <a class="dropdown-item" href="#">Perfil</a>
                         <a class="dropdown-item" href="#">Mis Mascotas</a>
                         <a class="dropdown-item" href="#">Mis Turnos</a>

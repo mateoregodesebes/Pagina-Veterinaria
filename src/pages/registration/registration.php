@@ -79,10 +79,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 <input class="btn btn-outline-secondary" type="reset" value="Borrar información">
             </div>
             <div class="form-btn">
-                <button type="submit" value="Register" name="submit" class="btn btn-primary">Registrarse</button>
+                <button type="button" value="Register" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
             </div>
-
+            <?php //?Modal 
+            ?>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Usted esta a punto de registrarse
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Esta seguro?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" name="submit" value="register">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
+
         <br>
     </div>
     <div class="col-2"></div>
