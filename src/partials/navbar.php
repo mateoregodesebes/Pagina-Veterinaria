@@ -28,8 +28,7 @@
                     <?php
                     if (isset($_SESSION["user"])) {
                         # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
-                        if (isset($_POST["logoutButton"]))
-                        {
+                        if (isset($_POST["logoutButton"])) {
                             // Is it correct to destroy the session here? Or should I only unset the user related $_SESSION variables?
                             session_destroy();
                             echo '<script>window.location.replace("index.php");</script>';
@@ -76,13 +75,13 @@
                                     Recordarme
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary mx-auto iniciar_sesion" name="login">Iniciar Sesion</button>
+                            <button type="submit" class="btn btn-primary mx-auto iniciar_sesion dropdown_button" name="login">Iniciar Sesion</button>
                         </form>
                         <div class="dropdown-divider"></div>
                         <form method="post">
-                            <button type="submit" class="dropdown-item register_button btn btn-secondary" name="registerButton">No tenes una cuenta? Registrate</button>
+                            <button type="submit" class="dropdown-item dropdown_button" name="registerButton">No tenes una cuenta? Registrate</button>
                         </form>
-                        <a class="dropdown-item" href="#">Olvidaste tu contraseña?</a>
+                        <button type="submit" class="dropdown-item dropdown_button">Olvidaste tu contraseña? Recuperala</button>
                     <?php
                     }
                     ?>

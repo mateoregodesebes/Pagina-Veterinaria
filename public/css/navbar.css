@@ -32,6 +32,6 @@ a.nav-link:hover {
   width:100%;
 }
 
-.register_button {
+.dropdown_button {
   font-family: var(--main-font);
 }

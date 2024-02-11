@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 <input class="btn btn-outline-secondary" type="reset" value="Borrar información">
             </div>
             <div class="form-btn">
-                <button type="button" value="Register" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
+                <button type="button" value="Register" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
             </div>
             <?php //?Modal 
             ?>
