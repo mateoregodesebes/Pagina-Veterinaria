@@ -27,7 +27,6 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <?php
                     if (isset($_SESSION["user"])) {
-                        # Maybe, I could remove the echo and use the html directly. Closing the php tag and opening it again before the }
                         if (isset($_POST["logoutButton"])) {
                             // Is it correct to destroy the session here? Or should I only unset the user related $_SESSION variables?
                             session_destroy();
@@ -51,8 +50,7 @@
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["login"])) {
                                 require_once(__DIR__ . '/../scripts/login.php');
-                                echo '<script>window.location.replace("index.php");</script>';
-                                exit();
+
                             } elseif (isset($_POST["registerButton"])) {
                                 $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
                                 echo '<script>window.location.replace("index.php");</script>';
