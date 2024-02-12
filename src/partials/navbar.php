@@ -61,13 +61,13 @@
                         <form class="px-4 py-3" action="index.php" method="POST">
                             <div class="form-group">
                                 <label>Mail</label>
-                                <input type="email" class="form-control mt-1" name="email" placeholder="email@ejemplo.com" required>
+                                <input type="email" class="form-control mt-2" name="email" placeholder="email@ejemplo.com" required>
                             </div>
                             <div class="form-group">
                                 <label>Contraseña</label>
-                                <input type="password" class="form-control mt-1" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
+                                <input type="password" class="form-control mt-2" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
                             </div>
-                            <div class="form-check mt-2">
+                            <div class="form-check mt-3">
                                 <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                 <label class="form-check-label" for="dropdownCheck">
                                     Recordarme

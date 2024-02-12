@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 <input type="password" class="form-control" name="repeat_password" minlength="8" required>
             </div>
             <div class="form-btn">
-                <input class="btn btn-outline-secondary" type="reset" value="Borrar información">
+                <input class="btn btn-outline-danger" type="reset" value="Borrar información">
             </div>
             <div class="form-btn">
                 <button type="button" value="Register" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
