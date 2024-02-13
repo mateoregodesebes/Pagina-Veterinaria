@@ -1,0 +1,23 @@
+.form-group {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-btn > * {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+small {
+    color: grey;
+}
+
+form > * {
+    font-family: var(--main-font);
+}

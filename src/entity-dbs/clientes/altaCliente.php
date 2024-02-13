@@ -3,23 +3,23 @@
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
-
-  $vIdClient = $_POST['idCliente'];
   $vNombre = $_POST['nombre'];
   $vApellido = $_POST['apellido'];
   $vEmail = $_POST['email'];
   $vCiudad = $_POST['ciudad'];
   $vDireccion = $_POST['direccion'];
   $vTelefono = $_POST['telefono'];
+  $vContrasenia = $_POST['password'];
 
+  $vContrasenia_hash = password_hash($vContrasenia, PASSWORD_DEFAULT);
 
-  $stmt = $conn->prepare("INSERT INTO clientes (id, nombre, apellido, email, ciudad, direccion, telefono) 
+  $stmt = $conn->prepare("INSERT INTO clientes (nombre, apellido, email, ciudad, direccion, telefono, contrasenia) 
                           VALUES (?, ?, ?, ?, ?, ?, ?)");
 
   if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);
   }
-  $stmt->bind_param("sssssss", $vIdClient, $vNombre, $vApellido, $vEmail, $vCiudad, $vDireccion, $vTelefono);
+  $stmt->bind_param("sssssss", $vNombre, $vApellido, $vEmail, $vCiudad, $vDireccion, $vTelefono, $vContrasenia_hash);
 
   if (!$_SESSION['error']) {
     if (!$stmt->execute()) {
