@@ -31,11 +31,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 35%;
+  width: 23%;
   margin: 0 auto;
   border-radius: 1vw;
   background-color: var(--form-color);
   padding-block: 1vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .dataForm {
+    width: 95%;
+    border-radius: 3vw;
+  }
 }
 
 .dataForm label {

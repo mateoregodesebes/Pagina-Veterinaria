@@ -22,5 +22,6 @@
             </div>
         </div>
     </div>
-    <p>Este sitio es realizado para una prueba práctica de la materia Entornos Gráficos de la Universidad Tecnologica Nacional Regional Rosario (UTNFRRO), no representa a ninguna veterinaria ni debe ser tomada como ello.</p>
+    <p>Este sitio es realizado para una prueba práctica de la materia Entornos Gráficos de la Universidad Tecnologica
+        Nacional Regional Rosario (UTNFRRO), no representa a ninguna veterinaria ni debe ser tomada como ello.</p>
 </div>
