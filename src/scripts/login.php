@@ -4,8 +4,23 @@
     $login_email = $_POST["email"];
     $login_password = $_POST["password"];
 
-    $sql = "SELECT * FROM clientes WHERE email = '$login_email'";
-    $result = mysqli_query($conn, $sql);
+    $stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
+
+    if (!$stmt) {
+        throw new Exception("Error preparing statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $login_email);
+
+    if (!$_SESSION['error']) {
+        if (!$stmt->execute()) {
+            throw new Exception("Error executing statement" . $stmt->error);
+        }
+    }
+
+    $result = $stmt->get_result();
+    
+    $stmt->close();
     $user = mysqli_fetch_assoc($result);
 
     if ($user) 
