@@ -1,0 +1,24 @@
+.fondo {
+    background-image: url('/pagina/assets/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--main-color);
+    height: 100%;
+    width: 100%;
+}
+
+.container-fluid {
+    height:100%;
+}
+
+.icono {
+    background-color: var(--main-color);
+    border-radius: 10%;
+    padding: 10px;
+    
+}
+
+.whatsapp-link, .whatsapp-link:visited, .whatsapp-link:hover {
+    color: white;
+    background-color: red;
+}

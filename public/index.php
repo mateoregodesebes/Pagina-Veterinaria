@@ -12,6 +12,7 @@ session_start();
     <link rel="stylesheet" href="css/veterinaria.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/homepage.css">
 
     <script src="https://kit.fontawesome.com/ac9e2dd316.js" crossorigin="anonymous"></script>
     <?php
@@ -28,6 +29,9 @@ session_start();
                 break;
             case '../src/pages/registration/registration.php':
                 echo '<link rel="stylesheet" href="css/registration.css">';
+                break;
+            case '../src/pages/homepage/homepage.php':
+                echo '<link rel="stylesheet" href="css/homepage.css">';
                 break;
         }
     }
@@ -57,7 +61,7 @@ session_start();
             if (!isset ($_SESSION["currentPage"])) {
                 //?Aca lo que habria que hacer es que en vez de abmList cuando tengamos el home hecho poner eso
                 //?y que cuando se apreta el boton de home se ponga el home como current page
-                require_once ("../src/pages/atencionDom/atencionMain.php");
+                require_once ("../src/pages/homepage/homepage.php");
             } elseif (isset ($_SESSION["currentPage"])) {
                 require_once ($_SESSION["currentPage"]);
             }
