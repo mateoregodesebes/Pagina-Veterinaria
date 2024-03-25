@@ -1,10 +1,12 @@
 .fondo {
-    background-image: url('/pagina/assets/fondo.jpg');
+    background-image: url('/Pagina-Veterinaria/assets/fondo3.png');
     background-size: cover;
     background-position: center;
     color: var(--main-color);
     height: 100%;
     width: 100%;
+    text-shadow: 2px 2px 4px rgba(123, 121, 121, 0.447);
+    opacity: 80%;
 }
 
 .container-fluid {
@@ -22,3 +24,12 @@
     color: white;
     background-color: red;
 }
+
+.card {
+    width: 18rem; position: relative; overflow: hidden; color: white; text-shadow: 2px 2px 4px black;
+}
+
+.card-img-top {
+    height: 250px; object-fit: cover;
+}
+
