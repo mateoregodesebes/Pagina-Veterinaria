@@ -1,0 +1,23 @@
+.pet-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(142, 23, 51, 0.75);
+}
+
+.pet-card_info {
+  flex-grow: 1;
+  padding-left: 20px;
+}
+
+.pet-card_info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.pet-card_action button {
+  cursor: pointer;
+  
+  display: block;
+  width:100%;
+  height:auto;
+}

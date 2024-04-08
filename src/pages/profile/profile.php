@@ -1,61 +1,80 @@
-<div class="container-fluid px-3">
-  <div class="row py-5">
-    <div class="col-3">
+<?php
+if (isset($_SESSION["user"])) {
 
+?>
+  <div class="container-fluid px-3">
+    <div class="row py-5">
+      <div class="col-3">
+
+      </div>
+      <div class="col-9">
+        <h1>
+          <?php echo 'Hola ' . $_SESSION["user_name"]
+          ?>
+        </h1>
+      </div>
     </div>
-    <div class="col-9">
-      <h1>
-        <?php echo 'Hola ' . $_SESSION["user_name"]
-        ?>
-      </h1>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col ps-2">
-      <h2>
-        Mis Mascotas:
-      </h2>
-    </div>
-  </div>
+    <?php
+    require_once(__DIR__ . '/../../../includes/connection.php');
 
-  <div class="row">
-    <div class="col ps-2">
-      <h2>
-        Mis Mascotas:
-      </h2>
-    </div>
-  </div>
+    $stmt = $conn->prepare("SELECT * FROM mascotas WHERE cliente_id = ?");
 
-  <?php
-  require_once(__DIR__ . '/../../includes/connection.php');
+    $stmt->bind_param("i", $_SESSION['user_id']);
 
-  $stmt = $conn->prepare("SELECT * FROM mascotas WHERE id_usuario = ?");
-
-  $stmt->bind_param("i", $_SESSION['user_id']);
-
-  if (!$_SESSION['error']) {
-    if (!$stmt->execute()) {
-      throw new Exception("Error executing statement" . $stmt->error);
+    if (!isset($_SESSION['error'])) {
+      if (!$stmt->execute()) {
+        throw new Exception("Error executing statement" . $stmt->error);
+      }
     }
-  }
-  $result = $stmt->get_result();
+    $result = $stmt->get_result();
 
-  $stmt->close();
-  $mascotas = mysqli_fetch_assoc($result);
+    $stmt->close();
 
-  foreach ($mascotas as $mascota) {
-    echo '<div class="row">';
-    echo '<div class="col-3">';
-    echo '<img src="' . $mascota['foto'] . '" class="img-fluid" alt="Imagen de ' . $mascota['nombre'] . '">';
-    echo '</div>';
-    echo '<div class="col-9">';
-    echo '<h3>' . $mascota['nombre'] . '</h3>';
-    echo '<p>' . $mascota['raza'] . '</p>';
-    echo '<p>' . $mascota['edad'] . ' años</p>';
-    echo '<form><button class="btn btn-info">Realizar Consultar</button> </form>';
-    echo '</div>';
-    echo '</div>';
-  }
-  ?>
-</div>
+    $mascotas = array();
+
+    while ($row = $result->fetch_assoc()) {
+      $mascotas[] = $row;
+    }
+    if (!empty($mascotas)) {
+
+      echo '<div class="row">';
+      echo '<div class="col ps-2">';
+      echo '<h2>Mis Mascotas:</h2>';
+      echo '</div>';
+      echo '</div>';
+      foreach ($mascotas as $mascota) {
+        echo '<div class="row pet-card my-3">';
+        echo '<div class="col-12 col-md-3">';
+        echo '<img src="../assets/petImages/' . $mascota['foto'] . '" class="img-fluid" alt="Imagen de ' . $mascota['nombre'] . '">';
+        echo '</div>';
+        echo '<div class="col-12 col-md-5 pet-card_info">';
+        echo '<h3><b>' . $mascota['nombre'] . '</b></h3>';
+        echo '<p>Raza: <b>' . $mascota['raza'] . '</b></p>';
+        echo '<p>Color: <b>' . $mascota['color'] . '</b></p>';
+        echo '<p>Fecha de nacimiento: <b>' . $mascota['fecha_de_nac'] . '</b></p>';
+        echo '</div>';
+        echo '<div class="col-12 col-md-4 pet-card_action">';
+        echo '<form><button class="btn btn-info btn-lg">Realizar Consulta</button> </form>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+      }
+    } else {
+      echo '<div class="row">';
+      echo '<div class="col ps-2">';
+      echo '<h2>No tenes mascotas registradas para mostrar</h2>';
+      echo '</div>';
+      echo '</div>';
+    }
+    ?>
+  </div>
+<?php
+}
+# Si el usuario no tiene cuenta y de alguna manera accedió a profile.php, lo reedirigimos a homepage
+else {
+  $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+  echo '<script>window.location.replace("index.php");</script>';
+  exit();
+}
+?>

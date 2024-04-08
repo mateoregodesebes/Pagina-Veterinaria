@@ -41,7 +41,7 @@
                         <div class='alert alert-success' role='alert'>Bienvenido
                             <?php echo $_SESSION["user_name"] ?>
                         </div>
-                        <form>
+                        <form method="post">
                             <button type="submit" class="dropdown-item" name="profileButton">
                                 Perfil
                             </button>
@@ -50,7 +50,9 @@
                         <a class="dropdown-item" href="#">Mis Turnos</a>
                         <div class="dropdown-item">
                             <form method="post">
-                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">Cerrar Sesión</button>
+                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">
+                                    Cerrar Sesión
+                                </button>
                             </form>
                         </div>
                     <?php
