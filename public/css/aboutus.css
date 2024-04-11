@@ -1,0 +1,23 @@
+.pag{
+    background-color: rgb(251, 144, 183);
+    font-family: var(--main-font);
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+}
+
+.titulo{
+    font-family: var(--main-font);
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px 4px white;;
+    background-image: url("../../assets/fondo-aboutus.png");
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 10%;
+}
+
+.aboutus-texto > p{
+    background-color: rgb(251, 144, 183);
+}
