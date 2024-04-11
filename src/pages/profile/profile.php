@@ -20,26 +20,7 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <?php
-    require_once(__DIR__ . '/../../../includes/connection.php');
-
-    $stmt = $conn->prepare("SELECT * FROM mascotas WHERE cliente_id = ?");
-
-    $stmt->bind_param("i", $_SESSION['user_id']);
-
-    if (!$_SESSION['error']) {
-      if (!$stmt->execute()) {
-        throw new Exception("Error executing statement" . $stmt->error);
-      }
-    }
-    $result = $stmt->get_result();
-
-    $stmt->close();
-
-    $mascotas = array();
-
-    while ($row = $result->fetch_assoc()) {
-      $mascotas[] = $row;
-    }
+    include __DIR__ . '/../../entity-dbs/clientes/mascotasCliente.php';
 
     if (!empty($mascotas)) {
 
@@ -50,8 +31,8 @@ if (isset($_SESSION["user"])) {
       echo '</div>';
       foreach ($mascotas as $mascota) {
         echo '<div class="row pet-card my-3 mx-auto">';
-        echo '<div class="col-12 col-md-3" align="center">';
-        echo '<img src="../assets/petImages/' . $mascota['foto'] . '" class="img-fluid" alt="Imagen de ' . $mascota['nombre'] . '">';
+        echo '<div class="col-12 col-md-3 foto-mascota" align="center">';
+        echo '<img src="../assets/petImages/' . $mascota['foto'] . '" alt="Imagen de ' . $mascota['nombre'] . '">';
         echo '</div>';
         echo '<div class="col-12 col-md-5 pet-card_info">';
         echo '<h3><b>' . $mascota['nombre'] . '</b></h3>';

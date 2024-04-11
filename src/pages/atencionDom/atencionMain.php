@@ -1,5 +1,5 @@
 <?php
-if (isset ($_SESSION['alerta'])) {
+if (isset($_SESSION['alerta'])) {
   switch ($_SESSION['alerta']) {
     case 'noCliente':
       echo '<div id="alert" class="mt-2 alert alert-danger" role="alert">
@@ -27,8 +27,6 @@ if (isset ($_SESSION['alerta'])) {
     La atencion se ha registrado correctamente.
           </div>';
       break;
-
-
   }
 
   echo '<script type="text/javascript">
@@ -69,9 +67,9 @@ if (isset ($_SESSION['alerta'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include __DIR__ . '/../../entity-dbs/clientes/validaCliente.php';
   if ($clientFlag) {
-    $_SESSION['idCliente'] = $_POST['idCliente'];
+    $_SESSION['user_id'] = $_POST['idCliente'];
     $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
-    if (isset ($_POST['petCheckbox'])) {
+    if (isset($_POST['petCheckbox'])) {
       $_SESSION['currentPage'] = '../src/pages/abmMascota/abmFormMascota.php';
     }
   } else {

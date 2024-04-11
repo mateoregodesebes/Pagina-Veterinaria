@@ -3,7 +3,7 @@
 include(__DIR__ . '/../../../includes/connection.php');
 
 try {
-  $vId = $_SESSION['idCliente'];
+  $vId = $_SESSION["user_id"];
   $stmt = $conn->prepare("SELECT * FROM mascotas WHERE cliente_id = ?");
   $mascotas = array();
 
@@ -25,13 +25,8 @@ try {
     $mascotas = null;
   }
   $stmt->close();
-
-
-
 } catch (Exception $e) {
   echo 'Caught exception: ', $e->getMessage(), "\n";
 } finally {
   mysqli_close($conn);
 }
-
-?>
