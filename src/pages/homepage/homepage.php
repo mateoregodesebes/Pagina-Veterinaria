@@ -7,18 +7,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (isset($_POST["PeluqButton"])) {
         $_SESSION['atencion'] = 'Corte de pelo';
-        $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
+        $_SESSION['currentPage'] = '../src/pages/peluqueria/peluqueria.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
     if (isset($_POST["AtButton"])) {
         $_SESSION['atencion'] = 'Revisión Médica';
-        $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
+        $_SESSION['currentPage'] = '../src/pages/atencion/atencion.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
     if (isset($_POST["HospButton"])) {
-        $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
+        $_SESSION['currentPage'] = '../src/pages/hospitalization/hospitalization.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
