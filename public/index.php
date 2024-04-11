@@ -48,6 +48,9 @@ session_start();
                 # Cambiar por el css de la pagina de atencion cuando la hagamos
                 echo '<link rel="stylesheet" href="css/inprogress.css">';
                 break;
+            case '../src/pages/aboutus/aboutus.php':
+                echo '<link rel="stylesheet" href="css/aboutus.css">';
+                break;
         }
     }
     ?>
