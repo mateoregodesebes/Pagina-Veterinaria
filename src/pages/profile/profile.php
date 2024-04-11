@@ -5,7 +5,11 @@ if (isset($_SESSION["user"])) {
   <div class="container-fluid px-3">
     <div class="row py-5">
       <div class="col-3">
-
+        <?php
+        /* TODO: Agregar foto de perfil para el usuario.
+        *   <img src="../assets/userImages/<?php echo $_SESSION['user_image'] ?>" class="img-fluid rounded-circle" alt="Imagen de perfil de <?php echo $_SESSION['user_name'] ?>">
+        */
+        ?>
       </div>
       <div class="col-9">
         <h1>
@@ -22,7 +26,7 @@ if (isset($_SESSION["user"])) {
 
     $stmt->bind_param("i", $_SESSION['user_id']);
 
-    if (!isset($_SESSION['error'])) {
+    if (!$_SESSION['error']) {
       if (!$stmt->execute()) {
         throw new Exception("Error executing statement" . $stmt->error);
       }
@@ -36,6 +40,7 @@ if (isset($_SESSION["user"])) {
     while ($row = $result->fetch_assoc()) {
       $mascotas[] = $row;
     }
+
     if (!empty($mascotas)) {
 
       echo '<div class="row">';
@@ -44,8 +49,8 @@ if (isset($_SESSION["user"])) {
       echo '</div>';
       echo '</div>';
       foreach ($mascotas as $mascota) {
-        echo '<div class="row pet-card my-3">';
-        echo '<div class="col-12 col-md-3">';
+        echo '<div class="row pet-card my-3 mx-auto">';
+        echo '<div class="col-12 col-md-3" align="center">';
         echo '<img src="../assets/petImages/' . $mascota['foto'] . '" class="img-fluid" alt="Imagen de ' . $mascota['nombre'] . '">';
         echo '</div>';
         echo '<div class="col-12 col-md-5 pet-card_info">';
@@ -54,9 +59,8 @@ if (isset($_SESSION["user"])) {
         echo '<p>Color: <b>' . $mascota['color'] . '</b></p>';
         echo '<p>Fecha de nacimiento: <b>' . $mascota['fecha_de_nac'] . '</b></p>';
         echo '</div>';
-        echo '<div class="col-12 col-md-4 pet-card_action">';
+        echo '<div class="col-12 col-md-4 pet-card_action my-5">';
         echo '<form><button class="btn btn-info btn-lg">Realizar Consulta</button> </form>';
-        echo '</div>';
         echo '</div>';
         echo '</div>';
       }
@@ -67,6 +71,7 @@ if (isset($_SESSION["user"])) {
       echo '</div>';
       echo '</div>';
     }
+    echo '</div>';
     ?>
   </div>
 <?php

@@ -20,8 +20,9 @@ if (!$_SESSION['error']) {
 
 $result = $stmt->get_result();
 
-$stmt->close();
 $user = mysqli_fetch_assoc($result);
+
+$stmt->close();
 
 if ($user) {
     $user_name = $user["nombre"];
