@@ -1,0 +1,47 @@
+nav {
+  background-color: var(--main-color);
+  text-align: center;
+}
+
+.navbar-nav {
+  margin-right: 22%;
+}
+.nav-item {
+  padding-inline: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-nav {
+    margin-right: 20%;
+  }
+}
+
+a.nav-link {
+  color: var(--link-color);
+  font-size: 1.5em;
+  /*This text-shadow property and its settings are for making the black text outline*/
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+a.nav-link:hover {
+  outline: 2px solid white;
+}
+
+.form-group * {
+  color: var(--main-color);
+  font-family: var(--main-font);
+}
+
+.form-check * {
+  color: solid black;
+  font-family: var(--main-font);
+}
+
+.iniciar_sesion {
+  width: 100%;
+}
+
+.dropdown_button {
+  font-family: var(--main-font);
+}

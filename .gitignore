@@ -1,0 +1,5 @@
+.env
+composer.phar
+vendor
+.vscode
+assets/petImages

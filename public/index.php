@@ -12,7 +12,6 @@ session_start();
     <link rel="stylesheet" href="css/veterinaria.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/aboutus.css">
 
     <script src="https://kit.fontawesome.com/ac9e2dd316.js" crossorigin="anonymous"></script>
     <?php
