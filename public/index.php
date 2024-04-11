@@ -11,8 +11,6 @@ session_start();
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/veterinaria.css">
     <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/contact.css">
-
     <script src="https://kit.fontawesome.com/ac9e2dd316.js" crossorigin="anonymous"></script>
     <?php
     if (isset ($_SESSION["currentPage"])) {
@@ -61,6 +59,7 @@ session_start();
                 //?Aca lo que habria que hacer es que en vez de abmList cuando tengamos el home hecho poner eso
                 //?y que cuando se apreta el boton de home se ponga el home como current page
                 require_once ("../src/pages/aboutus/aboutus.php");
+              
             } elseif (isset ($_SESSION["currentPage"])) {
                 require_once ($_SESSION["currentPage"]);
             }
@@ -81,6 +80,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 
 </html>

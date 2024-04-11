@@ -37,6 +37,7 @@ if (isset($_SESSION['error'])) {
       <th scope="col">Ciudad</th>
       <th scope="col">Direccion</th>
       <th scope="col">Telefono</th>
+      <th scope="col">Mascotas</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -68,6 +69,48 @@ if (isset($_SESSION['error'])) {
         <td>
           <?= $row['telefono'] ?>
         </td>
+        
+        <td style="text-align: center;">
+
+          <script>
+            function cargarMascotas(idCliente) {
+              $.ajax({
+                type: "GET",
+                url: "../src/entity-dbs/clientes/getMascotasAjax.php?idCliente=" + idCliente,
+                success: function(response) {
+                  $("#mascotaModal .modal-body").html(response);
+                  $("#mascotaModal").modal("show");
+                },
+                error: function(xhr, status, error) {
+                  console.error(chr.responseText);
+                }
+              })
+            }
+          </script>
+
+          <button type="button" name="action" value="mascotas" class="btn btn-warning btn-paw" data-bs-toggle="modal"
+              data-bs-target="#mascotaModal" onclick="cargarMascotas(<?= $row['id'] ?>)"><i class="fa-solid fa-paw" style="color: black;"></i>
+          </button>
+
+          <div class="modal fade" id="mascotaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="mascotaModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="mascotaModalLabel">Mascotas del cliente</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- Contenido de la tabla de mascotas -->
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </td>
+        
         <td>
           <form method="post">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -93,7 +136,6 @@ if (isset($_SESSION['error'])) {
                 </div>
               </div>
             </div>
-
           </form>
         </td>
       </tr>
