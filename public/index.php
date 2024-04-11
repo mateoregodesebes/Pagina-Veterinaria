@@ -27,6 +27,9 @@ session_start();
             case '../src/pages/registration/registration.php':
                 echo '<link rel="stylesheet" href="css/registration.css">';
                 break;
+            case '../src/pages/aboutus/aboutus.php':
+                echo '<link rel="stylesheet" href="css/aboutus.css">';
+                break;
         }
     }
     ?>
@@ -55,7 +58,8 @@ session_start();
             if (!isset ($_SESSION["currentPage"])) {
                 //?Aca lo que habria que hacer es que en vez de abmList cuando tengamos el home hecho poner eso
                 //?y que cuando se apreta el boton de home se ponga el home como current page
-                require_once ("../src/pages/abmCliente/abmListCliente.php");
+                require_once ("../src/pages/aboutus/aboutus.php");
+              
             } elseif (isset ($_SESSION["currentPage"])) {
                 require_once ($_SESSION["currentPage"]);
             }
