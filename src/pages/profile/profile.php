@@ -31,7 +31,7 @@ if (isset($_SESSION["user"])) {
       echo '</div>';
       foreach ($mascotas as $mascota) {
         echo '<div class="row pet-card my-3 mx-auto">';
-        echo '<div class="col-12 col-md-3 foto-mascota" align="center">';
+        echo '<div class="col-12 col-md-3 foto-mascota">';
         echo '<img src="../assets/petImages/' . $mascota['foto'] . '" alt="Imagen de ' . $mascota['nombre'] . '">';
         echo '</div>';
         echo '<div class="col-12 col-md-5 pet-card_info">';
