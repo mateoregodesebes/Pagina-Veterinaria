@@ -1,11 +1,23 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["LogoButton"])) {
+        $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+}
+?>
+
 <div class="row">
     <nav class="nav navbar-expand-sm d-flex justify-content-between">
         <?php
         #ToDo: Make so that the logo change the $_SESSION['currentPage'] to contact.php
         ?>
-        <a class="navbar-brand mx-3">
-            <img src="../assets/logo.png" width="50" height="50" alt="Logo">
-        </a>
+        <form action="index.php" method="post">
+            <button class="navbar-brand mx-3" type="submit" name="LogoButton">
+                <img src="../assets/logo.png" width="50" height="50" alt="Logo">
+            </button>
+        </form>
         <ul class="navbar-nav mr-auto mt-1">
             <li class="nav-item">
                 <a class="nav-link" href="#">Sobre Nosotros</a>
