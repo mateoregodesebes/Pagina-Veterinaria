@@ -52,6 +52,8 @@ session_start();
                 echo '<link rel="stylesheet" href="css/aboutus.css">';
                 break;
         }
+    } else {
+        echo '<link rel="stylesheet" href="css/homepage.css">';
     }
     ?>
 
