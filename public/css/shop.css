@@ -1,0 +1,5 @@
+h1{
+      color: var(--main-color);
+      text-shadow: 2px 2px 4px rgba(123, 121, 121, 0.447);
+      font-family: var(--main-font);
+}

@@ -1,0 +1,58 @@
+.fondo {
+    background-image: url('/Pagina-Veterinaria/assets/fondo3.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    text-shadow: 2px 2px 4px rgba(123, 121, 121, 0.447);
+    opacity: 80%;
+    outline: 1px solid grey;
+    font-family: var(--main-font);
+}
+
+.container-fluid {
+    height:100%;
+}
+
+.icono {
+    background-color: var(--main-color);
+    border-radius: 10%;
+    padding: 10px;
+}
+
+.whatsapp-link, .whatsapp-link:visited, .whatsapp-link:hover {
+    color: white;
+}
+
+.card { 
+    position: relative; 
+    overflow: hidden; 
+    color: white; 
+    text-shadow: 2px 2px 4px black;
+    outline: 3px solid black;
+    font-family: var(--main-font);
+    text-align: center;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+      width: 300px;
+    }
+  }
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.card-img-top {
+    height: 250px; object-fit: cover;
+}
+
+.cartas {
+    display: flex;
+    justify-content: center;
+}   
