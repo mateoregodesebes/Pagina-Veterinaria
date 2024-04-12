@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #ToDo: Make so that the logo change the $_SESSION['currentPage'] to contact.php
         ?>
         <form action="index.php" method="post">
-            <button class="navbar-brand mx-3" type="submit" name="LogoButton">
+            <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
                 <img src="../assets/logo.png" width="50" height="50" alt="Logo">
             </button>
         </form>
@@ -44,17 +44,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             session_destroy();
                             echo '<script>window.location.replace("index.php");</script>';
                             exit();
+                        } elseif (isset($_POST["profileButton"])) {
+                            $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
+                            echo '<script>window.location.replace("index.php");</script>';
+                            exit();
                         }
                     ?>
                         <div class='alert alert-success' role='alert'>Bienvenido
                             <?php echo $_SESSION["user_name"] ?>
                         </div>
-                        <a class="dropdown-item" href="#">Perfil</a>
+                        <form method="post">
+                            <button type="submit" class="dropdown-item" name="profileButton">
+                                Perfil
+                            </button>
+                        </form>
                         <a class="dropdown-item" href="#">Mis Mascotas</a>
                         <a class="dropdown-item" href="#">Mis Turnos</a>
                         <div class="dropdown-item">
                             <form method="post">
-                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">Cerrar Sesión</button>
+                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">
+                                    Cerrar Sesión
+                                </button>
                             </form>
                         </div>
                     <?php

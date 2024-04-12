@@ -46,10 +46,8 @@ try {
   }
 
   $stmt->close();
-
 } catch (Exception $e) {
   echo 'Caught exception: ', $e->getMessage(), "\n";
 } finally {
   mysqli_close($conn);
 }
-?>
