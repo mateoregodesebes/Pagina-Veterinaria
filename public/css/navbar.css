@@ -10,6 +10,12 @@ nav {
   padding-inline: 10px;
 }
 
+.logo {
+  border: none;
+  outline: none;
+  background: none;
+}
+
 @media only screen and (max-width: 600px) {
   .navbar-nav {
     margin-right: 15%;

@@ -8,17 +8,17 @@ const finManiana = 13;
 const iniTarde = 14;
 const finTarde = 18;
 
-if (!isset ($mascotas)) {
+if (!isset($mascotas)) {
   $_SESSION['alerta'] = 'noMascotas';
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
   echo '<script>window.location.replace("index.php");</script>';
 }
-if (!isset ($servicios)) {
+if (!isset($servicios)) {
   $_SESSION['alerta'] = 'noServicios';
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
   echo '<script>window.location.replace("index.php");</script>';
 }
-if (!isset ($personal)) {
+if (!isset($personal)) {
   $_SESSION['alerta'] = 'noPersonal';
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
   echo '<script>window.location.replace("index.php");</script>';
@@ -26,8 +26,7 @@ if (!isset ($personal)) {
 ?>
 <form method="POST">
   <div class="mb-2 mt-3 d-flex justify-content-start">
-    <button class="button-back" type="submit" name="action" value="goBack"><i
-        class="fa-solid fa-arrow-left"></i></button>
+    <button class="button-back" type="submit" name="action" value="goBack"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
 </form>
 <div class="mb-2 d-flex justify-content-center">
@@ -43,7 +42,7 @@ if (!isset ($personal)) {
       <?php
       //?Esto es mas por seguridad de crasheo y me lo recomendo copilot pero diria que no es necesario,
       //?Ya checkeo si es null al principio
-      if (isset ($mascotas)) {
+      if (isset($mascotas)) {
         foreach ($mascotas as $mascota) {
           echo '<option value="' . $mascota['id'] . '">' . $mascota['nombre'] . '</option>';
         }
@@ -58,7 +57,7 @@ if (!isset ($personal)) {
     <select class="form-select" name="servicios" id="servicios" required>
       <option value="" disabled selected>Selecciona el tipo de servicio</option>
       <?php
-      if (isset ($servicios)) {
+      if (isset($servicios)) {
         foreach ($servicios as $servicio) {
           echo '<option value="' . $servicio['id'] . '">' . $servicio['nombre'] . '</option>';
         }
@@ -73,7 +72,7 @@ if (!isset ($personal)) {
     <select class="form-select" name="personal" id="personal" required>
       <option value="" disabled selected>Selecciona email del profesional</option>
       <?php
-      if (isset ($personal)) {
+      if (isset($personal)) {
         foreach ($personal as $p) {
           echo '<option value="' . $p['id'] . '">' . $p['email'] . '</option>';
         }
@@ -89,14 +88,12 @@ if (!isset ($personal)) {
 
   <div class="mb-3">
     <label for="descripcion">Descripción de la atencion: </label>
-    <textarea class="form-control" name="descripcion" id="descripcion" rows="5"
-      placeholder="Le duele la panza al rrope..." required></textarea>
+    <textarea class="form-control" name="descripcion" id="descripcion" rows="5" placeholder="Le duele la panza al rrope..." required></textarea>
   </div>
 
   <div class="mb-3">
     <label for="fecha">Fecha de atencion: </label>
-    <input type="date" class="form-control" name="fecha" id="fecha" min="<?php echo date("Y-m-d") ?>"
-      max="<?php echo date('Y-m-d', strtotime('+90 days')) ?> required">
+    <input type="date" class="form-control" name="fecha" id="fecha" min="<?php echo date("Y-m-d") ?>" max="<?php echo date('Y-m-d', strtotime('+90 days')) ?> required">
 
     <div class="mt-1">
       <select class="form-select" name="hora" id="hora" required>
@@ -130,8 +127,7 @@ if (!isset ($personal)) {
               <?= $horario['fecha_hora'] ?>
             </td>
           </tr>
-        <?php }
-        ; ?>
+        <?php }; ?>
       </tbody>
     </table>
   </div>
@@ -146,14 +142,13 @@ if (!isset ($personal)) {
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'altaAtencion') {
-    include (__DIR__ . '/../../entity-dbs/atenciones/altaTurnos.php');
+    include(__DIR__ . '/../../entity-dbs/atenciones/altaTurnos.php');
     if ($_SESSION['alerta'] !== 'errorTurno') {
       $_SESSION['alerta'] = 'altaTurno';
     }
   }
-  $_SESSION['idClient'] = null;
+  $_SESSION['user_id'] = null;
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
   echo '<script>window.location.replace("index.php");</script>';
-
 }
 ?>
