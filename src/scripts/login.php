@@ -12,11 +12,9 @@ if (!$stmt) {
 
 $stmt->bind_param("s", $login_email);
 
-if (!$_SESSION['error']) {
-    if (!$stmt->execute()) {
+if (!$stmt->execute()) {
         throw new Exception("Error executing statement" . $stmt->error);
     }
-}
 
 $result = $stmt->get_result();
 
@@ -36,8 +34,8 @@ if ($user) {
         exit();
     } else {
         # Check if these echoes work
-        echo "<div class='dropdown-item alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
+        echo "<div class='alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
     }
 } else {
-    echo "<div class='dropdown-item alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
+    echo "<div class='alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
 }
