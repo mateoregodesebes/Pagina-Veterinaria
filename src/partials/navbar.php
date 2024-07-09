@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <div class="row">
-    <nav class="nav navbar-expand-sm d-flex justify-content-between">
+    <nav class="nav navbar-expand-sm d-flex justify-content-center">
         <form action="index.php" method="post">
             <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
                 <img src="../assets/logo.png" width="50" height="50" alt="Logo">
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a class="dropdown-item" href="#">Mis Turnos</a>
                         <div class="dropdown-item">
                             <form method="post">
-                                <button type="submit" class="dropdown-item register_button btn btn-secondary" name="logoutButton">
+                                <button type="submit" class="dropdown-item register_button" name="logoutButton">
                                     Cerrar Sesión
                                 </button>
                             </form>
