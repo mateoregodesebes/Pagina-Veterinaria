@@ -23,6 +23,10 @@ if (isset($_SESSION["idMascota"])) {
 } else {
   $id = null;
 }
+
+//?Colores de mascotas actuales
+$colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
+
 ?>
 <?php ?>
 <div class="dataForm my-3">
@@ -52,15 +56,20 @@ if (isset($_SESSION["idMascota"])) {
       <label class="form-label">Raza</label>
       <input type="text" required name="raza" class="form-control" placeholder="Raza" value="<?php echo isset($raza) ? $raza : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
       <label for="formFile" class="form-label">Foto de la mascota</label>
       <input required class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
     </div>
-    <?php //!Este ver que onda como guardar solamente el nombre de la foto y guardar el archivo en assets/mascotas/             
-    ?>
     <div class="mb-3">
       <label class="form-label">Color</label>
-      <input type="text" required name="color" class="form-control" placeholder="Color" value="<?php echo isset($color) ? $color : ""; ?>">
+      <select required name="color" class="form-control">
+        <?php 
+          foreach ($colors as $colorOption) {
+            $selected = (isset($color) && $color == $colorOption) ? "selected" : "";
+            echo "<option value='$colorOption' $selected>$colorOption</option>";
+          }
+        ?>
+      </select>
     </div>
     <div class="mb-3">
       <label class="form-label">Fecha de nacimiento</label>
