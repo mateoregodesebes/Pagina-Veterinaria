@@ -12,7 +12,7 @@
 }
 
 .container-fluid {
-    height:100%;
+    height: 100%;
 }
 
 .icono {
@@ -20,15 +20,24 @@
     border-radius: 10%;
     padding: 10px;
 }
+.icono:hover {
+    background-color: white;
+    transition: 1s linear;
+}
 
-.whatsapp-link, .whatsapp-link:visited, .whatsapp-link:hover {
+.whatsapp-link,
+.whatsapp-link:visited {
     color: white;
 }
 
-.card { 
-    position: relative; 
-    overflow: hidden; 
-    color: white; 
+.whatsapp-link:hover {
+    color: var(--main-color);
+    transition: 1s linear;
+}
+.card {
+    position: relative;
+    overflow: hidden;
+    color: white;
     text-shadow: 2px 2px 4px black;
     outline: 3px solid black;
     font-family: var(--main-font);
@@ -38,9 +47,9 @@
 
 @media only screen and (max-width: 600px) {
     .card {
-      width: 300px;
+        width: 300px;
     }
-  }
+}
 
 button {
     border: none;
@@ -49,11 +58,11 @@ button {
 }
 
 .card-img-top {
-    height: 250px; 
+    height: 250px;
     object-fit: cover;
 }
 
 .cartas {
     display: flex;
     justify-content: center;
-}   
+}
