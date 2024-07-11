@@ -24,6 +24,11 @@ if (isset($_SESSION["idMascota"])) {
   $id = null;
 }
 
+// * Para el combo del id cliente
+$query2 = "SELECT id FROM clientes";
+$result = mysqli_query($conn, $query2);
+$id_clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 //?Colores de mascotas actuales
 $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
 
@@ -40,13 +45,14 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
   <form method="post" enctype="multipart/form-data">
     <div class="mb-3">
       <label class="form-label">Id de cliente dueño</label>
-      <input type="text" required name="idCliente" class="form-control" placeholder="Id de cliente" value="<?php if (isset($id_cliente)) {
-                                                                                                              echo $id_cliente;
-                                                                                                            } elseif (isset($idAtencion)) {
-                                                                                                              echo $idAtencion;
-                                                                                                            } else {
-                                                                                                              echo "";
-                                                                                                            } ?>">
+      <select name="idCliente" class="form-control">
+        <?php
+        foreach ($id_clientes as $id_temp) {
+          $selected = $id_temp['id'] == $id_cliente ? "selected" : "";
+          echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
+        }
+        ?>
+      </select>
     </div>
     <div class="mb-3">
       <label class="form-label">Nombre</label>
@@ -58,7 +64,7 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
     </div>
     <div class="mb-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
       <label for="formFile" class="form-label">Foto de la mascota</label>
-      <input required class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
+      <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
     </div>
     <div class="mb-3">
       <label class="form-label">Color</label>
@@ -73,12 +79,12 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
     </div>
     <div class="mb-3">
       <label class="form-label">Fecha de nacimiento</label>
-      <input type="date" required name="fechaNac" class="form-control" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
+      <input type="date" required name="fechaNac" class="form-control" max="<?php echo date('Y-m-d') ?>" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
     </div>
     <div class="mb-3">
       <label for="formFile" class="form-label" style="<?php echo isset($id) ? "" : "display: none" ?>">Fecha de
         muerte</label>
-      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
+      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" max="<?php echo date('Y-m-d') ?>" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
     </div>
 
     <div class="row justify-content-center">
