@@ -57,3 +57,13 @@ button.nav-btn:focus {
 .dropdown_button {
     font-family: var(--main-font);
 }
+
+/* Footer CSS */
+
+.footer-link {
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-3 col-12 cartas">
         <form action="index.php" method="post">
-            <button type="submit" name="PeluqButton">
+            <button class="card-btn" type="submit" name="PeluqButton">
                 <div class="card">
                     <img class="card-img-top" src="..\assets\loro-card.png" alt="Card image cap">
                     <div class="card-img-overlay">
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-3 col-12 cartas">
         <form action="index.php" method="post">
-            <button type="submit" name="AtButton">
+            <button class="card-btn" type="submit" name="AtButton">
                 <div class="card">
                     <img class="card-img-top" src="..\assets\perro-card.png" alt="Card image cap">
                     <div class="card-img-overlay">
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-3 col-12 cartas">
         <form action="index.php" method="post">
-            <button type="submit" name="HospButton">
+            <button class="card-btn" type="submit" name="HospButton">
                 <div class="card">
                     <img class="card-img-top" src="..\assets\gato-card.png" alt="Card image cap">
                     <div class="card-img-overlay">
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-3 col-12 cartas">
         <form action="index.php" method="post">
-            <button type="submit" name="shopButton">
+            <button class="card-btn" type="submit" name="shopButton">
                 <div class="card">
                     <img class="card-img-top" src="..\assets\pajaro-card.png" alt="Card image cap">
                     <div class="card-img-overlay">

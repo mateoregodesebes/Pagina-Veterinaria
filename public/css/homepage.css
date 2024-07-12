@@ -19,10 +19,11 @@
     background-color: var(--main-color);
     border-radius: 10%;
     padding: 10px;
+    transition: 1s ease;
 }
 .icono:hover {
     background-color: white;
-    transition: 1s linear;
+    transition: 1s ease;
 }
 
 .whatsapp-link,
@@ -32,7 +33,7 @@
 
 .whatsapp-link:hover {
     color: var(--main-color);
-    transition: 1s linear;
+    transition: 1s ease;
 }
 .card {
     position: relative;
@@ -65,4 +66,13 @@ button {
 .cartas {
     display: flex;
     justify-content: center;
+}
+
+.card-btn:hover {
+    box-shadow: 12px 12px 10px 1px grey;
+    transition: 1s ease;
+}
+
+.card-btn {
+    transition: 1s ease;
 }
