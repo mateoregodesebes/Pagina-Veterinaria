@@ -12,6 +12,7 @@ if (isset($_SESSION["idMascota"])) {
   $row = mysqli_fetch_array($result);
   $id_cliente = $row['cliente_id'];
   $nombre = $row['nombre'];
+  $fotoPreview = $row['foto'];
   $raza = $row['raza'];
   $color = $row['color'];
   $fecha_de_nac = $row['fecha_de_nac'];
@@ -43,7 +44,7 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
   </form>
 
   <form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
+    <div class="mb-3 p-3">
       <label class="form-label">Id de cliente dueño</label>
       <select name="idCliente" class="form-control">
         <?php
@@ -54,19 +55,22 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
         ?>
       </select>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Nombre</label>
       <input type="text" required name="nombre" class="form-control" placeholder="Nombre" value="<?php echo isset($nombre) ? $nombre : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Raza</label>
       <input type="text" required name="raza" class="form-control" placeholder="Raza" value="<?php echo isset($raza) ? $raza : ""; ?>">
     </div>
-    <div class="mb-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
+    <div class="mb-3 px-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
       <label for="formFile" class="form-label">Foto de la mascota</label>
+      <div class="img-Mascota" <?php if (!isset($_SESSION['idMascota'])) echo 'style="display: none;"' ?>> 
+        <img src="../assets/petImages/<?php echo $fotoPreview?>" class="img-thumbnail img-fluid mb-3" style="margin-left: 35%;" alt="">
+      </div>
       <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Color</label>
       <select required name="color" class="form-control">
         <?php 
@@ -77,11 +81,11 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
         ?>
       </select>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Fecha de nacimiento</label>
       <input type="date" required name="fechaNac" class="form-control" max="<?php echo date('Y-m-d') ?>" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label for="formFile" class="form-label" style="<?php echo isset($id) ? "" : "display: none" ?>">Fecha de
         muerte</label>
       <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" max="<?php echo date('Y-m-d') ?>" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">

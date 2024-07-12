@@ -28,37 +28,37 @@ if (isset($_SESSION["idCliente"])) {
   </form>
 
   <form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Id de cliente</label>
       <input type="text" required name="idCliente" class="form-control" placeholder="Id de cliente"
         value="<?php echo isset($id_cliente) ? $id_cliente : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Nombre</label>
       <input type="text" required name="nombre" class="form-control" placeholder="Nombre"
         value="<?php echo isset($nombre) ? $nombre : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Apellido</label>
       <input type="text" required name="apellido" class="form-control" placeholder="Apellido"
         value="<?php echo isset($apellido) ? $apellido : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Email</label>
       <input type="text" required name="email" class="form-control" placeholder="Email"
         value="<?php echo isset($email) ? $email : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Ciudad</label>
       <input type="text" required name="ciudad" class="form-control" placeholder="Ciudad"
         value="<?php echo isset($ciudad) ? $ciudad : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Direccion</label>
       <input type="text" required name="direccion" class="form-control" placeholder="Direccion"
         value="<?php echo isset($direccion) ? $direccion : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Telefono</label>
       <input type="text" required name="telefono" class="form-control" placeholder="Telefono"
         value="<?php echo isset($telefono) ? $telefono : ""; ?>">
