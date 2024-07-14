@@ -12,6 +12,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+<script>
+$(document).ready(function(){
+    // Prevent the dropdown from closing when clicking inside it
+    $(".dropdown-menu").click(function(event){
+        event.stopPropagation();
+    });
+    // Show warning if email or password are not valid
+    $(".form-control").blur(function(){
+        console.log("Input blurred");
+        if($(this).attr('type') == "email") {
+            if($(this).val().indexOf("@") == -1) {
+                $("#email-warning").removeClass("d-none");
+            } else {
+                $("#email-warning").addClass("d-none");
+            }
+        } else if($(this).attr('type') == "password") {
+            if($(this).val().length < 8) {
+                $("#password-warning").removeClass("d-none");
+            } else {
+                $("#password-warning").addClass("d-none");
+            }
+        }
+    })
+});
+</script>
+
 
 <div class="row">
     <nav class="nav navbar-expand-sm">
@@ -101,14 +127,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     exit();
                                 }
                             }
+                        if(isset($_SESSION["error_message"])) {
+                            echo "<div class='alert alert-danger' role='alert'>" . $_SESSION["error_message"] . "</div>";
+                            unset($_SESSION["error_message"]);
+                        }
                         ?>
                             <form class="px-4 py-3" action="index.php" method="POST">
                                 <div class="form-group">
                                     <label>Mail</label>
+                                    <br>
+                                    <small class="warning d-none" id="email-warning">El mail debe contar con un @</small>
                                     <input type="email" class="form-control mt-2" name="email" placeholder="email@ejemplo.com" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-auto">
                                     <label>Contraseña</label>
+                                    <br>
+                                    <small class="warning d-none" id="password-warning">La contraseña debe tener 8 caracteres por lo menos</small>
                                     <input type="password" class="form-control mt-2" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
                                 </div>
                                 <div class="form-check mt-3">

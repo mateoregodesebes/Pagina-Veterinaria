@@ -33,9 +33,12 @@ if ($user) {
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     } else {
-        # Check if these echoes work
-        echo "<div class='alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
+        $_SESSION["error_message"] = "Usuario o contraseña no correcto";
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
     }
 } else {
-    echo "<div class='alert alert-danger' role='alert'>Usuario o contraseña no correcto</div>";
+    $_SESSION["error_message"] = "Usuario o contraseña no correcto";
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
 }

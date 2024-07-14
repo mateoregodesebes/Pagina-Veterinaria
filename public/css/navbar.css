@@ -9,6 +9,11 @@ nav {
     align-items: stretch;
 }
 
+.warning {
+    color: rgb(255, 0, 0);
+    transition: 1s ease;
+}
+
 .logo {
     border: none;
     outline: none;
@@ -41,7 +46,6 @@ button.nav-btn:focus {
 }
 
 .form-group * {
-    color: var(--main-color);
     font-family: var(--main-font);
 }
 
