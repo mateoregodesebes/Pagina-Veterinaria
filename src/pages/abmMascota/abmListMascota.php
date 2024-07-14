@@ -2,7 +2,7 @@
 $_SESSION["currentPage"] = '../src/pages/abmMascota/abmListMascota.php';
 
 require_once(__DIR__ . '/../../../includes/connection.php');
-$query = "SELECT * FROM mascotas";
+$query = "SELECT * FROM mascotas ORDER BY id";
 $result = mysqli_query($conn, $query);
 
 //!Decidir despues si se agrega un efecto con js aca, si se agrega recomiendo hacer un script aparte y ponerlo aca

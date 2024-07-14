@@ -12,6 +12,7 @@ if (isset($_SESSION["idMascota"])) {
   $row = mysqli_fetch_array($result);
   $id_cliente = $row['cliente_id'];
   $nombre = $row['nombre'];
+  $fotoPreview = $row['foto'];
   $raza = $row['raza'];
   $color = $row['color'];
   $fecha_de_nac = $row['fecha_de_nac'];
@@ -23,6 +24,15 @@ if (isset($_SESSION["idMascota"])) {
 } else {
   $id = null;
 }
+
+// * Para el combo del id cliente
+$query2 = "SELECT id FROM clientes";
+$result = mysqli_query($conn, $query2);
+$id_clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+//?Colores de mascotas actuales
+$colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
+
 ?>
 <?php ?>
 <div class="dataForm my-3">
@@ -34,42 +44,51 @@ if (isset($_SESSION["idMascota"])) {
   </form>
 
   <form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
+    <div class="mb-3 p-3">
       <label class="form-label">Id de cliente dueño</label>
-      <input type="text" required name="idCliente" class="form-control" placeholder="Id de cliente" value="<?php if (isset($id_cliente)) {
-                                                                                                              echo $id_cliente;
-                                                                                                            } elseif (isset($idAtencion)) {
-                                                                                                              echo $idAtencion;
-                                                                                                            } else {
-                                                                                                              echo "";
-                                                                                                            } ?>">
+      <select name="idCliente" class="form-control">
+        <?php
+        foreach ($id_clientes as $id_temp) {
+          $selected = $id_temp['id'] == $id_cliente ? "selected" : "";
+          echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
+        }
+        ?>
+      </select>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Nombre</label>
       <input type="text" required name="nombre" class="form-control" placeholder="Nombre" value="<?php echo isset($nombre) ? $nombre : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Raza</label>
       <input type="text" required name="raza" class="form-control" placeholder="Raza" value="<?php echo isset($raza) ? $raza : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
       <label for="formFile" class="form-label">Foto de la mascota</label>
-      <input required class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
+      <div class="img-Mascota d-flex justify-content-center mb-3" <?php if (!isset($_SESSION['idMascota'])) echo 'style="display: none;"' ?>> 
+        <img src="../assets/petImages/<?php echo $fotoPreview?>" class="img-thumbnail img-fluid" alt="">
+      </div>
+      <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
     </div>
-    <?php //!Este ver que onda como guardar solamente el nombre de la foto y guardar el archivo en assets/mascotas/             
-    ?>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Color</label>
-      <input type="text" required name="color" class="form-control" placeholder="Color" value="<?php echo isset($color) ? $color : ""; ?>">
+      <select required name="color" class="form-control">
+        <?php 
+          foreach ($colors as $colorOption) {
+            $selected = (isset($color) && $color == $colorOption) ? "selected" : "";
+            echo "<option value='$colorOption' $selected>$colorOption</option>";
+          }
+        ?>
+      </select>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label class="form-label">Fecha de nacimiento</label>
-      <input type="date" required name="fechaNac" class="form-control" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
+      <input type="date" required name="fechaNac" class="form-control" max="<?php echo date('Y-m-d') ?>" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 px-3">
       <label for="formFile" class="form-label" style="<?php echo isset($id) ? "" : "display: none" ?>">Fecha de
         muerte</label>
-      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
+      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" max="<?php echo date('Y-m-d') ?>" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
     </div>
 
     <div class="row justify-content-center">

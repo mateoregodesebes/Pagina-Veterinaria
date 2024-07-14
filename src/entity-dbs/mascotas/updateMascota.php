@@ -10,16 +10,31 @@ try {
     throw new Exception('Error, no existe la mascota: ' . mysqli_error($conn));
   }
 
-  $targetDirectory = "../assets/petImages/";
-  $targetFile = $targetDirectory . basename($_FILES["foto"]["name"]);
-  if (move_uploaded_file($_FILES["foto"]["tmp_name"], $targetFile)) {
-    echo "The file " . basename($_FILES["foto"]["name"]) . " has been uploaded.";
-    $name = basename($_FILES["foto"]["name"]);
-    $_SESSION['error'] = false;
+  if ($_FILES["foto"]["error"] == UPLOAD_ERR_OK) {
+    //? No hay errores, se selecciono archivo
+    $targetDirectory = "../assets/petImages/";
+    $targetFile = $targetDirectory . basename($_FILES["foto"]["name"]);
+    if (move_uploaded_file($_FILES["foto"]["tmp_name"], $targetFile)) {
+        echo "The file " . basename($_FILES["foto"]["name"]) . " has been uploaded.";
+        $name = basename($_FILES["foto"]["name"]);
+        $_SESSION['error'] = false;
+    } else {
+      $name = null;
+      $_SESSION['error'] = true;
+      echo "There was an error uploading the file.";
+    }
+  } elseif ($_FILES["foto"]["error"] == UPLOAD_ERR_NO_FILE) {
+    //? No se seleccionó ningún archivo
+    $query2 = "SELECT foto FROM mascotas WHERE id = $vId";
+    $result2 = mysqli_query($conn, $query2);
+    $row = mysqli_fetch_array($result2);
+    $name = $row['foto'];
   } else {
     $name = null;
     $_SESSION['error'] = true;
+    echo "An error occurred during the file upload.";
   }
+
 
   $vIdClient = $_POST['idCliente'];
   $vNombre = $_POST['nombre'];
