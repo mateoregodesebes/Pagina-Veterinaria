@@ -65,8 +65,8 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
     </div>
     <div class="mb-3 px-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
       <label for="formFile" class="form-label">Foto de la mascota</label>
-      <div class="img-Mascota d-flex justify-content-center mb-3" <?php if (!isset($_SESSION['idMascota'])) echo 'style="display: none;"' ?>> 
-        <img src="../assets/petImages/<?php echo $fotoPreview?>" class="img-thumbnail img-fluid" alt="">
+      <div class="img-Mascota d-flex justify-content-center mb-3"> 
+        <img src="../assets/petImages/<?php echo $fotoPreview?>" class="img-thumbnail img-fluid" <?php if (!isset($_SESSION['idMascota'])) echo 'style="display: none;"' ?> alt="">
       </div>
       <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
     </div>

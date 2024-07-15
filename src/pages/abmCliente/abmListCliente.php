@@ -2,8 +2,6 @@
 $_SESSION["currentPage"] = '../src/pages/abmCliente/abmListCliente.php';
 
 require_once(__DIR__ . '/../../../includes/connection.php');
-$query = "SELECT * FROM clientes";
-$result = mysqli_query($conn, $query);
 
 //!Decidir despues si se agrega un efecto con js aca, si se agrega recomiendo hacer un script aparte y ponerlo aca
 if (isset($_SESSION['error'])) {
@@ -24,9 +22,22 @@ if (isset($_SESSION['error'])) {
   </script>';
   $_SESSION['error'] = null;
 }
+
+$registrosPagina = 7;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$paginaActual = max($paginaActual, 1);
+$offset = ($paginaActual - 1) * $registrosPagina;
+
+$query = "SELECT * FROM clientes ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$result = mysqli_query($conn, $query);
+
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM clientes");
+$filaTotal = mysqli_fetch_assoc($paginadoTotal);
+$totalRegistros = $filaTotal['total'];
+$totalPaginas = ceil($totalRegistros / $registrosPagina);
 ?>
 
-<h3> Clientes </h3>
+<h3 class="mt-3"> Clientes </h3>
 <table class="table table-bordered border-3 table-hover table-striped">
   <thead>
     <tr>
@@ -116,14 +127,14 @@ if (isset($_SESSION['error'])) {
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
             <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop">Delete</button>
+              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Delete</button>
 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel<?= $row['id'] ?>" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Usted esta a punto de borrar un cliente</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar un cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -145,6 +156,16 @@ if (isset($_SESSION['error'])) {
     ?>
   </tbody>
 </table>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <?php for ($pagina = 1; $pagina <= $totalPaginas; $pagina++): ?>
+      <li class="page-item <?= ($paginaActual == $pagina) ? 'active' : '' ?>">
+        <a class="page-link" href="index.php?pagina=<?= $pagina ?>"><?= $pagina ?></a>
+      </li>
+    <?php endfor; ?>
+  </ul>
+</nav>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

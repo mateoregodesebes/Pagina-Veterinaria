@@ -24,6 +24,21 @@
   background-color: var(--main-background);
 }
 
+.pagination {
+  background-color: var(--main-background);
+}
+
+.page-item.active .page-link{
+  z-index: 3;
+  color: #fff;
+  background-color: var(--table-color);
+  border-color: var(--table-color);
+}
+
+.page-link {
+  color: var(--table-color);
+}
+
 /* AbmForm */
 
 .dataForm {
