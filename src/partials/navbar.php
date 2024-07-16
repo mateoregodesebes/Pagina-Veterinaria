@@ -20,7 +20,6 @@ $(document).ready(function(){
     });
     // Show warning if email or password are not valid
     $(".form-control").blur(function(){
-        console.log("Input blurred");
         if($(this).attr('type') == "email") {
             if($(this).val().indexOf("@") == -1) {
                 $("#email-warning").removeClass("d-none");
