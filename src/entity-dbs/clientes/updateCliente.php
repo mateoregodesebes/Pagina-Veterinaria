@@ -10,7 +10,7 @@ try {
     throw new Exception('Error, no existe el cliente: ' . mysqli_error($conn));
   }
 
-  $vIdClient = $_POST['idCliente'];
+  $vIdClient = $_SESSION["idCliente"];
   $vNombre = $_POST['nombre'];
   $vApellido = $_POST['apellido'];
   $vEmail = $_POST['email'];
