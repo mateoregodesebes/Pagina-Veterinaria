@@ -28,11 +28,6 @@ if (isset($_SESSION["idCliente"])) {
   </form>
 
   <form method="post" enctype="multipart/form-data">
-    <div class="mb-3 px-3" style="<?php echo isset($id) ? "" : "display: none" ?>"> 
-      <label class="form-label">Id de cliente</label>
-      <input type="text" name="idCliente" class="form-control" placeholder="Id de cliente"
-        value="<?php echo isset($id_cliente) ? $id_cliente : ""; ?>">
-    </div>
     <div class="mb-3 px-3">
       <label class="form-label">Nombre</label>
       <input type="text" required name="nombre" class="form-control" placeholder="Nombre"
