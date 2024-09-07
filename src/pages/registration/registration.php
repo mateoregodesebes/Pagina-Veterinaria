@@ -1,24 +1,34 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $errors = array();
-
-    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+    $reg_email = $_POST["email"];
+    
+    if (!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
         array_push($errors, "Email inválido");
     }
     if ($_POST["password"] != $_POST["repeat_password"]) {
         array_push($errors, "Las contraseñas no coinciden");
     }
+    
+    require_once(__DIR__ . '/../../../includes/connection.php');
+    $stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
 
-    /* Check if the email is already registered
-    *  require_once(__DIR__ . '/../../../includes/connection.php');
-    *  $sql = "SELECT * FROM clientes WHERE email = '$email'";
-    *  $result = mysqli_query($conn, $sql);
-    *
-    *  if (mysqli_num_rows($result) > 0) 
-    * {
-    *      array_push($errors, "El email ya está registrado");
-    *  }
-    */
+    if (!$stmt) {
+    throw new Exception("Error preparing statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $reg_email);
+
+    if (!$stmt->execute()) {
+        throw new Exception("Error executing statement" . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+    
+    if (mysqli_num_rows($result) > 0) 
+    {
+        array_push($errors, "El email ya está registrado");
+    }
 
     if (count($errors) > 0) {
         foreach ($errors as $error) {
