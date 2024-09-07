@@ -1,13 +1,83 @@
 # Página de la veterinaria
 
+### Integrantes
+
+| Legajo |      Apellido y Nombre      |
+| :----: | :-------------------------: |
+| 51657  | Quagliardi, Martín Nicolás. |
+| 51079  |  Regodesebes, Mateo Ariel   |
+| 48128  |       Socolsky, José        |
+| 51415  |   Alesandroni, Valentino    |
+
 ## Introducción
 
-En este repositorio se encuentran el trabajo relacionado a la página de la veterinaria del grupo 10 relacionado a la materia electiva llamada Entornos Gráficos dictada en la Universidad Tecnológica Nacional Regional Rosario (UTNFRRO).
+Este repositorio contiene el trabajo relacionado con la página web de la veterinaria del Grupo 10, desarrollado para la materia electiva "Entornos Gráficos" de la Universidad Tecnológica Nacional, Facultad Regional Rosario (UTN-FRRO).
 
-Los respectivos profesores de esta materia son Daniela Diaz(teoría) y Julian Butti(práctica).
+Los profesores responsables de esta materia son:
 
-(ENG)
-This repository is dedicated to a vet's web site. The making of this web site is college(UTNFRRO) related, specifically for a subject called "Entornos Gráficos".
-The code from this web site contains HTML, CSS and PHP.
+-   Teoría: Daniela Díaz
+-   Práctica: Julián Butti
 
----
+### Tecnologias utilizadas
+
+El sitio web fue realizado usando:
+
+-   HTML
+-   CSS
+-   PHP
+
+## Diagrama Entidad-Relación (DER/ERD)
+
+```mermaid
+erDiagram
+    Cliente {
+        int id
+        string nombre
+        string apellido
+        string email
+        string ciudad
+        string direccion
+        string telefono
+    }
+    Mascota {
+        int id
+        int cliente_id
+        string nombre
+        blob foto
+        string raza
+        string color
+        date fecha_de_nac
+        date fecha_muerte(NULL)
+    }
+    Atencion {
+      int id
+      int mascota_id
+      int servicio_id
+      int personal_id
+      datetime fecha_hora
+      string titulo
+      string descripcion
+    }
+    Servicio {
+        int id
+        string nombre
+        string tipo
+        int precio
+    }
+    Personal {
+      int id
+      int rol_id
+      string email
+      string clave
+    }
+    Rol {
+      int id
+      string nombre
+    }
+
+    Mascota ||--o{ Atencion : recibe
+    Cliente ||--|{ Mascota : tiene
+    Atencion }o--|| Servicio: con
+    Personal }o--|| Rol: tiene
+    Atencion }o--|| Personal: realiza
+```
