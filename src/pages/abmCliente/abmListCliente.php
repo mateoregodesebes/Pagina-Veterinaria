@@ -28,10 +28,10 @@ $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM clientes ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT * FROM personas WHERE rol_id is NULL ORDER BY id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM clientes");
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM personas WHERE rol_id IS NULL");
 $filaTotal = mysqli_fetch_assoc($paginadoTotal);
 $totalRegistros = $filaTotal['total'];
 $totalPaginas = ceil($totalRegistros / $registrosPagina);
