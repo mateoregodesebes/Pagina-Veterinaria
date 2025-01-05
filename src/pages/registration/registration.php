@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
     
     require_once(__DIR__ . '/../../../includes/connection.php');
-    $stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
+    $stmt = $conn->prepare("SELECT * FROM personas WHERE email = ? AND rol_id IS NULL");
 
     if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);
