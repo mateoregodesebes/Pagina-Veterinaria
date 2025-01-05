@@ -1,5 +1,5 @@
 <?php
-    // Array con las paginas que estan en progreso
+// Array con las paginas que estan en progreso
 $in_progress_pages = [
     '../src/pages/shop/shop.php',
     '../src/pages/peluqueria/peluqueria.php',
