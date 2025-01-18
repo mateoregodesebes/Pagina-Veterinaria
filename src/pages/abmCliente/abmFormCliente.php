@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../../../includes/connection.php');
 
 if (isset($_SESSION["idCliente"])) {
   $id = $_SESSION["idCliente"];
-  $query = "SELECT * FROM clientes WHERE id = '$id' ";
+  $query = "SELECT * FROM personas WHERE id = '$id' AND rol_id IS NULL";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result);
   $id_cliente = $row['id'];

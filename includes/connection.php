@@ -8,7 +8,7 @@ $servername = $_ENV['DB_HOST'];
 $username = $_ENV['DB_USERNAME'];
 $password = $_ENV['DB_PASSWORD'];
 
-$database = "veterinaria-sql";
+$database = "veterinarias_db";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
