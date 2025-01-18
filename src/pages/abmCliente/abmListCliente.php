@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo '<script>window.location.replace("index.php");</script>';
 
   } elseif ($_POST['action'] == 'delete') {
-    require_once(__DIR__ . '/../../entity-dbs/Clientes/bajaCliente.php');
+    require_once(__DIR__ . '/../../entity-dbs/clientes/bajaCliente.php');
     echo '<script>window.location.replace("index.php");</script>';
     exit();
   } elseif ($_POST['action'] == 'create') {
