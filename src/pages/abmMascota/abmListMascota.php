@@ -24,14 +24,14 @@ if (isset($_SESSION['error'])) {
 }
 
 $registrosPagina = 7;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM Mascotas ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT * FROM mascotas ORDER BY id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM Mascotas");
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM mascotas");
 $filaTotal = mysqli_fetch_assoc($paginadoTotal);
 $totalRegistros = $filaTotal['total'];
 $totalPaginas = ceil($totalRegistros / $registrosPagina);
@@ -47,6 +47,7 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
       <th scope="col">Nombre</th>
       <th scope="col">Raza</th>
       <th scope="col">Color</th>
+      <th scope="col">Id de dueño</th>
       <th scope="col">Fecha Nac</th>
       <th scope="col">Fecha Muerte</th>
       <form method="post">
@@ -72,24 +73,29 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
           <?= $row['color'] ?>
         </td>
         <td>
+          <?= $row['cliente_id'] ?>
+        </td>
+        <td>
           <?= $row['fecha_de_nac'] ?>
         </td>
         <td>
           <?= $row['fecha_muerte'] ?>
         </td>
-        <td> 
+        <td>
           <form method="post">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
             <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
               data-bs-target="#staticBackdrop<?= $row['id'] ?>">Delete</button>
 
-            <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-              aria-labelledby="staticBackdropLabel<?= $row['id'] ?>" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static"
+              data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<?= $row['id'] ?>"
+              aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar una mascota</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar
+                      una mascota</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
