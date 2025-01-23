@@ -12,16 +12,17 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['option'])) {
-    $selected_option = $_POST['option'];
-    if ($selected_option == 'clientes') {
-      require_once(__DIR__ . '/../abmCliente/abmListCliente.php');
-    }
-    if ($selected_option = $_POST['option']) {
-      require_once(__DIR__ . '/../abmMascota/abmListMascota.php');
-    }
-
+    $_SESSION['crudSelected'] = $_POST['option'];
+    echo '<script>window.location.replace("index.php");</script>';
   }
+}
 
-  exit();
+if(isset($_SESSION['crudSelected'])) {
+  if ($_SESSION['crudSelected'] == 'clientes') {
+    require_once(__DIR__ . '/../abmCliente/abmListCliente.php');
+  }
+  if ($_SESSION['crudSelected'] == 'mascotas') {
+    require_once(__DIR__ . '/../abmMascota/abmListMascota.php');
+  }
 }
 ?>

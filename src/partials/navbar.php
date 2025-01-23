@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["LogoButton"])) {
-        $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+        //! Navbar should redirect to homepage, not unset the session variable
+        unset($_SESSION['currentPage']);
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
