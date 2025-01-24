@@ -1,3 +1,5 @@
+<?php $_SESSION["currentPage"] = '../src/pages/crudSelector/crudSelector.php'; ?>
+
 <div class="btn-group mt-3" role="group">
   <form method="post">
     <input type="radio" class="btn-check" name="option" id="btnradio1" autocomplete="off" value="clientes">
