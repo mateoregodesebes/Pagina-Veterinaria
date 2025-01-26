@@ -74,7 +74,7 @@ if (!isset($personal)) {
       <?php
       if (isset($personal)) {
         foreach ($personal as $p) {
-          echo '<option value="' . $p['id'] . '">' . $p['email'] . '</option>';
+          echo '<option value="' . $p['idPersona'] . '">' . $p['nombre'] . ' ' . $p['apellido'] . ' ('  . $p['nombreRol'] . ')</option>';
         }
       }
       ?>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['alerta'] = 'altaTurno';
     }
   }
-  $_SESSION['user_id'] = null;
+  $_SESSION['user_idAt'] = null;
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
   echo '<script>window.location.replace("index.php");</script>';
 }

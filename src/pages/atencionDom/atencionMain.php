@@ -67,7 +67,7 @@ if (isset($_SESSION['alerta'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include __DIR__ . '/../../entity-dbs/clientes/validaCliente.php';
   if ($clientFlag) {
-    $_SESSION['user_id'] = $_POST['idCliente'];
+    $_SESSION['user_idAt'] = $_POST['idCliente'];
     $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
     if (isset($_POST['petCheckbox'])) {
       $_SESSION['currentPage'] = '../src/pages/abmMascota/abmFormMascota.php';

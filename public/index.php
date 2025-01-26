@@ -46,12 +46,11 @@ session_start();
     ?>
     <main>
         <div class="container-fluid">
-
             <?php
             require_once("../src/partials/navbar.php");
-
-            require_once("../src/partials/pageHandler.php")
-                ?>
+            require_once("../src/partials/roleHandler.php");
+            require_once("../src/partials/pageHandler.php");
+            ?>
         </div>
     </main>
     <footer>

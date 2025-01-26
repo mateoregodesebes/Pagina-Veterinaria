@@ -3,7 +3,12 @@
 include(__DIR__ . '/../../../includes/connection.php');
 
 try {
-  $vId = $_SESSION["user_id"];
+  // user_idAt viene de atencionMain, el user_id normal es el del login
+  if(isset($_SESSION["user_idAt"])){
+    $vId = $_SESSION["user_idAt"];
+  } else {
+    $vId = $_SESSION["user_id"];
+  };
   $stmt = $conn->prepare("SELECT * FROM mascotas WHERE cliente_id = ?");
   $mascotas = array();
 

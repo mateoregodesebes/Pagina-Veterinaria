@@ -3,7 +3,7 @@
 include(__DIR__ . '/../../../includes/connection.php');
 
 try {
-  $query = "SELECT * FROM servicios";
+  $query = "SELECT * FROM servicios ORDER BY nombre";
   $result = mysqli_query($conn, $query);
   $servicios = array();
 
