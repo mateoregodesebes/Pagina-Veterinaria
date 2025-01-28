@@ -1,4 +1,4 @@
-nav {
+.navb {
     background-color: var(--main-color);
     display: flex;
     justify-content: space-between;

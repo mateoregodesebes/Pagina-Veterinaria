@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION["currentPage"])) {
     switch ($_SESSION["currentPage"]) {
+        case '../src/pages/crudSelector/crudSelector.php':
         case '../src/pages/abmMascota/abmListMascota.php':
         case '../src/pages/abmMascota/abmFormMascota.php':
         case '../src/pages/abmCliente/abmListCliente.php':
