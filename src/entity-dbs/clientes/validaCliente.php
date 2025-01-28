@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../../includes/connection.php');
 
 try {
   $vId = $_POST['idCliente'];
-  $stmt = $conn->prepare("SELECT * FROM clientes WHERE id = ?");
+  $stmt = $conn->prepare("SELECT * FROM personas WHERE id = ? AND rol_id IS NULL");
 
   if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);

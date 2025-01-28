@@ -26,74 +26,84 @@ if (isset($_SESSION["idMascota"])) {
 }
 
 // * Para el combo del id cliente
-$query2 = "SELECT id FROM clientes";
+$query2 = "SELECT id FROM personas";
 $result = mysqli_query($conn, $query2);
 $id_clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 //?Colores de mascotas actuales
 $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
 
-?>
+  ?>
 <?php ?>
 <div class="dataForm my-3">
   <form class="button-form" method="post">
     <div class="mb-3">
       <button class="button-back" <?php if (isset($idAtencion))
-                                    echo 'style="display: none;"' ?> type="submit" name="action" value="goBack"><i class="fa-solid fa-arrow-left"></i></button>
-    </div>
-  </form>
+        echo 'style="display: none;"' ?> type="submit"
+          name="action" value="goBack"><i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+    </form>
 
-  <form method="post" enctype="multipart/form-data">
-    <div class="mb-3 p-3">
-      <label class="form-label">Id de cliente dueño</label>
-      <select name="idCliente" class="form-control">
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-3 p-3">
+        <label class="form-label">Id de cliente dueño</label>
+        <select name="idCliente" class="form-control">
+          <?php
+      foreach ($id_clientes as $id_temp) {
+        $selected = $id_temp['id'] == $id_cliente ? "selected" : "";
+        echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
+      }
+      ?>
+      </select>
+    </div>
+    <div class="mb-3 px-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" required name="nombre" class="form-control" placeholder="Nombre"
+        value="<?php echo isset($nombre) ? $nombre : ""; ?>">
+    </div>
+    <div class="mb-3 px-3">
+      <label class="form-label">Raza</label>
+      <input type="text" required name="raza" class="form-control" placeholder="Raza"
+        value="<?php echo isset($raza) ? $raza : ""; ?>">
+    </div>
+    <div class="mb-3 px-3" <?php if (isset($idAtencion))
+      echo 'style="display: none;"' ?>>
+        <label for="formFile" class="form-label">Foto de la mascota</label>
+        <div class="img-Mascota d-flex justify-content-center mb-3">
+          <img src="../assets/petImages/<?php echo $fotoPreview ?>" class="img-thumbnail img-fluid" <?php if (!isset($_SESSION['idMascota']))
+              echo 'style="display: none;"' ?> alt="">
+        </div>
+        <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file"
+        id="formFile" accept="image/png" />
+    </div>
+    <div class="mb-3 px-3">
+      <label class="form-label">Color</label>
+      <select required name="color" class="form-control">
         <?php
-        foreach ($id_clientes as $id_temp) {
-          $selected = $id_temp['id'] == $id_cliente ? "selected" : "";
-          echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
+        foreach ($colors as $colorOption) {
+          $selected = (isset($color) && $color == $colorOption) ? "selected" : "";
+          echo "<option value='$colorOption' $selected>$colorOption</option>";
         }
         ?>
       </select>
     </div>
     <div class="mb-3 px-3">
-      <label class="form-label">Nombre</label>
-      <input type="text" required name="nombre" class="form-control" placeholder="Nombre" value="<?php echo isset($nombre) ? $nombre : ""; ?>">
-    </div>
-    <div class="mb-3 px-3">
-      <label class="form-label">Raza</label>
-      <input type="text" required name="raza" class="form-control" placeholder="Raza" value="<?php echo isset($raza) ? $raza : ""; ?>">
-    </div>
-    <div class="mb-3 px-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
-      <label for="formFile" class="form-label">Foto de la mascota</label>
-      <div class="img-Mascota d-flex justify-content-center mb-3"> 
-        <img src="../assets/petImages/<?php echo $fotoPreview?>" class="img-thumbnail img-fluid" <?php if (!isset($_SESSION['idMascota'])) echo 'style="display: none;"' ?> alt="">
-      </div>
-      <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file" id="formFile" accept="image/png" />
-    </div>
-    <div class="mb-3 px-3">
-      <label class="form-label">Color</label>
-      <select required name="color" class="form-control">
-        <?php 
-          foreach ($colors as $colorOption) {
-            $selected = (isset($color) && $color == $colorOption) ? "selected" : "";
-            echo "<option value='$colorOption' $selected>$colorOption</option>";
-          }
-        ?>
-      </select>
-    </div>
-    <div class="mb-3 px-3">
       <label class="form-label">Fecha de nacimiento</label>
-      <input type="date" required name="fechaNac" class="form-control" max="<?php echo date('Y-m-d') ?>" placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
+      <input type="date" required name="fechaNac" class="form-control" max="<?php echo date('Y-m-d') ?>"
+        placeholder="Fecha de nacimiento" value="<?php echo isset($fecha_de_nac) ? $fecha_de_nac : ""; ?>">
     </div>
     <div class="mb-3 px-3">
       <label for="formFile" class="form-label" style="<?php echo isset($id) ? "" : "display: none" ?>">Fecha de
         muerte</label>
-      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" max="<?php echo date('Y-m-d') ?>" class="form-control" placeholder="Fecha de muerte" value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
+      <input type="<?php echo isset($id) ? "date" : "hidden" ?>" name="fechaMuerte" max="<?php echo date('Y-m-d') ?>"
+        class="form-control" placeholder="Fecha de muerte"
+        value="<?php echo isset($fecha_muerte) ? $fecha_muerte : ""; ?>">
     </div>
 
     <div class="row justify-content-center">
       <div class="col-3 my-3">
-        <button type="button" class="btn btn-primary submit-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-primary submit-btn" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
           Enviar
         </button>
       </div>
@@ -102,7 +112,8 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
 
     <?php //?Modal             
     ?>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -116,7 +127,8 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" name="action" value="<?php echo isset($id) ? "updateEntity" : "createEntity" ?>">Si</button>
+            <button type="submit" class="btn btn-primary" name="action"
+              value="<?php echo isset($id) ? "updateEntity" : "createEntity" ?>">Si</button>
           </div>
         </div>
       </div>

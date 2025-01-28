@@ -13,7 +13,7 @@ try {
 
   $vContrasenia_hash = password_hash($vContrasenia, PASSWORD_DEFAULT);
 
-  $stmt = $conn->prepare("INSERT INTO clientes (nombre, apellido, email, ciudad, direccion, telefono, contrasenia) 
+  $stmt = $conn->prepare("INSERT INTO personas (nombre, apellido, email, ciudad, direccion, telefono, clave) 
                           VALUES (?, ?, ?, ?, ?, ?, ?)");
 
   if (!$stmt) {

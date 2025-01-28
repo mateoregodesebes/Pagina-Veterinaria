@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../../../includes/connection.php');
 $vId = $_SESSION["idCliente"];
-$query = "SELECT * FROM clientes WHERE id = $vId";
+$query = "SELECT * FROM personas WHERE id = $vId AND rol_id IS NULL";
 
 try {
   $result = mysqli_query($conn, $query);
@@ -18,7 +18,7 @@ try {
   $vDireccion = $_POST['direccion'];
   $vTelefono = $_POST['telefono'];
 
-  $stmt = $conn->prepare("UPDATE clientes SET id = ?, nombre = ?, apellido = ?, email = ?, ciudad = ?, direccion = ?, telefono = ? WHERE id = ?");
+  $stmt = $conn->prepare("UPDATE personas SET id = ?, nombre = ?, apellido = ?, email = ?, ciudad = ?, direccion = ?, telefono = ? WHERE id = ?");
 
   if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);
