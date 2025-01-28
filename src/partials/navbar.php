@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["LogoButton"])) {
-        $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+        //! Navbar should redirect to homepage, not unset the session variable
+        unset($_SESSION['currentPage']);
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
@@ -39,7 +40,7 @@ $(document).ready(function(){
 
 
 <div class="row">
-    <nav class="nav navbar-expand-sm">
+    <nav class="navb navbar-expand-sm">
         <div class="col-1">
             <form action="index.php" method="post">
                 <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">

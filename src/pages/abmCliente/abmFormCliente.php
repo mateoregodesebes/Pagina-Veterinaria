@@ -98,7 +98,7 @@ if (isset($_SESSION["idCliente"])) {
 <?php
 if (isset($_POST['id'])) {
   require_once(__DIR__ . '/../../entity-dbs/clientes/updateCliente.php');
-  $_SESSION['currentPage'] = '../src/pages/abmCliente/abmListCliente.php';
+  $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';
   echo '<script>window.location.replace("index.php");</script>';
 }
 ?>
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once(__DIR__ . '/../../entity-dbs/clientes/altaCliente.php');
   }
 
-  $_SESSION['currentPage'] = '../src/pages/abmCliente/abmListCliente.php';
+  $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';
   echo '<script>window.location.replace("index.php");</script>';
   exit();
 }

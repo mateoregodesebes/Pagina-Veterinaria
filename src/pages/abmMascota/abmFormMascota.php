@@ -140,7 +140,7 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
 <?php
 if (isset($_POST['id'])) {
   require_once(__DIR__ . '/../../entity-dbs/mascotas/updateMascota.php');
-  $_SESSION['currentPage'] = '../src/pages/abmMascota/abmListMascota.php';
+  $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';
   echo '<script>window.location.replace("index.php");</script>';
 }
 ?>
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once(__DIR__ . '/../../entity-dbs/mascotas/altaMascota.php');
   }
 
-  $_SESSION['currentPage'] = '../src/pages/abmMascota/abmListMascota.php';
+  $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';
   if (isset($_SESSION['user_id'])) {
     $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
   }

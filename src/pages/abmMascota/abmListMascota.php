@@ -1,6 +1,4 @@
 <?php
-$_SESSION["currentPage"] = '../src/pages/abmMascota/abmListMascota.php';
-
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 //!Decidir despues si se agrega un efecto con js aca, si se agrega recomiendo hacer un script aparte y ponerlo aca
