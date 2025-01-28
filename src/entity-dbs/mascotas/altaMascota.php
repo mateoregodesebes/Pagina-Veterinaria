@@ -13,6 +13,7 @@ try {
     $name = basename($_FILES["foto"]["name"]);
     $_SESSION['error'] = false;
   } elseif(isset($_SESSION['user_idAt'])){
+    //? Poner un nombre clave aca o hacer un provisional.jpg para que tenga una imagen default en estos casos
     $name = "Provisional, subir foto";
   } else {
     $name = null;

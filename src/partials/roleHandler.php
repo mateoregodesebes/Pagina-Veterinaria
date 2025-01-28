@@ -2,6 +2,7 @@
 if(isset($_SESSION["currentPage"]) && $_SESSION["currentPage"] == "../src/pages/homepage/homepage.php") {
   if(isset($_SESSION["user_role"])){
   switch ($_SESSION["user_role"]) {
+    //! En asistente y en veterinario sacar la navbar despues del login
     case 'Asistente':
       $_SESSION["currentPage"] = "../src/pages/crudSelector/crudSelector.php";
       break;
