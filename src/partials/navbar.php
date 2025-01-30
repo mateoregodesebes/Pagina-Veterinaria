@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["LogoButton"])) {
-        //! Navbar should redirect to homepage, not unset the session variable
         unset($_SESSION['currentPage']);
         echo '<script>window.location.replace("index.php");</script>';
         exit();
@@ -12,6 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+
+if (isset($_SESSION["user_role"]) && $_SESSION["user_role"] != "cliente") {
+    echo
+        '<style>
+    .logToggle {
+        display: none;
+    }
+    .nav-item {
+        margin-right: 12%;
+    }
+    </style>';
+}
+
 ?>
 <script>
 $(document).ready(function(){
@@ -51,28 +63,28 @@ $(document).ready(function(){
         <div class="col-2"></div>
         <div class="col-9">
             <ul class="navbar-nav mr-auto mt-1 d-flex justify-content-around">
-                <li class="nav-item">
+                <li class="nav-item logToggle">
                     <form action="index.php" method="post">
                         <button class="nav-btn" type="submit" name="about-us"> 
                             Sobre Nosotros
                         </button>
                     </form>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logToggle">
                     <form action="index.php" method="post">
                         <button class="nav-btn" type="submit" name="services"> 
                             Servicios
                         </button>
                     </form>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logToggle">
                     <form action="index.php" method="post">
                         <button class="nav-btn" type="submit" name="contact"> 
                             Contacto
                         </button>
                     </form>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logToggle">
                     <form action="index.php" method="post">
                         <button class="nav-btn" type="submit" name="newspaper"> 
                             Noticias peludas
