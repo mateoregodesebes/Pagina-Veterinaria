@@ -6,6 +6,7 @@ if(isset($_SESSION["currentPage"]) && $_SESSION["currentPage"] == "../src/pages/
       $_SESSION["currentPage"] = "../src/pages/crudSelector/crudSelector.php";
       break;
     case 'Peluquero':
+      $_SESSION["currentPage"] = "../src/pages/appointmentList/appointmentList.php";
       break;
     case 'Veterinario':
       $_SESSION["currentPage"] = "../src/pages/atencionDom/atencionMain.php";

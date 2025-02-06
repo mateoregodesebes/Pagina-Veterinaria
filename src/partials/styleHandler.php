@@ -1,6 +1,9 @@
 <?php
 if (isset($_SESSION["currentPage"])) {
     switch ($_SESSION["currentPage"]) {
+        case '../src/pages/appointmentList/appointmentList.php':
+            echo '<link rel="stylesheet" href="css/abm.css">';
+            break;
         case '../src/pages/crudSelector/crudSelector.php':
         case '../src/pages/abmMascota/abmListMascota.php':
         case '../src/pages/abmMascota/abmFormMascota.php':
