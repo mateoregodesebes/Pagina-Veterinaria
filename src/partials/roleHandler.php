@@ -15,7 +15,5 @@ if(isset($_SESSION["currentPage"]) && $_SESSION["currentPage"] == "../src/pages/
       break;
   }
 }
-
-
 }
 ?>

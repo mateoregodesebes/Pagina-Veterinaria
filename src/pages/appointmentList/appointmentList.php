@@ -1,6 +1,11 @@
 <?php
 require_once(__DIR__ . '/../../../includes/connection.php');
 
+$registrosPagina = 7;
+$paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
+$paginaActual = max($paginaActual, 1);
+$offset = ($paginaActual - 1) * $registrosPagina;
+
 $query = "SELECT ate.id, 
   mas.nombre AS mascota_nombre, 
   ser.nombre AS servicio_nombre,
@@ -12,9 +17,17 @@ $query = "SELECT ate.id,
   INNER JOIN servicios ser ON ate.servicio_id = ser.id
     WHERE (servicio_id = 1 OR servicio_id = 3) 
     AND personal_id = {$_SESSION["user_id"]} 
-  ORDER BY id";
+  ORDER BY id
+  LIMIT $registrosPagina
+  OFFSET $offset";
 
 $result = mysqli_query($conn, $query);
+
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM atenciones WHERE (servicio_id = 1 OR servicio_id = 3) AND personal_id = {$_SESSION["user_id"]}");
+$filaTotal = mysqli_fetch_assoc($paginadoTotal);
+$totalRegistros = $filaTotal['total'];
+$totalPaginas = ceil($totalRegistros / $registrosPagina);
+
 ?>
 <h3 class="mt-3"> Turnos </h3>
 <table class="table table-bordered border-3 table-hover table-striped">
@@ -56,6 +69,16 @@ $result = mysqli_query($conn, $query);
     ?>
   </tbody>
 </table>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <?php for ($pagina = 1; $pagina <= $totalPaginas; $pagina++): ?>
+      <li class="page-item <?= ($paginaActual == $pagina) ? 'active' : '' ?>">
+        <a class="page-link" href="index.php?pagina=<?= $pagina ?>"><?= $pagina ?></a>
+      </li>
+    <?php endfor; ?>
+  </ul>
+</nav>
 
 <?php
 mysqli_close($conn);
