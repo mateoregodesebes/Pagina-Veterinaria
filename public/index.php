@@ -54,9 +54,7 @@ session_start();
                 ?>
         </div>
     </main>
-    <footer>
         <?php require_once("../src/partials/footer.php"); ?>
-    </footer>
 </body>
 
 </html>

@@ -1,51 +1,36 @@
 :root {
-    --main-color: #2D6A4F;
+    --main-color: #2d6a4f;
     --text-color: white;
     --link-color: white;
-    --main-background: #E8F6F3;
+    --main-background: #eafffa;
     --table-color: #b070af;
     --main-font: 'Montserrat', sans-serif;
     --form-color: #8e1732;
 }
+
 * {
     font-family: var(--main-font);
+}
+
+div.container-fluid {
+    padding: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     background-color: var(--main-background);
 }
 
-footer {
-    margin-top: auto;
-    width: 99%;
-}
-@media only screen and (max-width: 600px) {
-    footer {
-        width: 97.5%;
-    }
-}
-
-.footerblock {
-    border-inline: 0.3vw solid black;
-    border-block: 0.5vw solid black;
-    background-color: var(--main-color);
-    text-align: center;
-}
-
-.footerblock p {
-    font-family: var(--main-font);
-    color: var(--text-color);
-    text-decoration: none;
-    text-align: left;
-}
-
-.footerblock address {
-    font-family: var(--main-font);
-    color: var(--text-color);
-    text-decoration: none;
+.row {
+    margin-right: 0 !important;
+    margin-left: 0px !important;
 }
 
 .row > p {
@@ -58,9 +43,8 @@ footer {
 
 a {
     font-family: var(--main-font);
-    color:#000000;
+    color: #000000;
     text-decoration: none;
     font-size: 1.1em;
     font-weight: 500;
-    
 }

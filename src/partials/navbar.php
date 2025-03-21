@@ -39,18 +39,14 @@ $(document).ready(function(){
 </script>
 
 
-<div class="row">
-    <nav class="navb navbar-expand-sm">
-        <div class="col-1">
-            <form action="index.php" method="post">
-                <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
-                    <img src="../assets/logo.png" width="50" height="50" alt="Logo">
-                </button>
-            </form>
-        </div>
-        <div class="col-2"></div>
-        <div class="col-9">
-            <ul class="navbar-nav mr-auto mt-1 d-flex justify-content-around">
+<header>
+    <form action="index.php" method="post">
+            <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
+                <img src="../assets/logo.png" width="50" height="50" alt="Logo">
+            </button>
+    </form>
+    <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <form action="index.php" method="post">
                         <button class="nav-btn" type="submit" name="about-us"> 
@@ -106,14 +102,15 @@ $(document).ready(function(){
                                     Perfil
                                 </button>
                             </form>
-                            <a class="dropdown-item" href="#">Mis Turnos</a>
-                            <div class="dropdown-item">
+                            <button type="submit" class="dropdown-item" name="profileButton">
+                                    Mis Turnos
+                                </button>
+                            <div class="dropdown-divider"></div>
                                 <form method="post">
                                     <button type="submit" class="dropdown-item register_button" name="logoutButton">
                                         Cerrar Sesión
                                     </button>
                                 </form>
-                            </div>
                         <?php
                         }
                         // ToDo: Make the remember me button work 
@@ -163,9 +160,8 @@ $(document).ready(function(){
                         }
                         ?>
 
-                    </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+        </ul>
     </nav>
-</div>
+                    </header>
