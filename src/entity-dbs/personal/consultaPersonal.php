@@ -3,7 +3,11 @@
 include(__DIR__ . '/../../../includes/connection.php');
 
 try {
-  $query = "SELECT * FROM personal";
+  $query = 
+  "SELECT per.id as idPersona, per.nombre as nombre, per.apellido as apellido, rol.nombre as nombreRol
+    FROM personas per
+    INNER JOIN roles rol on per.rol_id = rol.id
+    WHERE rol.id <> 3";
   $result = mysqli_query($conn, $query);
   $personal = array();
 

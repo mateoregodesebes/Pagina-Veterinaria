@@ -1,4 +1,5 @@
 <?php
+$_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["shopButton"])) {
         $_SESSION['currentPage'] = '../src/pages/shop/shop.php';

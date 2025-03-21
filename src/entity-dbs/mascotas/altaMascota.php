@@ -12,6 +12,9 @@ try {
     echo "The file " . basename($_FILES["foto"]["name"]) . " has been uploaded.";
     $name = basename($_FILES["foto"]["name"]);
     $_SESSION['error'] = false;
+  } elseif(isset($_SESSION['user_idAt'])){
+    //? Para este caso se le asigna una imagen por defecto
+    $name = "provisional.jpg";
   } else {
     $name = null;
     $_SESSION['error'] = true;
@@ -40,9 +43,9 @@ try {
   $stmt->bind_param("ssssss", $vIdClient, $vNombre, $vFoto, $vRaza, $vColor, $vFechaNac);
 
   if (!$_SESSION['error']) {
-    if (!$stmt->execute()) {
-      throw new Exception("Error executing statement" . $stmt->error);
-    }
+    if (!$stmt->execute()) { throw new Exception("Error executing statement" . $stmt->error);}
+  } else if($_SESSION['error'] && isset($_SESSION['user_idAt'])){
+      if (!$stmt->execute()) {  throw new Exception("Error executing statement" . $stmt->error);}
   }
 
   $stmt->close();

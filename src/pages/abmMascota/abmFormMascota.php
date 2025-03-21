@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__ . '/../../../includes/connection.php');
 
-if (isset($_SESSION['user_id'])) {
-  $idAtencion = $_SESSION['user_id'];
+if (isset($_SESSION['user_idAt'])) {
+  $idAtencion = $_SESSION['user_idAt'];
 }
 
 if (isset($_SESSION["idMascota"])) {
@@ -45,12 +45,12 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
     </form>
 
     <form method="post" enctype="multipart/form-data">
-      <div class="mb-3 p-3">
+    <div class="mb-3 p-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
         <label class="form-label">Id de cliente dueño</label>
         <select name="idCliente" class="form-control">
           <?php
       foreach ($id_clientes as $id_temp) {
-        $selected = $id_temp['id'] == $id_cliente ? "selected" : "";
+        $selected = ($id_temp['id'] == $id_cliente || $id_temp['id'] == $idAtencion) ? "selected" : "";
         echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
       }
       ?>
@@ -66,14 +66,13 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
       <input type="text" required name="raza" class="form-control" placeholder="Raza"
         value="<?php echo isset($raza) ? $raza : ""; ?>">
     </div>
-    <div class="mb-3 px-3" <?php if (isset($idAtencion))
-      echo 'style="display: none;"' ?>>
+    <div class="mb-3 px-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
         <label for="formFile" class="form-label">Foto de la mascota</label>
         <div class="img-Mascota d-flex justify-content-center mb-3">
           <img src="../assets/petImages/<?php echo $fotoPreview ?>" class="img-thumbnail img-fluid" <?php if (!isset($_SESSION['idMascota']))
               echo 'style="display: none;"' ?> alt="">
         </div>
-        <input <?php echo !isset($_SESSION["idMascota"]) ? "required" : "" ?> class="form-control" name="foto" type="file"
+        <input <?php echo (!isset($_SESSION["idMascota"]) && !isset($idAtencion)) ? "required" : "" ?> class="form-control" name="foto" type="file"
         id="formFile" accept="image/png" />
     </div>
     <div class="mb-3 px-3">
@@ -158,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';
-  if (isset($_SESSION['user_id'])) {
+  if (isset($_SESSION['user_idAt'])) {
     $_SESSION['currentPage'] = '../src/pages/atencionDom/formAtencion.php';
   }
 
