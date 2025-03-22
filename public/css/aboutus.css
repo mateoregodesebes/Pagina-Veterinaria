@@ -1,23 +1,51 @@
-.pag{
-    background-color: #DFFFE0;
+.pag {
+    background-color: #dfffe0;
     font-family: var(--main-font);
     border: 5px solid black;
     border-radius: 10px;
-    
+
     text-align: center;
 }
 
-.titulo{
+.titulo {
+    background: linear-gradient(#2d6a4f80, #eafffa5b), url('../../assets/fondo-aboutus.png');
+    /* background-image: url('../../assets/fondo-aboutus.png'); */
+    background-size: cover;
+    background-position: center center;
+}
+
+.titulo,
+.titulo > div {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo h1 {
+    font-size: 3em;
     font-family: var(--main-font);
     font-weight: bold;
     color: black;
-    text-shadow: 2px 2px 4px white;;
-    background-image: url("../../assets/fondo-aboutus.png");
-    background-size: cover;
-    background-position: center;
-     
+
+    display: inline;
+    border-bottom: 3px solid var(--main-color);
 }
 
-.aboutus-texto > p{
-    background-color: #DFFFE0;
+.aboutus-texto > p {
+    background-color: #dfffe0;
+}
+
+a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline blue;
+}
+
+a::after {
+    content: '📎';
+    font-size: 1.25em;
 }

@@ -143,12 +143,6 @@ footer * {
     padding: 0;
 }
 
-@media only screen and (max-width: 600px) {
-    footer {
-        width: 97.5%;
-    }
-}
-
 footer a::after {
     content: '📎';
 }
