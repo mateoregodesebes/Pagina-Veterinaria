@@ -65,16 +65,16 @@ $(document).ready(function(){
     $(".reg-required").on('blur keyup', function() {
         // Shows or hides warning
         if($(this).val() == "") {
-            $(this).prev("small").removeClass("d-none");
+            $(this).parent().prev("small").removeClass("d-none");
         } else {
-            $(this).prev("small").addClass("d-none");
+            $(this).parent().prev("small").addClass("d-none");
         }
         // Additional specific checks for email and password
         if($(this).attr('type') == "email") {
             if($(this).val().indexOf("@") == -1) {
-                $("#reg-email-warning").removeClass("d-none");
+                $(".reg-email-warning").removeClass("d-none");
             } else {
-                $("#reg-email-warning").addClass("d-none");
+                $(".reg-email-warning").addClass("d-none");
             }
         } else if($(this).attr('type') == "password") {
             if($(this).val().length < 8) {
@@ -98,41 +98,59 @@ $(document).ready(function(){
                 <label>Nombre</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="text" class="form-control reg-required" name="nombre" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                    <input type="text" class="form-control reg-required" name="nombre" required/>
+                </div>
             </div>
             <div class="form-group">
                 <label>Apellido</label>
                 <br>
                 <small class="d-none" >Campo obligatorio (*)</small>
-                <input type="text" class="form-control reg-required" name="apellido" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                    <input type="text" class="form-control reg-required" name="apellido" required/>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group my-5">
                 <label>Email</label>
-                <br>
-                <small class="warning d-none" id="reg-email-warning">El mail debe contar con un @</small>
+                <br class="d-none reg-email-warning">
+                <small class="warning d-none reg-email-warning">El mail debe contar con un @</small>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="email" class="form-control reg-required" name="email" required/>
+                <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="email" class="form-control reg-required" name="email" required/>
+                </div>
             </div>
             <div class="form-group">
                 <label>Ciudad</label>
                 <br>
                 <small class="d-none" >Campo obligatorio (*)</small>
-                <input type="text" class="form-control reg-required" name="ciudad" placeholder="Ej: 'Buenos Aires'" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-city"></i></span>
+                    <input type="text" class="form-control reg-required" name="ciudad" placeholder="Ej: 'Buenos Aires'" required/>
+                </div>
             </div>
             <div class="form-group">
                 <label>Dirección</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="text" class="form-control reg-required" name="direccion" placeholder="Calle 1234" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-house"></i></span>
+                    <input type="text" class="form-control reg-required" name="direccion" placeholder="Calle 1234" required/>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group my-5">
                 <label>Teléfono</label>
                 <br>
                 <small>No es necesario el prefijo +54</small>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="tel" class="form-control reg-required" name="telefono" placeholder="123456789" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                    <input type="tel" class="form-control reg-required" name="telefono" placeholder="123456789" required/>
+                </div>
             </div>
             <div class="form-group">
                 <label>Contraseña</label>
@@ -140,13 +158,19 @@ $(document).ready(function(){
                 <small id="reg-password-warning" class="d-none">La contraseña debe tener al menos 8 caracteres</small>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="password" minlength="8" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                    <input type="password" class="form-control reg-required" name="password" minlength="8" required/>
+                </div>
             </div>
             <div class="form-group">
                 <label>Repetir Contraseña</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="repeat_password" minlength="8" required/>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                    <input type="password" class="form-control reg-required" name="repeat_password" minlength="8" required/>
+                </div>
             </div>
             <div class="form-btn">
                 <input class="btn btn-outline-danger" type="reset" value="Borrar información">

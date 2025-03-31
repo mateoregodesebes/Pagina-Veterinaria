@@ -2,8 +2,12 @@
     padding: 5% 5%;
     align-items: center;
     background-color: #f6c18b;
-    border-radius: 10%;
+    border-radius: 50px;
     font-family: var(--main-font);
+}
+
+.registration-form > h2 {
+    font-weight: 700;
 }
 
 .registration-container {
