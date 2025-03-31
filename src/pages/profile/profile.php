@@ -4,11 +4,13 @@ if (isset($_SESSION["user"])) {
 ?>
   <div class="container-fluid px-3">
     <div class="row py-5">
-      <div class="col-3">
+      <div class="col-3 text-center">
         <?php
-        /* TODO: Agregar foto de perfil para el usuario.
-        *   <img src="../assets/userImages/<?php echo $_SESSION['user_image'] ?>" class="img-fluid rounded-circle" alt="Imagen de perfil de <?php echo $_SESSION['user_name'] ?>">
-        */
+        if(isset($_SESSION['user_image']) AND file_exists("../assets/userImages/" . $_SESSION['user_image'])){
+        echo '<img src="../assets/userImages/' . $_SESSION['user_image'] . '" class="img-fluid rounded-circle pfp-image" alt="Imagen de perfil de ' . $_SESSION['user_name'] . '">';
+        } else {
+        echo '<img src="../assets/defaultPfpImage.png" class="img-fluid rounded-circle pfp-image" alt="Imagen de perfil de ' . $_SESSION['user_name'] . '">';
+        }
         ?>
       </div>
       <div class="col-9">
