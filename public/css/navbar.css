@@ -80,12 +80,8 @@ button.nav-btn:has(+ .dropdown-menu:hover) {
 
     transition: 1s ease;
 }
-
 .dropdown-menu {
     position: absolute !important;
-    -webkit-transform: translate(-25%, 0);
-    -o-transform: translate(-25%, 0);
-    transform: translate(-25%, 0);
 }
 
 div.alert-success {

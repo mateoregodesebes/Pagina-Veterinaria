@@ -94,7 +94,7 @@ $(document).ready(function(){
                                 exit();
                             }
                         ?>
-                            <div class='alert alert-success' role='alert'>Bienvenido
+                            <div class='alert alert-success my-2' role='alert'>Bienvenido
                                 <?php echo $_SESSION["user_name"] ?>
                             </div>
                             <form method="post">
