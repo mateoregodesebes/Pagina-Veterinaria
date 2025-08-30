@@ -26,7 +26,7 @@ if (isset($_SESSION["idMascota"])) {
 }
 
 // * Para el combo del id cliente
-$query2 = "SELECT id FROM personas";
+$query2 = "SELECT id FROM personas WHERE rol_id IS NULL";
 $result = mysqli_query($conn, $query2);
 $id_clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
 

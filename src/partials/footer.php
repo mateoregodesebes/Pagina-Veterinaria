@@ -1,3 +1,12 @@
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["about-us"])) {
+        $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }}
+?>
 <div class="row">
     <div class="col-6 footerblock">
         <address>
@@ -7,7 +16,11 @@
         </address>
     </div>
     <div class="col-6 footerblock">
-        <a class="footer-link" href="QuienesSomos.php">Quienes somos</a>
+        <form action="index.php" method="post">
+                        <button class="footer-link" type="submit" name="about-us"> 
+                            Quienes somos
+                        </button>
+        </form>
         <p>Nuestras redes sociales:</p>
         <div class="row">
             <div class="col-6">

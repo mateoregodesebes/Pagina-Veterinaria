@@ -54,6 +54,7 @@ if ($user) {
             // Se usa $user['rol_id'] - 1 porque los roles empiezan en 1 y los índices en 0
             $_SESSION["user_role"] = $roles[$user['rol_id'] - 1]['nombre'];
         }
+        $_SESSION["currentPage"] = '../src/pages/homepage/homepage.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     } else {

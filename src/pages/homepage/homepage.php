@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     if (isset($_POST["PeluqButton"])) {
-        $_SESSION['atencion'] = 'Corte de pelo';
+        // $_SESSION['atencion'] = 'Corte de pelo';
         $_SESSION['currentPage'] = '../src/pages/peluqueria/peluqueria.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
     if (isset($_POST["AtButton"])) {
-        $_SESSION['atencion'] = 'Revisión Médica';
+        // $_SESSION['atencion'] = 'Revisión Médica';
         $_SESSION['currentPage'] = '../src/pages/atencion/atencion.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();

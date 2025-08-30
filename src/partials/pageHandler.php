@@ -1,5 +1,5 @@
 <?php
-// Array con las paginas que estan en progreso
+    // Array con las paginas que estan en progreso
 $in_progress_pages = [
     '../src/pages/shop/shop.php',
     '../src/pages/peluqueria/peluqueria.php',
@@ -8,6 +8,8 @@ $in_progress_pages = [
 ];
 
 if (!isset($_SESSION["currentPage"])) {
+    //?Aca lo que habria que hacer es que en vez de abmList cuando tengamos el home hecho poner eso
+    //?y que cuando se apreta el boton de home se ponga el home como current page
     require_once("../src/pages/homepage/homepage.php");
 } elseif (isset($_SESSION["currentPage"])) {
     // Si la pagina actual esta en el array de paginas en progreso, se muestra la pagina de en progreso

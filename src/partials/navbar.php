@@ -10,6 +10,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
+    if(isset($_POST["contact"])) {
+        $_SESSION['currentPage'] = '../src/pages/contact/contact.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["services"])) {
+        $_SESSION['currentPage'] = '../src/pages/inprogress/inprogress.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["newspaper"])) {
+        $_SESSION['currentPage'] = '../src/pages/inprogress/inprogress.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
 }
 
 if (isset($_SESSION["user_role"]) && $_SESSION["user_role"] != "cliente") {
@@ -53,7 +68,7 @@ $(document).ready(function(){
 
 <div class="row">
     <nav class="navb navbar-expand-sm">
-        <div class="col-1">
+        <div class="col-1 logToggle">
             <form action="index.php" method="post">
                 <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
                     <img src="../assets/logo.png" width="50" height="50" alt="Logo">
@@ -113,12 +128,16 @@ $(document).ready(function(){
                             <div class='alert alert-success' role='alert'>Bienvenido
                                 <?php echo $_SESSION["user_name"] ?>
                             </div>
-                            <form method="post">
+                            <form method="post" class="logToggle">
                                 <button type="submit" class="dropdown-item" name="profileButton">
                                     Perfil
                                 </button>
                             </form>
-                            <a class="dropdown-item" href="#">Mis Turnos</a>
+                            <form method="post">
+                                <button type="submit" class="dropdown-item <?php echo (isset($_SESSION["user_role"]) && $_SESSION["user_role"] == "Estudiante" || $_SESSION["user_role"] == "Asistente") ? 'd-none' : ''; ?>" name="appointmentsButton">
+                                    Mis Turnos
+                                </button>
+                            </form>
                             <div class="dropdown-item">
                                 <form method="post">
                                     <button type="submit" class="dropdown-item register_button" name="logoutButton">
