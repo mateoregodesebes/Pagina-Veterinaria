@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     if(isset($_POST["services"])) {
-        $_SESSION['currentPage'] = '../src/pages/inprogress/inprogress.php';
+        $_SESSION['currentPage'] = '../src/pages/services/services.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
