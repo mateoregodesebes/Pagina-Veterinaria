@@ -60,6 +60,46 @@ footer {
     text-decoration: none;
 }
 
+.sitemap {
+    font-family: var(--main-font);
+    background-color: var(--main-color);
+    border-bottom-width: 0.5vw;
+    border-style: solid;
+    border-color: black;
+
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+
+    padding: 0;
+}
+
+/* Solo en pantallas grandes */
+@media only screen and (min-width: 768px) {
+    .sitemap {
+        display: flex;
+    }
+}
+
+.sitemap-elem {
+    margin: 0 auto;
+    border: 0.2vw solid black;
+}
+
+.sitemap il,
+.sitemap ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sitemap-elem h3 {
+    font-size: larger;
+}
+.sitemap-elem a {
+    font-size: smaller;
+    font-weight: 900;
+}
+
 .row > p {
     font-family: var(--main-font);
     color: black;

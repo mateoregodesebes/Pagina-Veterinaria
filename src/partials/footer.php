@@ -35,6 +35,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+    <div class="col-12 sitemap">
+        <div class="col-4 sitemap-elem"> 
+            <h3>La veterinaria</h3>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Quienes Somos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="col-4 sitemap-elem"> 
+            <h3>Servicios y funciones</h3>
+            <ul>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Tiendas</a></li>
+            </ul>
+        </div>
+        <div class="col-4 sitemap-elem"> 
+            <h3>Usuario</h3>
+            <ul>
+                <li><a href="#">Perfil</a></li>
+            </ul>
+        </div>
+    </div>
     <p>Este sitio es realizado para una prueba práctica de la materia Entornos Gráficos de la Universidad Tecnologica
         Nacional Regional Rosario (UTNFRRO), no representa a ninguna veterinaria ni debe ser tomada como ello.</p>
 </div>
