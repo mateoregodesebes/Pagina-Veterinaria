@@ -1,12 +1,4 @@
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["about-us"])) {
-        $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
-        echo '<script>window.location.replace("index.php");</script>';
-        exit();
-    }}
-?>
 <div class="row">
     <div class="col-6 footerblock">
         <address>
@@ -39,22 +31,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="col-4 sitemap-elem"> 
             <h3>La veterinaria</h3>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Quienes Somos</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="home"> 
+                            Inicio
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="about-us"> 
+                            Quienes Somos
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="contact"> 
+                            Contacto
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="newspaper"> 
+                            Noticias peludas
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
         <div class="col-4 sitemap-elem"> 
             <h3>Servicios y funciones</h3>
             <ul>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Tiendas</a></li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="services">
+                            Listado de precios para servicios
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name=".">
+                        <?php
+                        //! Cambiar el name del boton cuando se haga la pagina de turnos
+                        ?>
+                            Pedido de turnos
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="shop">
+                            Tienda online
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
         <div class="col-4 sitemap-elem"> 
             <h3>Usuario</h3>
             <ul>
-                <li><a href="#">Perfil</a></li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="register">
+                            Registrarse
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="index.php" method="post">
+                        <button type="submit" name="profile">
+                            Mi perfil
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
