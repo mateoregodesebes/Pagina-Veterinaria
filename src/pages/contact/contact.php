@@ -12,6 +12,7 @@
           <textarea name="message" placeholder="Mensaje" class="message-textarea" required></textarea>
         </div>
         <button class="btn btn-primary submit-btn mt-2">Enviar</button>
+        <button class="btn btn-secondary mt-2" type="reset">Limpiar formulario</button>
       </div>
       <div class="col-4 static-info">
         <h2>O encuentrenos en</h2>
