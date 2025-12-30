@@ -66,12 +66,11 @@ button.nav-btn:focus {
 
 footer {
     margin-top: auto;
-    width: 99%;
 }
-@media only screen and (max-width: 600px) {
-    footer {
-        width: 97.5%;
-    }
+
+footer .row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .footerblock {
@@ -162,4 +161,10 @@ footer {
 
 .footer-link:hover {
     text-decoration: underline;
+}
+
+.note {
+    padding: 0;
+    border: 0;
+    margin: 0;
 }
