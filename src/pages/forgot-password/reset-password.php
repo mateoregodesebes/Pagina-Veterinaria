@@ -8,13 +8,13 @@ if (!isset($_SESSION["reset_psw_token"]) || empty($_SESSION["reset_psw_token"]))
 }
 
 // Verificar que el token en sesión sea válido
-$_SESSION["reset_psw_token_hash"] = password_hash($_SESSION["reset_psw_token"], PASSWORD_DEFAULT);
+$_SESSION["reset_psw_token_hash"] = hash('sha256', $_SESSION["reset_psw_token"]);
 
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 $sql = "SELECT * FROM personas 
           WHERE reset_token_hash = ? 
-            AND reset_token_expires_at > NOW()";
+            AND reset_token_expires_at > now()";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $_SESSION["reset_psw_token_hash"]);
@@ -28,7 +28,7 @@ if ($user === null) {
 echo "<script>
     setTimeout(function() {
         window.location.replace('index.php');
-    }, 5000);
+    }, 50000);
 </script>";
 $_SESSION['currentPage'] = '../src/pages/forgot-password/forgot-password.php';
 exit();
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
   // Actualizar la contraseña del usuario
   $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-  $sql = "UPDATE personas SET password_hash = ?, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = ?";
+  $sql = "UPDATE personas SET clave = ?, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("ss", $hashed_password, $_SESSION["reset_psw_token_hash"]);
   if ($stmt->execute()) {
