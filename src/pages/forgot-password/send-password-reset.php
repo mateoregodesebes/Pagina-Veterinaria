@@ -23,6 +23,8 @@ if ($conn->affected_rows === 0) {
     $_SESSION["mail_error"] = true;
 } else {
     require_once(__DIR__ . '/../../scripts/mailer.php');
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
 
     //! Cambiar localhost por el dominio cuando se suba al servidor
     $mail = require __DIR__ . '/../../scripts/mailer.php';
@@ -30,17 +32,18 @@ if ($conn->affected_rows === 0) {
 
     $mail->addAddress($email);
 
-    $mail->Subject = "Restablecimiento de contraseña";
+    // mb_encode_mimeheader es para que los caracteres especiales se vean bien en el asunto del mail
+    $mail->Subject = mb_encode_mimeheader("Restablecimiento de contraseña", "UTF-8", "B");
+    //! Recordar cambiar el link cuando se suba al servidor
     $mail->Body = <<<END
     <p>Hemos recibido una solicitud para restablecer la contraseña de su cuenta.</p>
-    <a href="http://localhost/Pagina-Veterinaria/src/pages/reset-password.php>Haga click en este enlace para restablecer su contraseña</a>
-    <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p
-    
+    <a href="http://localhost/Pagina-Veterinaria/public/index.php?token=$token">Haga click en este enlace para restablecer su contraseña</a>
+    <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 
     try {
         $mail->send();
-        echo "<br><div class='alert alert-success' role='alert'>Se ha enviado un correo electrónico con instrucciones para restablecer su contraseña.</div>";
+        $_SESSION["mail_success"] = true;
     } catch (Exception $e) {
         $_SESSION["mail_error"] = true;
     }

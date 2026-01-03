@@ -10,8 +10,6 @@ $app_password = $_ENV['APP_PASSWORD'];
 
 $mail = new PHPMailer(true);
 
-$mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable verbose debug output
-
 // SMTP configuration
 $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';

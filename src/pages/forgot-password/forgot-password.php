@@ -8,6 +8,10 @@ if (isset($_SESSION["mail_error"])) {
     echo "<br><div class='alert alert-danger mx-5 my-2' role='alert'>No se pudo enviar el correo electrónico. Intente nuevamente más tarde.</div>";
     unset($_SESSION["mail_error"]);
 }
+if (isset($_SESSION["mail_success"])) {
+    echo "<br><div class='alert alert-success mx-5 my-2' role='alert'>Se ha enviado un correo electrónico con instrucciones para restablecer su contraseña.</div>";
+    unset($_SESSION["mail_success"]);
+}
 ?>
 
 <div class="row m-5 info-container">

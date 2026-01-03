@@ -125,6 +125,11 @@ $(document).ready(function(){
                                     echo '<script>window.location.replace("index.php");</script>';
                                     exit();
                                 }
+                                elseif (isset($_POST["forgotPasswordButton"])) {
+                                    $_SESSION['currentPage'] = '../src/pages/forgot-password/forgot-password.php';
+                                    echo '<script>window.location.replace("index.php");</script>';
+                                    exit();
+                                }
                             }
                         if(isset($_SESSION["error_message"])) {
                             echo "<div class='alert alert-danger' role='alert'>" . $_SESSION["error_message"] . "</div>";
@@ -156,8 +161,10 @@ $(document).ready(function(){
                                 <button type="submit" class="dropdown-item dropdown_button" name="registerButton">No tenes una
                                     cuenta? Registrate</button>
                             </form>
-                            <button type="submit" class="dropdown-item dropdown_button">Olvidaste tu contraseña?
-                                Recuperala</button>
+                            <form method="post">
+                                <button type="submit" class="dropdown-item dropdown_button" name="forgotPasswordButton">Olvidaste tu contraseña?
+                                    Recuperala</button>
+                            </form>
                         <?php
                         }
                         ?>
