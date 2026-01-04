@@ -20,6 +20,15 @@
 
     <input type="radio" class="btn-check" name="option" id="btnradio2" autocomplete="off" value="mascotas">
     <label class="btn btn-outline-primary" for="btnradio2">Mascotas</label>
+
+    <input type="radio" class="btn-check" name="option" id="btnradio3" autocomplete="off" value="veterinarios">
+    <label class="btn btn-outline-primary" for="btnradio3">Veterinarios</label>
+
+    <input type="radio" class="btn-check" name="option" id="btnradio4" autocomplete="off" value="peluqueros">
+    <label class="btn btn-outline-primary" for="btnradio4">Peluqueros</label>
+
+    <input type="radio" class="btn-check" name="option" id="btnradio5" autocomplete="off" value="estudiantes">
+    <label class="btn btn-outline-primary" for="btnradio5">Estudiantes</label>
     <button class="btn btn-dark submit-btn" id="submitBtn">Enviar</button>
   </form>
 </div>
@@ -38,6 +47,15 @@ if(isset($_SESSION['crudSelected'])) {
   }
   if ($_SESSION['crudSelected'] == 'mascotas') {
     require_once(__DIR__ . '/../abmMascota/abmListMascota.php');
+  }
+  if ($_SESSION['crudSelected'] == 'veterinarios') {
+    require_once(__DIR__ . '/../abmStaff/abmListStaff.php');
+  }
+  if ($_SESSION['crudSelected'] == 'peluqueros') {
+    require_once(__DIR__ . '/../abmStaff/abmListStaff.php');
+  }
+  if ($_SESSION['crudSelected'] == 'estudiantes') {
+    require_once(__DIR__ . '/../abmStaff/abmListStaff.php');
   }
 }
 ?>

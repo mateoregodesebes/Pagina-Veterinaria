@@ -46,8 +46,8 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
       <th scope="col">Raza</th>
       <th scope="col">Color</th>
       <th scope="col">Id de dueño</th>
-      <th scope="col">Fecha Nac</th>
-      <th scope="col">Fecha Muerte</th>
+      <th scope="col">Fecha Nacimiento</th>
+      <th scope="col">Fecha Defuncion</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -82,9 +82,9 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
         <td>
           <form method="post">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
-            <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
+            <button type="submit" name="action" value="update" class="btn btn-success">Actualizar</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Delete</button>
+              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Borrar</button>
 
             <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static"
               data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<?= $row['id'] ?>"

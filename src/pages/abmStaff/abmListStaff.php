@@ -5,11 +5,11 @@ require_once(__DIR__ . '/../../../includes/connection.php');
 if (isset($_SESSION['error'])) {
   if ($_SESSION['error']) {
     echo '<div id="alert" class="alert alert-danger" role="alert">
-    Error al cargar cliente, intente nuevamente
+    Error al cargar staff, intente nuevamente
           </div>';
   } else {
     echo '<div id="alert" class="alert alert-success" role="alert">
-    Cliente actualizado con exito
+    Staff actualizado con exito
           </div>';
   }
   echo '<script type="text/javascript">
@@ -26,16 +26,29 @@ $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM personas WHERE rol_id is NULL ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+if ($_SESSION['crudSelected'] == 'veterinarios') {
+  $rolId = 2;
+  $staff = "Veterinarios";
+  $rol = "veterinario";
+} elseif ($_SESSION['crudSelected'] == 'peluqueros') {
+  $rolId = 3;
+  $staff = "Peluqueros";
+  $rol = "peluquero";
+} elseif ($_SESSION['crudSelected'] == 'estudiantes') {
+  $rolId = 4;
+  $staff = "Estudiantes";
+  $rol = "estudiante";
+}
+$query = "SELECT * FROM personas WHERE rol_id = $rolId ORDER BY id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM personas WHERE rol_id IS NULL");
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM personas WHERE rol_id = $rolId");
 $filaTotal = mysqli_fetch_assoc($paginadoTotal);
 $totalRegistros = $filaTotal['total'];
 $totalPaginas = ceil($totalRegistros / $registrosPagina);
 ?>
 
-<h3 class="mt-3"> Clientes </h3>
+<h3 class="mt-3"> <?php echo "$staff" ?></h3>
 <table class="table table-bordered border-3 table-hover table-striped">
   <thead>
     <tr>
@@ -46,7 +59,6 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
       <th scope="col">Ciudad</th>
       <th scope="col">Direccion</th>
       <th scope="col">Telefono</th>
-      <th scope="col">Mascotas</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -78,48 +90,6 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
         <td>
           <?= $row['telefono'] ?>
         </td>
-        
-        <td style="text-align: center;">
-
-          <script>
-            function cargarMascotas(idCliente) {
-              $.ajax({
-                type: "GET",
-                url: "../src/entity-dbs/clientes/getMascotasAjax.php?idCliente=" + idCliente,
-                success: function(response) {
-                  $("#mascotaModal .modal-body").html(response);
-                  $("#mascotaModal").modal("show");
-                },
-                error: function(xhr, status, error) {
-                  console.error(chr.responseText);
-                }
-              })
-            }
-          </script>
-
-          <button type="button" name="action" value="mascotas" class="btn btn-warning btn-paw" data-bs-toggle="modal"
-              data-bs-target="#mascotaModal" onclick="cargarMascotas(<?= $row['id'] ?>)"><i class="fa-solid fa-paw" style="color: black;"></i>
-          </button>
-
-          <div class="modal fade" id="mascotaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="mascotaModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="mascotaModalLabel">Mascotas del cliente</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <!-- Contenido de la tabla de mascotas -->
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </td>
-        
         <td>
           <form method="post">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -132,7 +102,7 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar un cliente</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar un staff</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -168,8 +138,10 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'update') {
-    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
-    $_SESSION["idCliente"] = $_POST['id'];
+    $_SESSION["currentPage"] = '../src/pages/abmStaff/abmFormStaff.php';
+    $_SESSION["idStaff"] = $_POST['id'];
+    $_SESSION["idrol"] = $rolId;
+    $_SESSION["rol"] = $rol;
     echo '<script>window.location.replace("index.php");</script>';
 
   } elseif ($_POST['action'] == 'delete') {
@@ -177,7 +149,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo '<script>window.location.replace("index.php");</script>';
     exit();
   } elseif ($_POST['action'] == 'create') {
-    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
+    $_SESSION["currentPage"] = '../src/pages/abmStaff/abmFormStaff.php';
+    $_SESSION["rol"] = $rol;
     echo '<script>window.location.replace("index.php");</script>';
   }
 }
