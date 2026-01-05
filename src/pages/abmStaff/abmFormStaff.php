@@ -109,7 +109,7 @@ if (isset($_POST['id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'updateEntity') {
     if (isset($_SESSION["idStaff"])) {
-      require_once(__DIR__ . '/../../entity-dbs/clientes/updateCliente.php');
+      require_once(__DIR__ . '/../../entity-dbs/clientes/updateStaff.php');
       $_SESSION['idStaff'] = null;
     }
 
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['idStaff'] = null;
 
   } elseif ($_POST['action'] == 'createEntity') {
-    require_once(__DIR__ . '/../../entity-dbs/clientes/altaCliente.php');
+    require_once(__DIR__ . '/../../entity-dbs/clientes/altaStaff.php');
   }
 
   $_SESSION['currentPage'] = '../src/pages/crudSelector/crudSelector.php';

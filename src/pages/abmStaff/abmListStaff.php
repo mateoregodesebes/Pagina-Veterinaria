@@ -39,6 +39,8 @@ if ($_SESSION['crudSelected'] == 'veterinarios') {
   $staff = "Estudiantes";
   $rol = "estudiante";
 }
+$_SESSION["idrol"] = $rolId;
+
 $query = "SELECT * FROM personas WHERE rol_id = $rolId ORDER BY id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
@@ -140,7 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'update') {
     $_SESSION["currentPage"] = '../src/pages/abmStaff/abmFormStaff.php';
     $_SESSION["idStaff"] = $_POST['id'];
-    $_SESSION["idrol"] = $rolId;
     $_SESSION["rol"] = $rol;
     echo '<script>window.location.replace("index.php");</script>';
 
