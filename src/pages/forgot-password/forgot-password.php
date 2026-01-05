@@ -23,7 +23,8 @@ if (isset($_SESSION["mail_success"])) {
           <p>Por favor ingrese su el correo asociado a su cuenta. Le enviaremos un enlace para restablecer su contraseña.</p>
           <div class="form-group">
             <label>Correo electrónico</label>
-            <input type="email" name="email" placeholder="Email/correo" class="email" required>
+            <input type="email" name="email" placeholder="Email/correo" class="email" required
+            <?php if (isset($_SESSION['user_email'])) echo 'value="' . htmlspecialchars($_SESSION['user_email']) . '"'; ?>>
           </div>  
         </div>
         <button type="submit" name="submit" class="btn btn-primary submit-btn mt-2">Enviar</button>

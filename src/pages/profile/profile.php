@@ -1,5 +1,17 @@
 <?php
-if (isset($_SESSION["user"])) {
+# Si el usuario no tiene cuenta y de alguna manera accedió a profile.php, lo reedirigimos a homepage
+if (!isset($_SESSION["user"])) {
+  $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+  echo '<script>window.location.replace("index.php");</script>';
+  exit();
+}
+  else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["change_psw"])) {
+        $_SESSION['currentPage'] = '../src/pages/forgot-password/forgot-password.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+}
+
 
 ?>
   <div class="container-fluid px-3">
@@ -12,11 +24,20 @@ if (isset($_SESSION["user"])) {
         ?>
       </div>
       <div class="col-9">
-        <h1>
-          <?php echo 'Hola ' . $_SESSION["user_name"]
-          ?>
-        </h1>
+        <div class="col-12">
+          <h1>
+            <?php echo 'Hola ' . $_SESSION["user_name"]
+            ?>
+          </h1>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+          <form action="index.php" method="post">
+            <button class="btn btn-sm btn-outline-warning" type="submit" name="change_psw">Cambiar contraseña</button>
+            </form>
+          
+        </div>
       </div>
+
     </div>
 
     <?php
@@ -56,11 +77,5 @@ if (isset($_SESSION["user"])) {
     ?>
   </div>
 <?php
-}
-# Si el usuario no tiene cuenta y de alguna manera accedió a profile.php, lo reedirigimos a homepage
-else {
-  $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
-  echo '<script>window.location.replace("index.php");</script>';
-  exit();
 }
 ?>
