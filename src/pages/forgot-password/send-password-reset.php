@@ -22,12 +22,10 @@ $stmt->execute();
 if ($conn->affected_rows === 0) {
     $_SESSION["mail_error"] = true;
 } else {
-    require_once(__DIR__ . '/../../scripts/mailer.php');
+    $mail = require __DIR__ . '/../../scripts/mailer.php';
     $mail->CharSet = 'UTF-8';
     $mail->Encoding = 'base64';
 
-    //! Cambiar localhost por el dominio cuando se suba al servidor
-    $mail = require __DIR__ . '/../../scripts/mailer.php';
     $mail->setFrom('noreply@sanantonvet.com', 'San Anton Veterinaria');
 
     $mail->addAddress($email);
@@ -41,6 +39,9 @@ if ($conn->affected_rows === 0) {
     <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 
+
+    # Se envia el correo. No se notifica el tipo de error al usuario por seguridad.
+    # Puede tratarse de una persona que pruebando si un email existe en la base de datos.
     try {
         $mail->send();
         $_SESSION["mail_success"] = true;

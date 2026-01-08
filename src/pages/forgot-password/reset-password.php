@@ -28,7 +28,7 @@ if ($user === null) {
 echo "<script>
     setTimeout(function() {
         window.location.replace('index.php');
-    }, 50000);
+    }, 5000);
 </script>";
 $_SESSION['currentPage'] = '../src/pages/forgot-password/forgot-password.php';
 exit();
@@ -45,9 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     exit();
   }
 
+  if (strlen($new_password) < 8 || strlen($repeat_new_password) < 8) {
+    echo "<br><div class='alert alert-danger mx-5 my-2' role='alert'>La contraseña debe tener al menos 8 caracteres.</div>";
+    exit();
+  }
+
   // Actualizar la contraseña del usuario
   $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-  $sql = "UPDATE personas SET clave = ?, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = ?";
+  $sql = "UPDATE personas 
+            SET clave = ?, 
+                reset_token_hash = NULL, 
+                reset_token_expires_at = NULL 
+              WHERE reset_token_hash = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("ss", $hashed_password, $_SESSION["reset_psw_token_hash"]);
   if ($stmt->execute()) {
@@ -105,8 +114,6 @@ $(".reg-required").on('blur keyup', function() {
         <h2>Restablecimiento de contraseña</h2>
         <div class="user-info mb-2">
           <p>Por favor ingrese su nueva contraseña y confírmela. Recuerde la necesidad de que la contraseña tenga al menos 8 caracteres</p>
-          <input type="hidden" name="reset_psw_token_hash" value="<?php htmlspecialchars($_SESSION['reset_psw_token_hash']); ?>" />
-
           <div class="form-group">
             <label>Nueva contraseña</label>
                 <br>
