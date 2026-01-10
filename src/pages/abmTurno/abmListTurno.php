@@ -26,7 +26,13 @@ $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM atenciones ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT atenciones.id AS atencion_id,
+  mascotas.nombre AS mascota_nombre,
+  servicios.nombre AS servicio_nombre,
+  CONCAT(personas.nombre, ' ', personas.apellido) AS personal_nombre,
+  atenciones.fecha_hora,
+  atenciones.titulo,
+  atenciones.descripcion FROM atenciones INNER JOIN mascotas ON atenciones.mascota_id = mascotas.id JOIN servicios ON atenciones.servicio_id = servicios.id JOIN personas ON atenciones.personal_id = personas.id ORDER BY atenciones.id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
 $paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM atenciones");
@@ -57,16 +63,16 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
     <?php while ($row = mysqli_fetch_array($result)): ?>
       <tr>
         <td>
-          <?= $row['id'] ?>
+          <?= $row['atencion_id'] ?>
         </td>
         <td>
-          <?= $row['mascota_id'] ?>
+          <?= $row['mascota_nombre'] ?>
         </td>
         <td>
-          <?= $row['servicio_id'] ?>
+          <?= $row['servicio_nombre'] ?>
         </td>
         <td>
-          <?= $row['personal_id'] ?>
+          <?= $row['personal_nombre'] ?>
         </td>
         <td>
           <?= $row['fecha_hora'] ?>
@@ -80,17 +86,17 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
 
         <td>
           <form method="post">
-            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+            <input type="hidden" name="id" value="<?= $row['atencion_id'] ?>">
             <button type="submit" name="action" value="update" class="btn btn-success">Actualizar</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Borrar</button>
+              data-bs-target="#staticBackdrop<?= $row['atencion_id'] ?>">Borrar</button>
 
-            <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-              aria-labelledby="staticBackdropLabel<?= $row['id'] ?>" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop<?= $row['atencion_id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel<?= $row['atencion_id'] ?>" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar un cliente</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['atencion_id'] ?>">Usted esta a punto de borrar un cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
