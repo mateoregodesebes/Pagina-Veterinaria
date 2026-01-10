@@ -1,6 +1,14 @@
 <?php
 if (isset($_SESSION["user"])) {
 
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["requestAppointment"])) {
+      $_SESSION['currentPage'] = '../src/pages/requestAppointment/requestAppointment.php';
+      echo '<script>window.location.replace("index.php");</script>';
+      exit();
+    }
+  }
+
 ?>
   <div class="container-fluid px-3">
     <div class="row py-5">
@@ -16,6 +24,14 @@ if (isset($_SESSION["user"])) {
           <?php echo 'Hola ' . $_SESSION["user_name"]
           ?>
         </h1>
+      </div>
+      <div class="col-12 my-3 actions-section d-flex flex-column justify-content-center align-items-start">
+        <h2>Acciones:</h2>
+        <div class="d-flex justify-content-center ">
+          <form action="index.php" method="post">
+            <input type="hidden" name="requestAppointment" type="submit">
+            <button class="btn btn-warning btn-lg">Pedir Turno</button>
+          </form>
       </div>
     </div>
 
