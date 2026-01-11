@@ -15,4 +15,6 @@
     background-color: white;
     padding: 2vw 2vw;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }

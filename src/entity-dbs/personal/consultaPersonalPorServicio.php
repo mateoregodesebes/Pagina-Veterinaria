@@ -1,4 +1,5 @@
 <?php
+// Query AJAX para obtener el personal según el servicio seleccionado
 
 include(__DIR__ . '/../../../includes/connection.php');
 
