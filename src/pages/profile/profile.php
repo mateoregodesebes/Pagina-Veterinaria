@@ -7,6 +7,12 @@ if (isset($_SESSION["user"])) {
       echo '<script>window.location.replace("index.php");</script>';
       exit();
     }
+    elseif (isset($_POST["viewAppointments"])) {
+      $_SESSION['currentPage'] = '../src/pages/viewAppointments/viewAppointments.php';
+      echo '<script>window.location.replace("index.php");</script>';
+      exit();
+
+    }
   }
 
 ?>
@@ -25,13 +31,19 @@ if (isset($_SESSION["user"])) {
           ?>
         </h1>
       </div>
-      <div class="col-12 my-3 actions-section d-flex flex-column justify-content-center align-items-start">
+      <div class="col-12 my-3 actions-section d-flex flex-column justify-content-around">
         <h2>Acciones:</h2>
-        <div class="d-flex justify-content-center ">
-          <form action="index.php" method="post">
-            <input type="hidden" name="requestAppointment" type="submit">
-            <button class="btn btn-warning btn-lg">Pedir Turno</button>
+        <div class="d-flex justify-content-around">
+          <div>
+            <form action="index.php" method="post">
+              <button class="btn btn-warning btn-lg" name="requestAppointment" type="submit">Pedir Turno</button>
+            </form>
+          </div>
+          <div>
+            <form action="index.php" method="post">
+            <button class="btn btn-info btn-lg" name="viewAppointments" type="submit">Ver Turnos</button>
           </form>
+          </div>
       </div>
     </div>
 

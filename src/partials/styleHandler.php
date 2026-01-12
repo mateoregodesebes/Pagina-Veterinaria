@@ -46,6 +46,9 @@ if (isset($_SESSION["currentPage"])) {
         case '../src/pages/requestAppointment/requestAppointment.php':
             echo '<link rel="stylesheet" href="css/requestAppointment.css">';
             break;
+        case '../src/pages/viewAppointments/viewAppointments.php':
+            echo '<link rel="stylesheet" href="css/viewAppointments.css">';
+            break;
     }
 } else {
     echo '<link rel="stylesheet" href="css/homepage.css">';
