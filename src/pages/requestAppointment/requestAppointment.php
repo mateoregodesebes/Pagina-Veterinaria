@@ -98,15 +98,19 @@ $(document).ready(function() {
             $fecha.off('change').on('change', function() {
                 var selectedDate = $(this).val();
                 var bookedHours = data.filter(function(appointment) {
-                    return appointment.fecha === selectedDate;
+                    fechaTurno = appointment.fecha_hora.slice(0,10);
+                    return fechaTurno === selectedDate;
                 }).map(function(appointment) {
-                    return appointment.hora;
+                    return appointment.fecha_hora.slice(11,16);
                 });
+                console.log("Horas ocupadas para la fecha " + selectedDate + ":", bookedHours);
                 $hora.find('option').each(function() {
-                    var hourValue = $(this).val();
-                    if (bookedHours.includes(hourValue)) {
+                    var hourValue = $(this).text();
+                    console.log("Verificando hora:", hourValue, "y verificando si está en horas ocupadas:", bookedHours.includes(hourValue));
+                    if (bookedHours.includes(hourValue) || hourValue === 'Selecciona la hora') {
                         $(this).prop('disabled', true);
-                    } else {
+                    }
+                    else {
                         $(this).prop('disabled', false);
                     }
                 });
