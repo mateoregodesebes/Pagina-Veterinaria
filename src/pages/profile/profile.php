@@ -1,6 +1,10 @@
 <?php
-if (isset($_SESSION["user"])) {
-
+if (!isset($_SESSION["user"])) {
+  $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
+}
+  else{
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["requestAppointment"])) {
       $_SESSION['currentPage'] = '../src/pages/requestAppointment/requestAppointment.php';
@@ -11,7 +15,11 @@ if (isset($_SESSION["user"])) {
       $_SESSION['currentPage'] = '../src/pages/viewAppointments/viewAppointments.php';
       echo '<script>window.location.replace("index.php");</script>';
       exit();
-
+    }
+    elseif (isset($_POST["addPet"])) {
+      $_SESSION['currentPage'] = '../src/pages/addPet/addPet.php';
+      echo '<script>window.location.replace("index.php");</script>';
+      exit();
     }
   }
 
@@ -42,6 +50,11 @@ if (isset($_SESSION["user"])) {
           <div>
             <form action="index.php" method="post">
             <button class="btn btn-info btn-lg" name="viewAppointments" type="submit">Ver Turnos</button>
+          </form>
+          </div>
+          <div>
+            <form action="index.php" method="post">
+            <button class="btn btn-primary btn-lg" name="addPet" type="submit">Agregar Mascota</button>
           </form>
           </div>
       </div>
@@ -84,11 +97,5 @@ if (isset($_SESSION["user"])) {
     ?>
   </div>
 <?php
-}
-# Si el usuario no tiene cuenta y de alguna manera accedió a profile.php, lo reedirigimos a homepage
-else {
-  $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
-  echo '<script>window.location.replace("index.php");</script>';
-  exit();
 }
 ?>

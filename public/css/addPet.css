@@ -1,0 +1,20 @@
+.pet-container {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--main-color);
+    padding: 2vw 2vw;
+    border-radius: 10px;
+}
+
+.pet-container h2 {
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.main-inputs {
+    background-color: white;
+    padding: 2vw 2vw;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}

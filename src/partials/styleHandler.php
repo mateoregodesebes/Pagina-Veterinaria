@@ -49,6 +49,9 @@ if (isset($_SESSION["currentPage"])) {
         case '../src/pages/viewAppointments/viewAppointments.php':
             echo '<link rel="stylesheet" href="css/viewAppointments.css">';
             break;
+        case '../src/pages/addPet/addPet.php':
+            echo '<link rel="stylesheet" href="css/addPet.css">';
+            break;
     }
 } else {
     echo '<link rel="stylesheet" href="css/homepage.css">';
