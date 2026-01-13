@@ -1,6 +1,11 @@
 <?php
 require_once(__DIR__ . '/../../../includes/connection.php');
 
+  define('iniManiana', 9);
+  define('finManiana', 13);
+  define('iniTarde', 14);
+  define('finTarde', 18);
+
 if (isset($_SESSION["idTurno"])) {
   $id = $_SESSION["idTurno"];
   $query = "SELECT * FROM atenciones WHERE id = '$id'";
@@ -10,7 +15,8 @@ if (isset($_SESSION["idTurno"])) {
   $mascotas = $row['mascota_id'];
   $servicios = $row['servicio_id'];
   $personal = $row['personal_id'];
-  $fecha_hora = $row['fecha_hora'];
+  $fecha = substr($row['fecha_hora'], 0, 10);
+  $hora = substr($row['fecha_hora'], 11, 5);
   $titulo = $row['titulo'];
   $descripcion = $row['descripcion'];
 } else {
@@ -73,14 +79,22 @@ $id_servicios = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </select>
     </div>
     <div class="mb-3 px-3">
-      <label class="form-label">Fecha</label>
-      <input type="date" required  name="fecha" class="form-control" placeholder="Fecha"
-        value="<?php echo isset($fecha_hora) ? $fecha : ""; ?>">
-    </div>
-    <div class="mb-3 px-3">
-      <label class="form-label">Hora</label>
-      <input type="time" required  name="hora" class="form-control" placeholder="Hora"
-        value="<?php echo isset($fecha_hora) ? $hora : ""; ?>">
+      <label>Seleccione fecha y hora del servicio: </label>
+      <input type="date" class="form-control" name="fecha" id="fecha" <?php echo isset($fecha) ? 'value="' . $fecha . '"' : '' ?> required>
+
+      <select class="form-select my-1" name="hora" id="hora" required>
+        <option value="" disabled <?php echo !isset($hora) ? 'selected' : '' ?>>Selecciona la hora</option>
+        <?php
+        for ($i = iniManiana; $i < finManiana; $i += 0.5) {
+          $time = $i >= 1 ? intval($i) . ':' . (($i * 60) % 60 == 0 ? '00' : '30') : '00:' . (($i * 60) % 60 == 0 ? '00' : '30');
+          echo '<option value="' . $i . '" ' . (isset($hora) && $hora == $time ? 'selected' : '') . '>' . $time . '</option>';
+        }
+        for ($i = iniTarde; $i < finTarde; $i += 0.5) {
+           $time = $i >= 1 ? intval($i) . ':' . (($i * 60) % 60 == 0 ? '00' : '30') : '00:' . (($i * 60) % 60 == 0 ? '00' : '30');
+            echo '<option value="' . $i . '" ' . (isset($hora) && $hora == $time ? 'selected' : '') . '>' . $time . '</option>';
+        }
+        ?>
+      </select>
     </div>
     <div class="mb-3 px-3">
       <label class="form-label">Titulo</label>
