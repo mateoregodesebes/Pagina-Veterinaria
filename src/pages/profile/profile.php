@@ -7,6 +7,7 @@ if (!isset($_SESSION["user"])) {
   else{
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["requestAppointment"])) {
+      $_SESSION['mascota_id'] = $_POST['requestAppointment'] ?? null;
       $_SESSION['currentPage'] = '../src/pages/requestAppointment/requestAppointment.php';
       echo '<script>window.location.replace("index.php");</script>';
       exit();
@@ -17,6 +18,8 @@ if (!isset($_SESSION["user"])) {
       exit();
     }
     elseif (isset($_POST["addPet"])) {
+      $_SESSION['idMascota'] = $_POST['addPet'] ?? null;
+
       $_SESSION['currentPage'] = '../src/pages/addPet/addPet.php';
       echo '<script>window.location.replace("index.php");</script>';
       exit();
@@ -59,42 +62,44 @@ if (!isset($_SESSION["user"])) {
           </div>
       </div>
     </div>
+    <div class="pets-section my-1">
+      <?php
+      include __DIR__ . '/../../entity-dbs/clientes/mascotasCliente.php';
 
-    <?php
-    include __DIR__ . '/../../entity-dbs/clientes/mascotasCliente.php';
+      if (!empty($mascotas)) {
 
-    if (!empty($mascotas)) {
-
-      echo '<div class="row">';
-      echo '<div class="col ps-2">';
-      echo '<h2>Mis Mascotas:</h2>';
-      echo '</div>';
-      echo '</div>';
-      foreach ($mascotas as $mascota) {
-        echo '<div class="row pet-card my-3 mx-auto">';
-        echo '<div class="col-12 col-md-3 foto-mascota">';
-        echo '<img src="../assets/petImages/' . $mascota['foto'] . '" alt="Imagen de ' . $mascota['nombre'] . '">';
+        echo '<div class="row">';
+        echo '<div class="col ps-2">';
+        echo '<h2>Mis Mascotas:</h2>';
         echo '</div>';
-        echo '<div class="col-12 col-md-5 pet-card_info">';
-        echo '<h3><b>' . $mascota['nombre'] . '</b></h3>';
-        echo '<p>Raza: <b>' . $mascota['raza'] . '</b></p>';
-        echo '<p>Color: <b>' . $mascota['color'] . '</b></p>';
-        echo '<p>Fecha de nacimiento: <b>' . $mascota['fecha_de_nac'] . '</b></p>';
         echo '</div>';
-        echo '<div class="col-12 col-md-4 pet-card_action my-5">';
-        echo '<form><button class="btn btn-info btn-lg">Realizar Consulta</button> </form>';
+        foreach ($mascotas as $mascota) {
+          echo '<div class="row pet-card my-3 mx-auto">';
+          echo '<div class="col-12 col-md-3 foto-mascota">';
+          echo '<img src="../assets/petImages/' . $mascota['foto'] . '" alt="Imagen de ' . $mascota['nombre'] . '">';
+          echo '</div>';
+          echo '<div class="col-12 col-md-5 pet-card_info">';
+          echo '<h3><b>' . $mascota['nombre'] . '</b></h3>';
+          echo '<p>Raza: <b>' . $mascota['raza'] . '</b></p>';
+          echo '<p>Color: <b>' . $mascota['color'] . '</b></p>';
+          echo '<p>Fecha de nacimiento: <b>' . $mascota['fecha_de_nac'] . '</b></p>';
+          echo '</div>';
+          echo '<div class="col-12 col-md-4 pet-card_action my-5">';
+          echo '<form action="index.php" method="post"><button class="btn btn-info btn-lg" name="requestAppointment" value="' . $mascota['id'] . '">Realizar Consulta</button> </form>';
+          echo '<form class="mt-2 mx-5" action="index.php" method="post"><button class="btn btn-secondary btn-sm" name="addPet" value="' . $mascota['id'] . '">Editar Mascota</button> </form>';
+          echo '</div>';
+          echo '</div>';
+        }
+      } else {
+        echo '<div class="row">';
+        echo '<div class="col ps-2">';
+        echo '<h2>No tenes mascotas registradas para mostrar</h2>';
         echo '</div>';
         echo '</div>';
       }
-    } else {
-      echo '<div class="row">';
-      echo '<div class="col ps-2">';
-      echo '<h2>No tenes mascotas registradas para mostrar</h2>';
       echo '</div>';
-      echo '</div>';
-    }
-    echo '</div>';
-    ?>
+      ?>
+    </div>
   </div>
 <?php
 }

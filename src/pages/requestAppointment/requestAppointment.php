@@ -146,11 +146,11 @@ $(document).ready(function() {
           <div class="form-group my-4">
             <label>Seleccione la mascota que desea atender: </label>
             <select class="form-select" name="mascotas" id="mascotas" required>
-              <option value="" disabled selected>Nombre de la mascota</option>
+              <option value="" disabled <?php echo (!isset($_SESSION['mascota_id']) || $_SESSION['mascota_id'] == '') ? 'selected' : '' ?>>Nombre de la mascota</option>
               <?php
               if (isset($mascotas)) {
                 foreach ($mascotas as $mascota) {
-                  echo '<option value="' . $mascota['id'] . '">' . $mascota['nombre'] . '</option>';
+                  echo '<option value="' . $mascota['id'] . '" ' . ($mascota['id'] == $_SESSION['mascota_id'] ? 'selected' : '') . '>' . $mascota['nombre'] . '</option>';
                 }
               }
               ?>
