@@ -40,10 +40,12 @@ if($user['rol_id'] != NULL){
 
 if ($user) {
     $user_name = $user["nombre"];
+    $user_email = $user["email"];
     $user_password_hash = $user["clave"];
 
     if (password_verify($login_password, $user_password_hash)) {
         $_SESSION["user_name"] = $user_name;
+        $_SESSION["user_email"] = $user_email;
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["user"] = 'yes';
 

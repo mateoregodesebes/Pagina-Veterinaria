@@ -1,4 +1,12 @@
 <?php
+
+// Lógica por si entra por el mail de recuperar contraseña
+// Si hay un token en la URL, se carga la pagina de reset-password
+if ($_GET['token'] ?? false) {
+    $_SESSION["reset_psw_token"] = $_GET['token'] ?? '';
+    $_SESSION["currentPage"] = '../src/pages/forgot-password/reset-password.php';
+}
+
 if (isset($_SESSION["currentPage"])) {
     switch ($_SESSION["currentPage"]) {
         case '../src/pages/appointmentList/appointmentList.php':
@@ -14,7 +22,10 @@ if (isset($_SESSION["currentPage"])) {
         case '../src/pages/contact/contact.php':
             echo '<link rel="stylesheet" href="css/contact.css">';
             break;
-            
+        case '../src/pages/forgot-password/forgot-password.php':
+        case '../src/pages/forgot-password/reset-password.php':
+            echo '<link rel="stylesheet" href="css/forgot-password.css">';
+            break;
         case '../src/pages/registration/registration.php':
             echo '<link rel="stylesheet" href="css/registration.css">';
             break;
