@@ -17,6 +17,10 @@ if (isset($_SESSION["currentPage"])) {
         case '../src/pages/abmMascota/abmFormMascota.php':
         case '../src/pages/abmCliente/abmListCliente.php':
         case '../src/pages/abmCliente/abmFormCliente.php':
+        case '../src/pages/abmStaff/abmListStaff.php':
+        case '../src/pages/abmStaff/abmFormStaff.php':
+        case '../src/pages/abmTurno/abmListTurno.php':
+        case '../src/pages/abmTurno/abmFormTurno.php':
             echo '<link rel="stylesheet" href="css/abm.css">';
             break;
         case '../src/pages/contact/contact.php':
