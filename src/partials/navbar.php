@@ -1,17 +1,4 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["LogoButton"])) {
-        unset($_SESSION['currentPage']);
-        echo '<script>window.location.replace("index.php");</script>';
-        exit();
-    }
-    if(isset($_POST["about-us"])) {
-        $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
-        echo '<script>window.location.replace("index.php");</script>';
-        exit();
-    }
-}
-
 if (isset($_SESSION["user_role"]) && $_SESSION["user_role"] != "cliente") {
     echo
         '<style>
@@ -53,7 +40,7 @@ $(document).ready(function(){
 
 <div class="row">
     <nav class="navb navbar-expand-sm">
-        <div class="col-1">
+        <div class="col-1 logToggle">
             <form action="index.php" method="post">
                 <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
                     <img src="../assets/logo.png" width="50" height="50" alt="Logo">
@@ -104,7 +91,7 @@ $(document).ready(function(){
                                 session_destroy();
                                 echo '<script>window.location.replace("index.php");</script>';
                                 exit();
-                            } elseif (isset($_POST["profileButton"])) {
+                            } elseif (isset($_POST["profile"])) {
                                 $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
                                 echo '<script>window.location.replace("index.php");</script>';
                                 exit();
@@ -113,12 +100,16 @@ $(document).ready(function(){
                             <div class='alert alert-success' role='alert'>Bienvenido
                                 <?php echo $_SESSION["user_name"] ?>
                             </div>
-                            <form method="post">
+                            <form method="post" class="logToggle">
                                 <button type="submit" class="dropdown-item" name="profileButton">
                                     Perfil
                                 </button>
                             </form>
-                            <a class="dropdown-item" href="#">Mis Turnos</a>
+                            <form method="post">
+                                <button type="submit" class="dropdown-item <?php echo (isset($_SESSION["user_role"]) && $_SESSION["user_role"] == "Estudiante" || $_SESSION["user_role"] == "Asistente") ? 'd-none' : ''; ?>" name="appointmentsButton">
+                                    Mis Turnos
+                                </button>
+                            </form>
                             <div class="dropdown-item">
                                 <form method="post">
                                     <button type="submit" class="dropdown-item register_button" name="logoutButton">
@@ -133,7 +124,7 @@ $(document).ready(function(){
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 if (isset($_POST["login"])) {
                                     require_once(__DIR__ . '/../scripts/login.php');
-                                } elseif (isset($_POST["registerButton"])) {
+                                } elseif (isset($_POST["register"])) {
                                     $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
                                     echo '<script>window.location.replace("index.php");</script>';
                                     exit();
@@ -166,7 +157,7 @@ $(document).ready(function(){
                                 <button type="submit" class="btn btn-primary mx-auto iniciar_sesion dropdown_button" name="login">Iniciar Sesion</button>
                             </form>
                             <form method="post">
-                                <button type="submit" class="dropdown-item dropdown_button" name="registerButton">No tenes una
+                                <button type="submit" class="dropdown-item dropdown_button" name="register">No tenes una
                                     cuenta? Registrate</button>
                             </form>
                             <button type="submit" class="dropdown-item dropdown_button">Olvidaste tu contraseña?

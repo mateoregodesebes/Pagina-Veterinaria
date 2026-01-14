@@ -1,12 +1,10 @@
 <div class="flex-container-fluid">
   
 <div class="row titulo">
-    <div class="col-md-4 py-5">
+    <div class="col-md-4 pt-1">
         <h1>Sobre nosotros</h1>
     </div>
 </div>
-
-<div class="row my-4">
 
     <div class="pag">
         <div class="row aboutus-texto">
