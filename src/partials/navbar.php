@@ -5,8 +5,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
-    if(isset($_POST["about-us"])) {
+    elseif(isset($_POST["about-us"])) {
         $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    elseif (isset($_POST["viewAppointments"])) {
+        $_SESSION['currentPage'] = '../src/pages/viewAppointments/viewAppointments.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
@@ -113,12 +118,20 @@ $(document).ready(function(){
                             <div class='alert alert-success' role='alert'>Bienvenido
                                 <?php echo $_SESSION["user_name"] ?>
                             </div>
-                            <form method="post">
-                                <button type="submit" class="dropdown-item" name="profileButton">
-                                    Perfil
-                                </button>
-                            </form>
-                            <a class="dropdown-item" href="#">Mis Turnos</a>
+                            <div>
+                                <form method="post">
+                                    <button type="submit" class="dropdown-item" name="profileButton">
+                                        Perfil
+                                    </button>
+                                </form>
+                            </div>
+                            <div>
+                                <form method="post">
+                                    <button type="submit" class="dropdown-item" name="viewAppointments">
+                                        Ver Turnos
+                                    </button>
+                                </form>
+                            </div>
                             <div class="dropdown-item">
                                 <form method="post">
                                     <button type="submit" class="dropdown-item register_button" name="logoutButton">
