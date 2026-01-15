@@ -1,7 +1,10 @@
 .pet-card {
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: rgba(142, 23, 51, 0.75);
+    background-color: rgb(92, 10, 10, 0.9);
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 0.7rem;
 }
 
 .pet-card_info {
@@ -27,6 +30,7 @@
     height: 10%;
     margin: auto;
     overflow: hidden;
+    border-radius: 50px;
 }
 
 .foto-mascota > img {
@@ -45,6 +49,13 @@
 }
 
 .actions-section {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    padding: 2vw 2vw;
+    border-radius: 10px;
+}
+
+.pets-section {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     background-color: white;
     padding: 2vw 2vw;

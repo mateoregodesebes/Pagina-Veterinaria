@@ -25,7 +25,6 @@ if (!isset($_SESSION["user"])) {
       exit();
     }
   }
-
 ?>
   <div class="container-fluid px-3">
     <div class="row py-5">
