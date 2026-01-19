@@ -118,27 +118,6 @@ if (!isset($personal)) {
     </div>
   </div>
 
-  <div class="mb-3">
-    <label for="lista-turnos">Turnos ya reservados: </label>
-    <table class="table table-bordered border-3 table-hover table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Horarios</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($horario_atenciones as $horario) { ?>
-          <tr>
-            <td>
-              <?= $horario['fecha_hora'] ?>
-            </td>
-          </tr>
-        <?php }; ?>
-      </tbody>
-    </table>
-  </div>
-
-
   <div class="mb-3 button-submit d-flex justify-content-center">
     <button type="submit" id="btnSubmit" class="btn btn-primary" name="action" value="altaAtencion">Enviar</button>
   </div>
