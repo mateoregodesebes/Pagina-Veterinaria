@@ -26,7 +26,21 @@ $paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM mascotas ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT 
+                masc.id, 
+                masc.nombre, 
+                masc.raza, 
+                masc.color, 
+                per.id AS id_dueno,
+                per.nombre AS nom_dueno, 
+                per.apellido AS ape_dueno, 
+                masc.fecha_de_nac, 
+                masc.fecha_muerte 
+          FROM mascotas as masc
+          INNER JOIN personas as per ON masc.cliente_id = per.id
+          ORDER BY masc.id 
+          LIMIT $registrosPagina OFFSET $offset";
+
 $result = mysqli_query($conn, $query);
 
 $paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM mascotas");
@@ -70,8 +84,11 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
         <td>
           <?= $row['color'] ?>
         </td>
+        <td style="display: none;">
+          <?= $row['id_dueno'] ?>
+        </td>
         <td>
-          <?= $row['cliente_id'] ?>
+          <?= $row['ape_dueno'] . ', ' . $row['nom_dueno'] ?>
         </td>
         <td>
           <?= $row['fecha_de_nac'] ?>
