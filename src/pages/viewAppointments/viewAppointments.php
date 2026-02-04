@@ -6,11 +6,43 @@ if (!isset($_SESSION["user_id"])) {
 }
 else {
   include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorUsuario.php';
+
+  if(isset($_POST['cancelAppointment'])) {
+    $appointmentIdsForUser = array_column($appointments, 'id');
+    if(!in_array($_POST['formAppointmentId'], $appointmentIdsForUser)) {
+      echo "<br><div class='alert alert-danger mx-5 my-2' role='alert'>Ocurrió un error con el cargado de turnos. Se recargará la página.</div>";
+    }
+    else {
+      $appointmentId = $_POST['formAppointmentId'];
+      include __DIR__ . '/../../entity-dbs/atenciones/cancelarTurno.php';
+      echo '<script>console.log("Viva Perón");</script>';
+      echo "<br><div class='alert alert-success mx-5 my-2' role='alert'>Turno cancelado correctamente.</div>";
+    }
+    echo "<script>
+        setTimeout(function() {
+            window.location.replace('index.php');
+        }, 3000);
+    </script>";
+  }
 ?>
+
+<script>
+// Script para pasar el ID del turno al form cancelar al modal
+document.addEventListener('DOMContentLoaded', function () {
+
+  const cancelButton = document.getElementById('cancelAppointmentBtn');
+
+  cancelButton.addEventListener('click', function () {
+    const appointmentId = document.getElementById('appointmentId').value;
+    const formAppointmentId = document.getElementById('formAppointmentId');
+
+    formAppointmentId.value = appointmentId;
+  })
+});
+</script>
 
 <div class="row m-5 appointment-container">
   <h2>Listado de turnos</h2>
-  <form method="post" action="index.php">
     <div class="row">
       <div class="col-12 main-info">
         <div class="appointment-info">
@@ -22,6 +54,7 @@ else {
                 <th>Mascota</th>
                 <th>Servicio</th>
                 <th>Personal</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +65,10 @@ else {
               <td><?= htmlspecialchars($appointment['mascota_nombre']) ?></td>
               <td><?= htmlspecialchars($appointment['servicio_nombre']) ?></td>
               <td><?= htmlspecialchars($appointment['personal_nombre']) ?></td>
+              <td class="d-flex justify-content-center">
+                <input type="hidden" id="appointmentId" value="<?= $appointment['id'] ?>">
+                  <button name="cancelAppointment" id="cancelAppointmentBtn" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal" class="btn btn-danger btn-sm">Cancelar Turno</button>
+              </td>
             </tr>
           <?php endforeach; ?>
             <tbody>
@@ -40,8 +77,30 @@ else {
       </div>
       </div>
     </div>
-  </form>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancelAppointmentModal" tabindex="-1" aria-labelledby="cancelAppointmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cancelAppointmentModalLabel">Cancelar Turno</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea cancelar este turno?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+        <form method="POST" action="index.php">
+          <input type="hidden" name="formAppointmentId" id="formAppointmentId" />
+          <button type="submit" name="cancelAppointment" class="btn btn-danger">Confirmar Cancelación</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <?php
 }

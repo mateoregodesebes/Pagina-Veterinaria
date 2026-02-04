@@ -6,7 +6,8 @@ if (isset($_SESSION['user_id'])) {
   try {
   $usuario_id = intval($_SESSION['user_id']);
 
-  $stmt = $conn->prepare("SELECT  a.fecha_hora AS fecha_hora, 
+  $stmt = $conn->prepare("SELECT  a.id AS id,
+                                  a.fecha_hora AS fecha_hora, 
                                   m.nombre AS mascota_nombre,
                                   s.nombre AS servicio_nombre,
                                   CONCAT(p.nombre, ' ', p.apellido) AS personal_nombre
@@ -15,7 +16,9 @@ if (isset($_SESSION['user_id'])) {
                             INNER JOIN servicios s ON s.id = a.servicio_id
                             INNER JOIN personas p ON p.id = a.personal_id
                               WHERE cliente_id = ?
-                              AND fecha_hora >= NOW()");
+                              AND fecha_hora >= NOW()
+                              AND a.titulo != 'Turno cancelado'
+                              AND a.descripcion != 'Turno cancelado'");
   $stmt->bind_param("i", $usuario_id);
   $stmt->execute();
   $result = $stmt->get_result();
