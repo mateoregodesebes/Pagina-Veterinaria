@@ -25,6 +25,11 @@ if (!isset($_SESSION["user_id"])) {
             </script>";
       exit();
     }
+    elseif(isset($_POST['action']) && $_POST['action'] === 'goBack') {
+      $_SESSION['idMascota'] = null;
+      $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
+      echo '<script>window.location.replace("index.php");</script>';
+  }
 
     # Se determina si se está agregando o editando una mascota
     if (isset($_SESSION['idMascota']) && $_SESSION['idMascota'] != '') {
@@ -41,6 +46,12 @@ if (!isset($_SESSION["user_id"])) {
   $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja'];
 ?>
 <div class="row m-5 pet-container">
+  <form class="button-form" method="post">
+      <div class="mb-3">
+        <button class="button-back" type="submit" name="action" value="goBack"><i
+            class="fa-solid fa-arrow-left"></i></button>
+      </div>
+  </form>
   <h2><?php echo $_SESSION['idMascota'] == '' ? "Agregar Mascota": "Editar Mascota" ?></h2>
   <form method="post" action="index.php" enctype="multipart/form-data">
     <div class="row">

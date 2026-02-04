@@ -47,7 +47,10 @@ else {
         }, 5000);
     </script>";
     exit();
-}
+} elseif(isset($_POST['action']) && $_POST['action'] === 'goBack') {
+    $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
+    echo '<script>window.location.replace("index.php");</script>';
+  }
 
 ?>
 
@@ -138,6 +141,12 @@ $(document).ready(function() {
 </script>
 
 <div class="row m-5 appointment-container">
+    <form class="button-form" method="post">
+      <div class="mb-3">
+        <button class="button-back" type="submit" name="action" value="goBack"><i
+            class="fa-solid fa-arrow-left"></i></button>
+      </div>
+    </form>
   <h2>Pida un turno</h2>
   <form method="post" action="index.php">
     <div class="row">
