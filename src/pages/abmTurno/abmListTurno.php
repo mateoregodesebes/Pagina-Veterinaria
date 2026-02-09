@@ -5,11 +5,11 @@ require_once(__DIR__ . '/../../../includes/connection.php');
 if (isset($_SESSION['error'])) {
   if ($_SESSION['error']) {
     echo '<div id="alert" class="alert alert-danger" role="alert">
-    Error al cargar cliente, intente nuevamente
+    Error al cargar turno, intente nuevamente
           </div>';
   } else {
     echo '<div id="alert" class="alert alert-success" role="alert">
-    Cliente actualizado con exito
+    Turno actualizado con exito
           </div>';
   }
   echo '<script type="text/javascript">
@@ -26,27 +26,32 @@ $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM personas WHERE rol_id is NULL ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT atenciones.id AS atencion_id,
+  mascotas.nombre AS mascota_nombre,
+  servicios.nombre AS servicio_nombre,
+  CONCAT(personas.nombre, ' ', personas.apellido) AS personal_nombre,
+  atenciones.fecha_hora,
+  atenciones.titulo,
+  atenciones.descripcion FROM atenciones INNER JOIN mascotas ON atenciones.mascota_id = mascotas.id JOIN servicios ON atenciones.servicio_id = servicios.id JOIN personas ON atenciones.personal_id = personas.id ORDER BY atenciones.id LIMIT $registrosPagina OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM personas WHERE rol_id IS NULL");
+$paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM atenciones");
 $filaTotal = mysqli_fetch_assoc($paginadoTotal);
 $totalRegistros = $filaTotal['total'];
 $totalPaginas = ceil($totalRegistros / $registrosPagina);
 ?>
 
-<h3 class="mt-3"> Clientes </h3>
+<h3 class="mt-3"> Turnos </h3>
 <table class="table table-bordered border-3 table-hover table-striped">
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Email</th>
-      <th scope="col">Ciudad</th>
-      <th scope="col">Direccion</th>
-      <th scope="col">Telefono</th>
-      <th scope="col">Mascotas</th>
+      <th scope="col">Mascota</th>
+      <th scope="col">Servicio</th>
+      <th scope="col">Personal</th>
+      <th scope="col">Fecha y hora</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Descripcion</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -58,81 +63,40 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
     <?php while ($row = mysqli_fetch_array($result)): ?>
       <tr>
         <td>
-          <?= $row['id'] ?>
+          <?= $row['atencion_id'] ?>
         </td>
         <td>
-          <?= $row['nombre'] ?>
+          <?= $row['mascota_nombre'] ?>
         </td>
         <td>
-          <?= $row['apellido'] ?>
+          <?= $row['servicio_nombre'] ?>
         </td>
         <td>
-          <?= $row['email'] ?>
+          <?= $row['personal_nombre'] ?>
         </td>
         <td>
-          <?= $row['ciudad'] ?>
+          <?= $row['fecha_hora'] ?>
         </td>
         <td>
-          <?= $row['direccion'] ?>
+          <?= $row['titulo'] ?>
         </td>
         <td>
-          <?= $row['telefono'] ?>
+          <?= $row['descripcion'] ?>
         </td>
-        
-        <td style="text-align: center;">
 
-          <script>
-            function cargarMascotas(idCliente) {
-              $.ajax({
-                type: "GET",
-                url: "../src/entity-dbs/clientes/getMascotasAjax.php?idCliente=" + idCliente,
-                success: function(response) {
-                  $("#mascotaModal .modal-body").html(response);
-                  $("#mascotaModal").modal("show");
-                },
-                error: function(xhr, status, error) {
-                  console.error(chr.responseText);
-                }
-              })
-            }
-          </script>
-
-          <button type="button" name="action" value="mascotas" class="btn btn-warning btn-paw" data-bs-toggle="modal"
-              data-bs-target="#mascotaModal" onclick="cargarMascotas(<?= $row['id'] ?>)"><i class="fa-solid fa-paw" style="color: black;"></i>
-          </button>
-
-          <div class="modal fade" id="mascotaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="mascotaModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="mascotaModalLabel">Mascotas del cliente</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <!-- Contenido de la tabla de mascotas -->
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </td>
-        
         <td>
           <form method="post">
-            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+            <input type="hidden" name="id" value="<?= $row['atencion_id'] ?>">
             <button type="submit" name="action" value="update" class="btn btn-success">Actualizar</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Borrar</button>
+              data-bs-target="#staticBackdrop<?= $row['atencion_id'] ?>">Borrar</button>
 
-            <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-              aria-labelledby="staticBackdropLabel<?= $row['id'] ?>" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop<?= $row['atencion_id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel<?= $row['atencion_id'] ?>" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['id'] ?>">Usted esta a punto de borrar un cliente</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel<?= $row['atencion_id'] ?>">Usted esta a punto de borrar un cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -168,16 +132,16 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($_POST['action'] == 'update') {
-    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
-    $_SESSION["idCliente"] = $_POST['id'];
+    $_SESSION["currentPage"] = '../src/pages/abmTurno/abmFormTurno.php';
+    $_SESSION["idTurno"] = $_POST['id'];
     echo '<script>window.location.replace("index.php");</script>';
 
   } elseif ($_POST['action'] == 'delete') {
-    require_once(__DIR__ . '/../../entity-dbs/clientes/bajaCliente.php');
+    require_once(__DIR__ . '/../../entity-dbs/atenciones/bajaTurnos.php');
     echo '<script>window.location.replace("index.php");</script>';
     exit();
   } elseif ($_POST['action'] == 'create') {
-    $_SESSION["currentPage"] = '../src/pages/abmCliente/abmFormCliente.php';
+    $_SESSION["currentPage"] = '../src/pages/abmTurno/abmFormTurno.php';
     echo '<script>window.location.replace("index.php");</script>';
   }
 }

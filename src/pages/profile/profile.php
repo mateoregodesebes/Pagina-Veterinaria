@@ -36,10 +36,18 @@ if (!isset($_SESSION["user"])) {
         ?>
       </div>
       <div class="col-9">
-        <h1>
-          <?php echo 'Hola ' . $_SESSION["user_name"]
-          ?>
-        </h1>
+        <div class="col-12">
+          <h1>
+            <?php echo 'Hola ' . $_SESSION["user_name"]
+            ?>
+          </h1>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+          <form action="index.php" method="post">
+            <button class="btn btn-sm btn-outline-warning" type="submit" name="change_psw">Cambiar contraseña</button>
+            </form>
+          
+        </div>
       </div>
       <div class="col-12 my-3 actions-section d-flex flex-column justify-content-around">
         <h2>Acciones:</h2>

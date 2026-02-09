@@ -26,7 +26,7 @@ if (isset($_SESSION["idMascota"])) {
 }
 
 // * Para el combo del id cliente
-$query2 = "SELECT id FROM personas";
+$query2 = "SELECT id, nombre, apellido FROM personas WHERE rol_id IS NULL";
 $result = mysqli_query($conn, $query2);
 $id_clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -46,14 +46,17 @@ $colors = ['Blanco', 'Negro', 'Marron', 'Amarillo', 'Potus', 'Verde', 'Naranja']
 
     <form method="post" enctype="multipart/form-data">
     <div class="mb-3 p-3" <?php if (isset($idAtencion)) echo 'style="display: none;"' ?>>
-        <label class="form-label">Id de cliente dueño</label>
-        <select name="idCliente" class="form-control">
-          <?php
-      foreach ($id_clientes as $id_temp) {
-        $selected = ($id_temp['id'] == $id_cliente || $id_temp['id'] == $idAtencion) ? "selected" : "";
-        echo "<option value='" . $id_temp['id'] . "' $selected>" . $id_temp['id'] . "</option>";
-      }
-      ?>
+      <label class="form-label">Cliente dueño</label>
+      <select name="idCliente" class="form-control">
+        <?php
+          foreach ($id_clientes as $id_temp) {
+              $selected = ($id_temp['id'] == $id_cliente || $id_temp['id'] == $idAtencion) ? "selected" : "";
+              
+              $texto = $id_temp['id'] . ' - ' . $id_temp['apellido'] . ', ' . $id_temp['nombre'];
+              
+              echo "<option value='{$id_temp['id']}' $selected>$texto</option>";
+          }
+        ?>
       </select>
     </div>
     <div class="mb-3 px-3">

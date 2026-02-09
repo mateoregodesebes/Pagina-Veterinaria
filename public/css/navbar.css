@@ -64,10 +64,107 @@ button.nav-btn:focus {
 
 /* Footer CSS */
 
+footer {
+    margin-top: auto;
+}
+
+footer .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.footerblock {
+    border-inline: 0.3vw solid black;
+    border-block: 0.5vw solid black;
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.footerblock button {
+    font-family: var(--main-font);
+    background-color: var(--main-color);
+    font-size: 1.1em;
+    font-weight: 900;
+    color: var(--button-link-color);
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.footerblock p {
+    font-family: var(--main-font);
+    color: var(--text-color);
+    text-decoration: none;
+    text-align: left;
+}
+
+.footerblock address {
+    font-family: var(--main-font);
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.sitemap {
+    font-family: var(--main-font);
+    background-color: var(--main-color);
+    border-bottom-width: 0.5vw;
+    border-style: solid;
+    border-color: black;
+
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+
+    padding: 0;
+}
+
+/* Solo en pantallas grandes */
+@media only screen and (min-width: 768px) {
+    .sitemap {
+        display: flex;
+    }
+}
+
+.sitemap-elem {
+    margin: 0 auto;
+    border: 0.2vw solid black;
+}
+
+.sitemap il,
+.sitemap ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sitemap-elem h3 {
+    font-size: larger;
+}
+.sitemap-elem button {
+    font-family: var(--main-font);
+    color: white;
+    font-size: 0.9em;
+    font-weight: 900;
+    text-decoration: none;
+
+    /* Estas dos configuraciones de abajo son para overridear lo que viene de otras librerias por default */
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.sitemap-elem button:hover {
+    text-decoration: underline;
+}
+
 .footer-link {
     text-decoration: none;
 }
 
 .footer-link:hover {
     text-decoration: underline;
+}
+
+.note {
+    padding: 0;
+    border: 0;
+    margin: 0;
 }

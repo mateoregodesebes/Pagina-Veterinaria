@@ -2,6 +2,7 @@
     --main-color: rgb(92, 10, 10);
     --text-color: white;
     --link-color: white;
+    --button-link-color: #0d6efd;
     --main-background: #eee3e7;
     --table-color: #b070af;
     --main-font: 'Montserrat', sans-serif;
@@ -16,36 +17,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--main-background);
-}
-
-footer {
-    margin-top: auto;
-    width: 99%;
-}
-@media only screen and (max-width: 600px) {
-    footer {
-        width: 97.5%;
-    }
-}
-
-.footerblock {
-    border-inline: 0.3vw solid black;
-    border-block: 0.5vw solid black;
-    background-color: var(--main-color);
-    text-align: center;
-}
-
-.footerblock p {
-    font-family: var(--main-font);
-    color: var(--text-color);
-    text-decoration: none;
-    text-align: left;
-}
-
-.footerblock address {
-    font-family: var(--main-font);
-    color: var(--text-color);
-    text-decoration: none;
 }
 
 .row > p {

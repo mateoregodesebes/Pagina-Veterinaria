@@ -1,5 +1,32 @@
 <?php
-// Array con las paginas que estan en progreso
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["LogoButton"]) or isset($_POST["home"])) {
+        unset($_SESSION['currentPage']);
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["about-us"])) {
+        $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["contact"])) {
+        $_SESSION['currentPage'] = '../src/pages/contact/contact.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["services"])) {
+        $_SESSION['currentPage'] = '../src/pages/services/services.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    if(isset($_POST["newspaper"])) {
+        $_SESSION['currentPage'] = '../src/pages/inprogress/inprogress.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+}
+    // Array con las paginas que estan en progreso
 $in_progress_pages = [
     '../src/pages/shop/shop.php',
     '../src/pages/peluqueria/peluqueria.php',

@@ -26,7 +26,21 @@ $paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $paginaActual = max($paginaActual, 1);
 $offset = ($paginaActual - 1) * $registrosPagina;
 
-$query = "SELECT * FROM mascotas ORDER BY id LIMIT $registrosPagina OFFSET $offset";
+$query = "SELECT 
+                masc.id, 
+                masc.nombre, 
+                masc.raza, 
+                masc.color, 
+                per.id AS id_dueno,
+                per.nombre AS nom_dueno, 
+                per.apellido AS ape_dueno, 
+                masc.fecha_de_nac, 
+                masc.fecha_muerte 
+          FROM mascotas as masc
+          INNER JOIN personas as per ON masc.cliente_id = per.id
+          ORDER BY masc.id 
+          LIMIT $registrosPagina OFFSET $offset";
+
 $result = mysqli_query($conn, $query);
 
 $paginadoTotal = mysqli_query($conn, "SELECT COUNT(*) as total FROM mascotas");
@@ -46,8 +60,8 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
       <th scope="col">Raza</th>
       <th scope="col">Color</th>
       <th scope="col">Id de dueño</th>
-      <th scope="col">Fecha Nac</th>
-      <th scope="col">Fecha Muerte</th>
+      <th scope="col">Fecha Nacimiento</th>
+      <th scope="col">Fecha Defuncion</th>
       <form method="post">
         <th scope="col"><button class="plus-icon" type="submit" name="action" value="create"><i
               class="fa-solid fa-plus"></i></button>
@@ -70,8 +84,11 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
         <td>
           <?= $row['color'] ?>
         </td>
+        <td style="display: none;">
+          <?= $row['id_dueno'] ?>
+        </td>
         <td>
-          <?= $row['cliente_id'] ?>
+          <?= $row['ape_dueno'] . ', ' . $row['nom_dueno'] ?>
         </td>
         <td>
           <?= $row['fecha_de_nac'] ?>
@@ -82,9 +99,9 @@ $totalPaginas = ceil($totalRegistros / $registrosPagina);
         <td>
           <form method="post">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
-            <button type="submit" name="action" value="update" class="btn btn-success">Update</button>
+            <button type="submit" name="action" value="update" class="btn btn-success">Actualizar</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Delete</button>
+              data-bs-target="#staticBackdrop<?= $row['id'] ?>">Borrar</button>
 
             <div class="modal fade" id="staticBackdrop<?= $row['id'] ?>" data-bs-backdrop="static"
               data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<?= $row['id'] ?>"
