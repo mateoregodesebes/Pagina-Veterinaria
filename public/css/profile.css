@@ -1,45 +1,63 @@
 .pet-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: rgba(142, 23, 51, 0.75);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgb(92, 10, 10, 0.9);
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 0.7rem;
 }
 
 .pet-card_info {
-  flex-grow: 1;
-  padding-left: 20px;
+    flex-grow: 1;
+    padding-left: 20px;
 }
 
 .pet-card_info h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .pet-card_action button {
-  cursor: pointer;
-  
-  display: block;
-  width:100%;
-  height:auto;
+    cursor: pointer;
+
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-.foto-mascota{
-  width: 10%;
-  height: 10%;
-  margin: auto;
-  overflow:hidden;
+.foto-mascota {
+    width: 10%;
+    height: 10%;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 50px;
 }
 
-.foto-mascota > img{
-  width: 100%;
-  height: 100%;
-  object-fit:cover;
-  padding: 7%;
+.foto-mascota > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 7%;
 }
 
 @media only screen and (max-width: 600px) {
-  .foto-mascota {
-    width:70%;
-    height:70%;
-    overflow:hidden;
-  }
+    .foto-mascota {
+        width: 70%;
+        height: 70%;
+        overflow: hidden;
+    }
+}
+
+.actions-section {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    padding: 2vw 2vw;
+    border-radius: 10px;
+}
+
+.pets-section {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    padding: 2vw 2vw;
+    border-radius: 10px;
 }

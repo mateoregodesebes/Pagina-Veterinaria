@@ -1,0 +1,38 @@
+.appointment-container {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--main-color);
+    padding: 2vw 2vw;
+    border-radius: 10px;
+}
+
+.appointment-container h2 {
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.main-inputs {
+    background-color: white;
+    padding: 2vw 2vw;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.button-back {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+
+    transition: 0.3s ease;
+}
+
+.button-back:hover {
+    background-color: white;
+    border: none;
+    color: var(--main-color);
+
+    transition: 0.3s ease;
+}
