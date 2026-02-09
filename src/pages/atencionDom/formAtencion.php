@@ -7,7 +7,13 @@ const iniManiana = 9;
 const finManiana = 13;
 const iniTarde = 14;
 const finTarde = 18;
+?>
 
+<script>
+  const horariosOcupados = <?php echo json_encode($horario_atenciones); ?>;
+</script>
+
+<?php
 if (!isset($mascotas)) {
   $_SESSION['alerta'] = 'noMascotas';
   $_SESSION['currentPage'] = '../src/pages/atencionDom/atencionMain.php';
@@ -112,31 +118,47 @@ if (!isset($personal)) {
     </div>
   </div>
 
-  <div class="mb-3">
-    <label for="lista-turnos">Turnos ya reservados: </label>
-    <table class="table table-bordered border-3 table-hover table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Horarios</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($horario_atenciones as $horario) { ?>
-          <tr>
-            <td>
-              <?= $horario['fecha_hora'] ?>
-            </td>
-          </tr>
-        <?php }; ?>
-      </tbody>
-    </table>
-  </div>
-
-
   <div class="mb-3 button-submit d-flex justify-content-center">
-    <button type="submit" class="btn btn-primary" name="action" value="altaAtencion">Enviar</button>
+    <button type="submit" id="btnSubmit" class="btn btn-primary" name="action" value="altaAtencion">Enviar</button>
   </div>
+  <p id="msgHorario" style="text-align:center; color:red; display:none;"> El horario seleccionado ya está ocupado. </p>
 </form>
+
+<script>
+const fecha = document.getElementById("fecha");
+const hora  = document.getElementById("hora");
+const btn   = document.getElementById("btnSubmit");
+const msg   = document.getElementById("msgHorario");
+
+function convertirHora(horaFloat) {
+  let horas = Math.floor(horaFloat);
+  let minutos = (horaFloat - horas) * 60;
+  return String(horas).padStart(2,'0') + ":" + String(minutos).padStart(2,'0');
+}
+
+function verificarHorario() {
+  if (!fecha.value || !hora.value) return;
+
+  const fechaPartes = fecha.value.split("-");
+  const fechaFormateada = `${fechaPartes[2]}-${fechaPartes[1]}-${fechaPartes[0]}`;
+  const horaFormateada = convertirHora(parseFloat(hora.value));
+  const seleccion = `${fechaFormateada} ${horaFormateada}`;
+
+  const ocupado = horariosOcupados.some(h => h.fecha_hora === seleccion);
+
+  if (ocupado) {
+    btn.disabled = true;
+    msg.style.display = "block";
+  } else {
+    btn.disabled = false;
+    msg.style.display = "none";
+  }
+}
+
+fecha.addEventListener("change", verificarHorario);
+hora.addEventListener("change", verificarHorario);
+</script>
+
 
 
 <?php
