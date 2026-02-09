@@ -26,7 +26,7 @@ if (isset($_SESSION["user_role"]) && $_SESSION["user_role"] != "cliente") {
     .nav-item {
         margin-right: 12%;
     }
-    </style>';
+    </style>';  
 }
 
 ?>
@@ -109,7 +109,7 @@ $(document).ready(function(){
                                 session_destroy();
                                 echo '<script>window.location.replace("index.php");</script>';
                                 exit();
-                            } elseif (isset($_POST["profile"])) {
+                            } elseif (isset($_POST["profileButton"])) {
                                 $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
                                 echo '<script>window.location.replace("index.php");</script>';
                                 exit();
@@ -146,7 +146,7 @@ $(document).ready(function(){
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 if (isset($_POST["login"])) {
                                     require_once(__DIR__ . '/../scripts/login.php');
-                                } elseif (isset($_POST["register"])) {
+                                } elseif (isset($_POST["registerButton"])) {
                                     $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
                                     echo '<script>window.location.replace("index.php");</script>';
                                     exit();
