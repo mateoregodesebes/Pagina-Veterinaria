@@ -5,8 +5,16 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 else {
-  include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorUsuario.php';
+  $esPeluquero = $_SESSION['user_role'] === 'Peluquero';
+  $esVeterinario = $_SESSION['user_role'] === 'Veterinario';
 
+  if ($_SESSION['user_role'] === 'cliente') {
+    include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorUsuario.php';
+  }
+  else{
+    include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorProfesional.php';
+  }
+  
   if(isset($_POST['cancelAppointment'])) {
     $appointmentIdsForUser = array_column($appointments, 'id');
     if(!in_array($_POST['formAppointmentId'], $appointmentIdsForUser)) {
@@ -15,7 +23,6 @@ else {
     else {
       $appointmentId = $_POST['formAppointmentId'];
       include __DIR__ . '/../../entity-dbs/atenciones/cancelarTurno.php';
-      echo '<script>console.log("Viva Perón");</script>';
       echo "<br><div class='alert alert-success mx-5 my-2' role='alert'>Turno cancelado correctamente.</div>";
     }
     echo "<script>
@@ -63,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <th>Hora</th>
                 <th>Mascota</th>
                 <th>Servicio</th>
-                <th>Personal</th>
+                <th><?= ($esPeluquero || $esVeterinario) ? "Dueño" : "Personal" ?></th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -74,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <td><?= htmlspecialchars(substr($appointment['fecha_hora'], 11, 5)) ?></td>
               <td><?= htmlspecialchars($appointment['mascota_nombre']) ?></td>
               <td><?= htmlspecialchars($appointment['servicio_nombre']) ?></td>
-              <td><?= htmlspecialchars($appointment['personal_nombre']) ?></td>
+              <td><?= ($esPeluquero || $esVeterinario) ? htmlspecialchars($appointment['dueño_nombre']) : htmlspecialchars($appointment['personal_nombre']) ?></td>
               <td class="d-flex justify-content-center">
                 <input type="hidden" id="appointmentId" value="<?= $appointment['id'] ?>">
                   <button name="cancelAppointment" id="cancelAppointmentBtn" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal" class="btn btn-danger btn-sm">Cancelar Turno</button>

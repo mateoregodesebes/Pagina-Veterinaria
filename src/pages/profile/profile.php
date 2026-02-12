@@ -24,6 +24,11 @@ if (!isset($_SESSION["user"])) {
       echo '<script>window.location.replace("index.php");</script>';
       exit();
     }
+    elseif (isset($_POST["change_psw"])) {
+      $_SESSION['currentPage'] = '../src/pages/forgot-password/forgot-password.php';
+      echo '<script>window.location.replace("index.php");</script>';
+      exit();
+    }
   }
 ?>
   <div class="container-fluid px-3">
@@ -52,7 +57,7 @@ if (!isset($_SESSION["user"])) {
       <div class="col-12 my-3 actions-section d-flex flex-column justify-content-around">
         <h2>Acciones:</h2>
         <div class="d-flex justify-content-around">
-          <div>
+          <div class="<?php echo $_SESSION['user_role'] != 'cliente' ? 'd-none' : '' ?>">
             <form action="index.php" method="post">
               <button class="btn btn-warning btn-lg" name="requestAppointment" type="submit">Pedir Turno</button>
             </form>
@@ -62,14 +67,14 @@ if (!isset($_SESSION["user"])) {
             <button class="btn btn-info btn-lg" name="viewAppointments" type="submit">Ver Turnos</button>
           </form>
           </div>
-          <div>
+          <div class="<?php echo $_SESSION['user_role'] != 'cliente' ? 'd-none' : '' ?>">
             <form action="index.php" method="post">
             <button class="btn btn-primary btn-lg" name="addPet" type="submit">Agregar Mascota</button>
           </form>
           </div>
       </div>
     </div>
-    <div class="pets-section my-1">
+    <div class="pets-section my-1 <?php echo $_SESSION['user_role'] != 'cliente' ? 'd-none' : '' ?>">
       <?php
       include __DIR__ . '/../../entity-dbs/clientes/mascotasCliente.php';
 

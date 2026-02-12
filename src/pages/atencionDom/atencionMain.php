@@ -39,25 +39,36 @@ if (isset($_SESSION['alerta'])) {
 }
 ?>
 <form method="post">
-  <div class="mt-4">
-    <div class="d-flex justify-content-center">
-      <h2>Atencion</h2>
-    </div>
+  <div class="my-4 form-container">
+    <div class="main-form">
+      <div class="d-flex justify-content-center">
+        <h1>Atención Domiciliaria</h1>
+      </div>      
 
-    <div class="d-flex justify-content-center">
-      <h2>Domiciliaria</h2>
-    </div>
+      <div class="my-3">
+        <label class="form-label">Id de cliente:</label>
+        <input type="text" name="idCliente" class="form-control" placeholder="Id de cliente" required>
 
-    <div class="my-3">
-      <label class="form-label">Id de cliente:</label>
-      <input type="text" name="idCliente" class="form-control" placeholder="Id de cliente" required>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Nueva Mascota?</label>
-      <input name="petCheckbox" type="checkbox">
-    </div>
-    <div class="mb-3 d-flex justify-content-center">
-      <button class="btn btn-primary" type="submit">Siguiente</button>
+        <!-- <select class="form-select" name="servicios" id="servicios" required>
+              <option value="" disabled selected>Nombre del servicio</option>
+              <?php
+              if (isset($servicios)) {
+                foreach ($servicios as $servicio) {
+                  echo '<option value="' . $servicio['id'] . '">' . $servicio['nombre'] . '</option>';
+                }
+              }
+              ?>
+        </select> -->
+
+      </div>
+      <div class="mb-5 form-switch">
+        <input class="form-check-input" name="petCheckbox" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Se trata de una nueva mascota del cliente?</label>  
+    
+      </div>
+      <div class="mb-3 d-flex justify-content-center">
+        <button class="btn btn-primary" type="submit">Siguiente</button>
+      </div>
     </div>
   </div>
 </form>

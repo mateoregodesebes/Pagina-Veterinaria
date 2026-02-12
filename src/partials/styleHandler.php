@@ -6,6 +6,9 @@ if ($_GET['token'] ?? false) {
     $_SESSION["reset_psw_token"] = $_GET['token'] ?? '';
     $_SESSION["currentPage"] = '../src/pages/forgot-password/reset-password.php';
 }
+elseif($_SESSION["currentPage"] == "../src/pages/homepage/homepage.php" && $_SESSION["user_role"] != 'Profesional') {
+    echo '<link rel="stylesheet" href="css/atencion.css">';
+    }
 
 if (isset($_SESSION["currentPage"])) {
     switch ($_SESSION["currentPage"]) {
@@ -72,6 +75,9 @@ if (isset($_SESSION["currentPage"])) {
             break;
         case '../src/pages/addPet/addPet.php':
             echo '<link rel="stylesheet" href="css/addPet.css">';
+            break;
+        case '../src/pages/atencionDom/atencionMain.php':
+            echo '<link rel="stylesheet" href="css/atencion.css">';
             break;
     }
 } else {

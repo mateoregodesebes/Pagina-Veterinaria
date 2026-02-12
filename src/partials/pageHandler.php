@@ -1,10 +1,5 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["LogoButton"]) or isset($_POST["home"])) {
-        unset($_SESSION['currentPage']);
-        echo '<script>window.location.replace("index.php");</script>';
-        exit();
-    }
     if(isset($_POST["about-us"])) {
         $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
         echo '<script>window.location.replace("index.php");</script>';

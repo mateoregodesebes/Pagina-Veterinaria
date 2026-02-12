@@ -1,7 +1,18 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["LogoButton"])) {
-        unset($_SESSION['currentPage']);
+
+        if(!isset($_SESSION['user_role']) || $_SESSION['user_role'] === 'cliente') {
+            unset($_SESSION['currentPage']);
+        } elseif($_SESSION['user_role'] === 'Veterinario') {
+            $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
+        }
+
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    elseif(isset($_POST["register"])) {
+        $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
@@ -58,7 +69,7 @@ $(document).ready(function(){
 
 <div class="row">
     <nav class="navb navbar-expand-sm">
-        <div class="col-1 logToggle">
+        <div class="col-1">
             <form action="index.php" method="post">
                 <button class="navbar-brand mx-3 logo" type="submit" name="LogoButton">
                     <img src="../assets/logo.png" width="50" height="50" alt="Logo">
