@@ -6,9 +6,11 @@ if ($_GET['token'] ?? false) {
     $_SESSION["reset_psw_token"] = $_GET['token'] ?? '';
     $_SESSION["currentPage"] = '../src/pages/forgot-password/reset-password.php';
 }
-elseif($_SESSION["currentPage"] == "../src/pages/homepage/homepage.php" && $_SESSION["user_role"] != 'Profesional') {
+else if(isset($_SESSION["currentPage"]) && isset($_SESSION["user_role"])) {
+    if($_SESSION["currentPage"] == "../src/pages/homepage/homepage.php" && $_SESSION["user_role"] != 'Profesional') {
     echo '<link rel="stylesheet" href="css/atencion.css">';
     }
+}
 
 if (isset($_SESSION["currentPage"])) {
     switch ($_SESSION["currentPage"]) {
@@ -78,6 +80,9 @@ if (isset($_SESSION["currentPage"])) {
             break;
         case '../src/pages/atencionDom/atencionMain.php':
             echo '<link rel="stylesheet" href="css/atencion.css">';
+            break;
+        case '../src/pages/editAppointment/editAppointment.php':
+            echo '<link rel="stylesheet" href="css/editAppointment.css">';
             break;
     }
 } else {
