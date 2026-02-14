@@ -1,5 +1,4 @@
 <?php
-
 $email = $_POST['email'];
 
 $token = bin2hex(random_bytes(16));
@@ -11,8 +10,8 @@ $expires_at = date("Y-m-d H:i:s", time() + 60 * 30); // 30 minutos de expiració
 require_once(__DIR__ . '/../../../includes/connection.php');
 
 $sql = "UPDATE personas 
-            SET reset_token_hash = ?,
-                reset_token_expires_at = ?
+            SET verification_token_hash = ?,
+                verification_expires_at = ?
             WHERE email = ?";
 
 $stmt = $conn->prepare ($sql);
@@ -31,11 +30,11 @@ if ($conn->affected_rows === 0) {
     $mail->addAddress($email);
 
     // mb_encode_mimeheader es para que los caracteres especiales se vean bien en el asunto del mail
-    $mail->Subject = mb_encode_mimeheader("Restablecimiento de contraseña", "UTF-8", "B");
+    $mail->Subject = mb_encode_mimeheader("Verificación de cuenta", "UTF-8", "B");
     //! Recordar cambiar el link cuando se suba al servidor
     $mail->Body = <<<END
-    <p>Hemos recibido una solicitud para restablecer la contraseña de su cuenta.</p>
-    <a href="http://localhost/Pagina-Veterinaria/public/index.php?reset_psw_token=$token">Haga click en este enlace para restablecer su contraseña</a>
+    <p>Usted se ha registrado en la página de la veterinaria San Anton. Para verificar que su cuenta sea válida, haga click en el siguiente enlace:</p>
+    <a href="http://localhost/Pagina-Veterinaria/public/index.php?verification_token=$token">Haga click en este enlace para verificar su cuenta</a>
     <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 
@@ -49,4 +48,5 @@ if ($conn->affected_rows === 0) {
         $_SESSION["mail_error"] = true;
     }
 }
+
 ?>

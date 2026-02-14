@@ -4,7 +4,9 @@ require_once(__DIR__ . '/../../includes/connection.php');
 $login_email = $_POST["email"];
 $login_password = $_POST["password"];
 
-$stmt = $conn->prepare("SELECT * FROM personas WHERE email = ?");
+$stmt = $conn->prepare("SELECT * FROM personas 
+                            WHERE email = ? 
+                            AND is_verified = True");
 
 if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);

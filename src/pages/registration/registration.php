@@ -3,6 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $errors = array();
     $reg_email = $_POST["email"];
     
+    # Filtrado de email y validación de contraseña
     if (!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
         array_push($errors, "Email inválido");
     }
@@ -10,8 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         array_push($errors, "Las contraseñas no coinciden");
     }
     
+    # Se busca repetición de mail en base de datos
     require_once(__DIR__ . '/../../../includes/connection.php');
-    $stmt = $conn->prepare("SELECT * FROM personas WHERE email = ? AND rol_id IS NULL");
+    $stmt = $conn->prepare("SELECT * FROM personas 
+                                WHERE email = ? 
+                                AND rol_id IS NULL
+                                AND is_verified = True");
 
     if (!$stmt) {
     throw new Exception("Error preparing statement: " . $conn->error);
@@ -30,16 +35,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         array_push($errors, "El email ya está registrado");
     }
 
+    # Se muestran todos los errores encontrados o se da de alta al cliente
     if (count($errors) > 0) {
         foreach ($errors as $error) {
             echo "<br><div class='alert alert-danger' role='alert'>$error</div>";
         }
     } else {
-        require_once __DIR__ . '/../../entity-dbs/clientes/altaCliente.php';
-        echo "<br><div class='alert alert-success' role='alert'>Has creado tu perfil correctamente</div>";
-
+        # Si no hay errores, se le envia al cliente un mail de verificación
+        require_once __DIR__ . '/../../entity-dbs/personas/altaCliente.php';
+        require_once __DIR__ . '/../../includes/sendVerificationEmail.php';
+        if($_SESSION["mail_success"]) {
+        echo "<br><div class='alert alert-success' role='alert'>Se envió un mail de verificación a tu correo electrónico</div>";
         $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
-        echo '<script>window.location.replace("index.php");</script>';
+        } else if($_SESSION["mail_error"]) {
+            echo "<br><div class='alert alert-danger' role='alert'>Hubo un error al enviar el mail de verificación. Por favor, intente registrarse nuevamente.</div>";
+        }
+
+        echo "<script>
+        setTimeout(function() {
+            window.location.replace('index.php');
+        }, 5000);
+    </script>";
         exit();
     }
 }
