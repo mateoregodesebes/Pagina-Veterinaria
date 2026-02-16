@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../../../includes/connection.php');
+require(__DIR__ . '/../../../includes/connection.php');
 
 try {
   $vNombre = $_POST['nombre'];
@@ -21,11 +21,9 @@ try {
   }
   $stmt->bind_param("sssssss", $vNombre, $vApellido, $vEmail, $vCiudad, $vDireccion, $vTelefono, $vContrasenia_hash);
 
-  if (!$_SESSION['error']) {
     if (!$stmt->execute()) {
       throw new Exception("Error executing statement" . $stmt->error);
     }
-  }
 
   $stmt->close();
 

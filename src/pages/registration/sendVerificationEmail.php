@@ -7,15 +7,16 @@ $token_hash = hash('sha256', $token);
 
 $expires_at = date("Y-m-d H:i:s", time() + 60 * 30); // 30 minutos de expiración
 
-require_once(__DIR__ . '/../../../includes/connection.php');
+require(__DIR__ . '/../../../includes/connection.php');
 
 $sql = "UPDATE personas 
             SET verification_token_hash = ?,
                 verification_expires_at = ?
             WHERE email = ?";
 
-$stmt = $conn->prepare ($sql);
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("sss", $token_hash, $expires_at, $email);
+
 $stmt->execute();
 
 if ($conn->affected_rows === 0) {
@@ -38,7 +39,6 @@ if ($conn->affected_rows === 0) {
     <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 
-
     # Se envia el correo. No se notifica el tipo de error al usuario por seguridad.
     # Puede tratarse de una persona que pruebando si un email existe en la base de datos.
     try {
@@ -48,5 +48,7 @@ if ($conn->affected_rows === 0) {
         $_SESSION["mail_error"] = true;
     }
 }
+$stmt->close();
+mysqli_close($conn);
 
 ?>

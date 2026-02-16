@@ -35,6 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         array_push($errors, "El email ya está registrado");
     }
 
+    $stmt->close();
+
+    mysqli_close($conn);
+
     # Se muestran todos los errores encontrados o se da de alta al cliente
     if (count($errors) > 0) {
         foreach ($errors as $error) {
@@ -42,15 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         }
     } else {
         # Si no hay errores, se le envia al cliente un mail de verificación
-        require_once __DIR__ . '/../../entity-dbs/personas/altaCliente.php';
-        require_once __DIR__ . '/../../includes/sendVerificationEmail.php';
-        if($_SESSION["mail_success"]) {
+        require_once __DIR__ . '/../../entity-dbs/clientes/altaCliente.php';
+        require_once __DIR__ . '/sendVerificationEmail.php';
+
+        if(isset($_SESSION["mail_success"])) {
         echo "<br><div class='alert alert-success' role='alert'>Se envió un mail de verificación a tu correo electrónico</div>";
         $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
-        } else if($_SESSION["mail_error"]) {
+        unset($_SESSION["mail_success"]);
+        } else if(isset($_SESSION["mail_error"])) {
             echo "<br><div class='alert alert-danger' role='alert'>Hubo un error al enviar el mail de verificación. Por favor, intente registrarse nuevamente.</div>";
+            unset($_SESSION["mail_error"]);
         }
-
         echo "<script>
         setTimeout(function() {
             window.location.replace('index.php');
@@ -105,9 +111,8 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="row registration-container">
-    <div class="col-2"></div>
-    <div class="col-8 registration-form">
+<div class="row m-5 form-container">
+    <div class="col registration-info">
         <h2>Formulario de registro</h2>
         <form action="index.php" method="POST">
             <div class="form-group">
@@ -192,5 +197,4 @@ $(document).ready(function(){
 
         <br>
     </div>
-    <div class="col-2"></div>
 </div>

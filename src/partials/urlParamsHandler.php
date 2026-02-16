@@ -6,11 +6,12 @@ if ($_GET['reset_psw_token'] ?? false) {
   $_SESSION["currentPage"] = '../src/pages/forgot-password/reset-password.php';
 }
 else if ($_GET['verification_token'] ?? false) {
+  echo '<script>console.log("Se detectó un token de verificación en la URL, verificando cuenta...")</script>';
   $_SESSION["verification_token"] = $_GET['verification_token'] ?? '';
   // Verificar que el token en sesión sea válido
   $_SESSION["verification_token_hash"] = hash('sha256', $_SESSION["verification_token"]);
 
-  require_once(__DIR__ . '/../../../includes/connection.php');
+  require_once(__DIR__ . '/../../includes/connection.php');
 
   $sql = "SELECT * FROM personas 
               WHERE verification_token_hash = ? 
@@ -35,7 +36,7 @@ else if ($_GET['verification_token'] ?? false) {
     // Si el token es valido se verifica la cuenta del usuario
     echo '<script>console.log("Token de verificación válido. Verificando cuenta... de id ' . $user['id'] . '"); </script>';
     $userId = $user['id'];
-    require_once __DIR__ . '/../../entity-dbs/personas/verificarCuenta.php';
+    require_once __DIR__ . '/../entity-dbs/clientes/verificarCuenta.php';
     echo "<br><div class='alert alert-success mx-5 my-2' role='alert'>Cuenta verificada exitosamente. La página se recargará, ya puedes loguearte</div>";
     echo "<script>
         setTimeout(function() {

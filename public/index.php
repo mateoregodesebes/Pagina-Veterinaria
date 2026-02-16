@@ -25,6 +25,7 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <?php
+    require_once("../src/partials/urlParamsHandler.php");
     require_once("../src/partials/styleHandler.php");
     ?>
 

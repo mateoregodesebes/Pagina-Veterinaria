@@ -17,11 +17,9 @@ try {
   }
 
   $stmt->bind_param("i", $vId);
-
-  if (!$_SESSION['error']) {
-    if (!$stmt->execute()) {
-      throw new Exception("Error executing statement" . $stmt->error);
-    }
+  
+  if (!$stmt->execute()) {
+    throw new Exception("Error executing statement" . $stmt->error);
   }
 
   $stmt->close();
