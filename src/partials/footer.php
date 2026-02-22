@@ -1,3 +1,51 @@
+<?php
+
+$sitemap_role = $_SESSION["user_role"] ?? 'cliente';
+
+$sitemap = array(
+    "cliente" => array(
+    "La veterinaria" => array(
+        "Inicio" => "home",
+        "Quienes Somos" => "about-us",
+        "Contacto" => "contact",
+        "Noticias peludas" => "newspaper"
+        ),
+    "Servicios y funciones" => array(
+        "Listado de precios para servicios" => "services",
+        "Pedido de turnos" => "requestAppointment",
+        "Tienda online" => "shop"
+        ),
+    "Usuario" => array(
+        "Registrarse" => "register",
+        "Mi perfil" => "profile"
+        )
+    ),
+    "Veterinario" => array(
+        "Atención domiciliaria" => array(
+            "Inicio" => "home"
+            ),
+        "Usuario" => array(
+            "Mi perfil" => "profile"
+            )
+    ),
+    "Peluquero" => array(
+        "Atención domiciliaria" => array(
+            "Inicio" => "home"
+            ),
+        "Usuario" => array(
+            "Mi perfil" => "profile"
+            )
+    ),
+    'Asistente' => array()
+);
+
+$sitemap_col_length = $sitemap_role != 'Asistente' ? 12 / count($sitemap[$sitemap_role]) : 0; 
+
+$hasSitemap = $sitemap_role === 'Asistente' ? false : true;
+
+?>
+
+
 
 <div class="row">
     <div class="col-6 footerblock">
@@ -27,89 +75,38 @@
             </div>
         </div>
     </div>
+
+    <?php
+    if($hasSitemap){
+    ?>
     <div class="col-12 sitemap">
-        <div class="col-4 sitemap-elem"> 
-            <h3>La veterinaria</h3>
+        <?php
+        foreach($sitemap[$sitemap_role] as $sitemap_elem_title => $sitemap_elem_array)  {
+        ?>
+            <div class="col-<?=$sitemap_col_length?> sitemap-elem"> 
+            <h3><?=$sitemap_elem_title?></h3>
             <ul>
+            <?php
+            foreach($sitemap_elem_array as $sitemap_elem_desc => $sitemap_route){
+                ?>
                 <li>
                     <form action="index.php" method="post">
-                        <button type="submit" name="home"> 
-                            Inicio
+                        <button type="submit" name="<?=$sitemap_route?>"> 
+                            <?=$sitemap_elem_desc?>
                         </button>
-                    </form>
+                    </form> 
                 </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="about-us"> 
-                            Quienes Somos
-                        </button>
-                    </form>
-                </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="contact"> 
-                            Contacto
-                        </button>
-                    </form>
-                </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="newspaper"> 
-                            Noticias peludas
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-        <div class="col-4 sitemap-elem"> 
-            <h3>Servicios y funciones</h3>
-            <ul>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="services">
-                            Listado de precios para servicios
-                        </button>
-                    </form>
-                </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name=".">
-                        <?php
-                        //! Cambiar el name del boton cuando se haga la pagina de turnos
-                        ?>
-                            Pedido de turnos
-                        </button>
-                    </form>
-                </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="shop">
-                            Tienda online
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-        <div class="col-4 sitemap-elem"> 
-            <h3>Usuario</h3>
-            <ul>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="register">
-                            Registrarse
-                        </button>
-                    </form>
-                </li>
-                <li>
-                    <form action="index.php" method="post">
-                        <button type="submit" name="profile">
-                            Mi perfil
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
+                <?php
+            }
+            ?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
+    <?php
+    }
+    ?>
     <p class="note">Este sitio es realizado para una prueba práctica de la materia Entornos Gráficos de la Universidad Tecnologica
         Nacional Regional Rosario (UTNFRRO), no representa a ninguna veterinaria ni debe ser tomada como ello.</p>
 </div>
