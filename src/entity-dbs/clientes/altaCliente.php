@@ -21,9 +21,11 @@ try {
   }
   $stmt->bind_param("sssssss", $vNombre, $vApellido, $vEmail, $vCiudad, $vDireccion, $vTelefono, $vContrasenia_hash);
 
+  if (!isset($_SESSION['error'])) {
     if (!$stmt->execute()) {
       throw new Exception("Error executing statement" . $stmt->error);
     }
+  }
 
   $stmt->close();
 
