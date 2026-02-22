@@ -36,6 +36,8 @@ if (isset($_SESSION['alerta'])) {
     }, 10000); // 10 seconds
   </script>';
   $_SESSION['error'] = null;
+
+  require_once __DIR__ . '/../../entity-dbs/clientes/getClientes.php';
 }
 ?>
 <form method="post">
@@ -47,7 +49,16 @@ if (isset($_SESSION['alerta'])) {
 
       <div class="my-3">
         <label class="form-label">Id de cliente:</label>
-        <input type="text" name="idCliente" class="form-control" placeholder="Id de cliente" required>
+        <select class='form-control' name="idCliente" required>
+          <option selected disabled>Seleccione un cliente</option>
+            <?php
+              if (isset($clientes)) {
+                foreach ($clientes as $cliente) {
+                  echo '<option value="' . $cliente['id'] . '">' . 'ID: ' .$cliente['id'] . ' - ' . $cliente['nombre'] . '</option>';
+                }
+              }
+            ?>
+        </select>
 
         <!-- <select class="form-select" name="servicios" id="servicios" required>
               <option value="" disabled selected>Nombre del servicio</option>

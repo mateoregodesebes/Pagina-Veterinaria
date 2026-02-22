@@ -43,7 +43,7 @@ if (!isset($_SESSION["user"])) {
       <div class="col-9">
         <div class="col-12">
           <h1>
-            <?php echo 'Hola ' . $_SESSION["user_name"]
+            <?php echo 'Hola ' . $_SESSION["user_name"] . '. Tu ID de usuario es: ' . $_SESSION["user_id"] . '!';
             ?>
           </h1>
         </div>
