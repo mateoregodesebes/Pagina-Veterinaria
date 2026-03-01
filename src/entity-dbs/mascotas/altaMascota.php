@@ -9,7 +9,6 @@ try {
   $targetDirectory = "../assets/petImages/";
   $targetFile = $targetDirectory . basename($_FILES["foto"]["name"]);
   if (move_uploaded_file($_FILES["foto"]["tmp_name"], $targetFile)) {
-    echo "The file " . basename($_FILES["foto"]["name"]) . " has been uploaded.";
     $name = basename($_FILES["foto"]["name"]);
     $_SESSION['error'] = false;
   } elseif(isset($_SESSION['user_idAt'])){

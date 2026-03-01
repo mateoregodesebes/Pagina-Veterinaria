@@ -40,7 +40,7 @@ if (isset($_SESSION["idCliente"])) {
     </div>
     <div class="mb-3 px-3">
       <label class="form-label">Email</label>
-      <input type="text" required name="email" class="form-control" placeholder="Email"
+      <input type="email" required name="email" class="form-control" placeholder="Email"
         value="<?php echo isset($email) ? $email : ""; ?>">
     </div>
     <div class="mb-3 px-3">
@@ -55,7 +55,7 @@ if (isset($_SESSION["idCliente"])) {
     </div>
     <div class="mb-3 px-3">
       <label class="form-label">Telefono</label>
-      <input type="text" required name="telefono" class="form-control" placeholder="Telefono"
+      <input type="text" required maxlength="10" name="telefono" class="form-control" placeholder="Telefono"
         value="<?php echo isset($telefono) ? $telefono : ""; ?>">
     </div>
 

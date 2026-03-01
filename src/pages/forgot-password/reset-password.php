@@ -118,13 +118,19 @@ $(".reg-required").on('blur keyup', function() {
             <label>Nueva contraseña</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="new_password" minlength="8" required/>
+                <div class="input-group mt-auto">
+                  <input type="password" class="form-control reg-required" name="new_password" minlength="8" required/>
+                  <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
+                </div>
           </div>
           <div class="form-group mt-2">
             <label>Repetir nueva contraseña</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="repeat_new_password" minlength="8" required/>
+                <div class="input-group mt-auto">
+                  <input type="password" class="form-control reg-required" name="repeat_new_password" minlength="8" required/>
+                  <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
+                </div>  
           </div>   
         </div>
         <button type="submit" name="submit" class="btn btn-primary submit-btn mt-2">Enviar</button>

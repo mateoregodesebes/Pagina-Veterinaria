@@ -56,6 +56,8 @@ session_start();
     <footer>
         <?php require_once("../src/partials/footer.php"); ?>
     </footer>
+    <!-- Scrips globales -->
+    <script src="../src/scripts/showPassword.js"></script>
 </body>
 
 </html>

@@ -5,6 +5,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
+    elseif(isset($_POST["register"])) {
+    $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
+    }
     elseif(isset($_POST["about-us"])) {
         $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
         echo '<script>window.location.replace("index.php");</script>';
@@ -169,12 +174,14 @@ $(document).ready(function(){
                                     <small class="warning d-none" id="email-warning">El mail debe contar con un @</small>
                                     <input type="email" class="form-control mt-2" name="email" placeholder="email@ejemplo.com" required>
                                 </div>
-                                <div class="form-group mt-auto">
-                                    <label>Contraseña</label>
-                                    <br>
-                                    <small class="warning d-none" id="password-warning">La contraseña debe tener 8 caracteres por lo menos</small>
-                                    <input type="password" class="form-control mt-2" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
+                                <small class="warning d-none" id="password-warning">La contraseña debe tener 8 caracteres por lo menos</small>
+                                <br>
+                                <label>Contraseña</label>
+                                <div class="input-group mt-auto">
+                                    <input type="password" class="form-control" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
+                                    <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
                                 </div>
+
                                 <div class="form-check mt-3">
                                     <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                     <label class="form-check-label" for="dropdownCheck">
