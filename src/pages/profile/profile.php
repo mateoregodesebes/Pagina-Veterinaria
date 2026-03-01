@@ -44,7 +44,7 @@ if (!isset($_SESSION["user"])) {
 ?>
   <div class="container-fluid px-3">
     <div class="row py-5">
-      <div class="col-3 ">
+      <div class="col-3">
         <img src="<?= $pfpImage ?>" class="img-fluid rounded-circle" alt="Imagen de perfil de <?php echo $_SESSION['user_name'] ?>">
       </div>
       <div class="col-9">
@@ -60,8 +60,7 @@ if (!isset($_SESSION["user"])) {
         <div class="col-12 d-flex justify-content-end">
           <form action="index.php" method="post">
             <button class="btn btn-sm btn-outline-warning" type="submit" name="change_psw">Cambiar contraseña</button>
-            </form>
-          
+          </form>
         </div>
       </div>
       <div class="col-12 my-3 actions-section d-flex flex-column justify-content-around">

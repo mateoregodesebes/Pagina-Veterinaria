@@ -29,8 +29,8 @@ $sitemap = array(
             )
     ),
     "Peluquero" => array(
-        "Atención domiciliaria" => array(
-            "Inicio" => "home"
+        "Turnos" => array(
+            "Ver mis turnos" => "viewAppointments"
             ),
         "Usuario" => array(
             "Mi perfil" => "profile"
