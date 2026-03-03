@@ -1,12 +1,6 @@
 <?php
 
-// Lógica por si entra por el mail de recuperar contraseña
-// Si hay un token en la URL, se carga la pagina de reset-password
-if ($_GET['token'] ?? false) {
-    $_SESSION["reset_psw_token"] = $_GET['token'] ?? '';
-    $_SESSION["currentPage"] = '../src/pages/forgot-password/reset-password.php';
-}
-else if(isset($_SESSION["currentPage"]) && isset($_SESSION["user_role"])) {
+if(isset($_SESSION["currentPage"]) && isset($_SESSION["user_role"])) {
     if($_SESSION["currentPage"] == "../src/pages/homepage/homepage.php" && $_SESSION["user_role"] != 'Profesional') {
     echo '<link rel="stylesheet" href="css/atencion.css">';
     }
