@@ -111,18 +111,11 @@ footer .row {
     border-style: solid;
     border-color: black;
 
-    display: block;
+    display: flex;
     color: var(--text-color);
     text-align: center;
 
     padding: 0;
-}
-
-/* Solo en pantallas grandes */
-@media only screen and (min-width: 768px) {
-    .sitemap {
-        display: flex;
-    }
 }
 
 .sitemap-elem {
@@ -139,6 +132,7 @@ footer .row {
 .sitemap-elem h3 {
     font-size: larger;
 }
+
 .sitemap-elem button {
     font-family: var(--main-font);
     color: white;

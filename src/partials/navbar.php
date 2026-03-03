@@ -1,10 +1,10 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["LogoButton"])) {
+    if (isset($_POST["LogoButton"]) || isset($_POST["home"])) {
 
         if(!isset($_SESSION['user_role']) || $_SESSION['user_role'] === 'cliente') {
             unset($_SESSION['currentPage']);
-        } elseif($_SESSION['user_role'] === 'Veterinario') {
+        } elseif($_SESSION['user_role'] === 'Veterinario' || $_SESSION['user_role'] === 'Peluquero' || $_SESSION['user_role'] === 'Asistente') {
             $_SESSION['currentPage'] = '../src/pages/homepage/homepage.php';
         }
 
@@ -16,6 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
+    elseif(isset($_POST["register"])) {
+    $_SESSION['currentPage'] = '../src/pages/registration/registration.php';
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
+    }
     elseif(isset($_POST["about-us"])) {
         $_SESSION['currentPage'] = '../src/pages/aboutus/aboutus.php';
         echo '<script>window.location.replace("index.php");</script>';
@@ -23,6 +28,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     elseif (isset($_POST["viewAppointments"])) {
         $_SESSION['currentPage'] = '../src/pages/viewAppointments/viewAppointments.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    elseif (isset($_POST["profile"])) {
+        $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    elseif (isset($_POST["requestAppointment"])) {
+        $_SESSION['currentPage'] = '../src/pages/requestAppointment/requestAppointment.php';
+        echo '<script>window.location.replace("index.php");</script>';
+        exit();
+    }
+    elseif (isset($_POST["shop"])) {
+        $_SESSION['currentPage'] = '../src/pages/shop/shop.php';
         echo '<script>window.location.replace("index.php");</script>';
         exit();
     }
@@ -120,18 +140,17 @@ $(document).ready(function(){
                                 session_destroy();
                                 echo '<script>window.location.replace("index.php");</script>';
                                 exit();
-                            } elseif (isset($_POST["profileButton"])) {
-                                $_SESSION['currentPage'] = '../src/pages/profile/profile.php';
-                                echo '<script>window.location.replace("index.php");</script>';
-                                exit();
                             }
                         ?>
                             <div class='alert alert-success' role='alert'>Bienvenido
-                                <?php echo $_SESSION["user_name"] ?>
+                                <?= $_SESSION["user_name"] ?>
                             </div>
+                            <?php
+                            if($_SESSION["user_role"] != 'Asistente') {
+                            ?>
                             <div>
                                 <form method="post">
-                                    <button type="submit" class="dropdown-item" name="profileButton">
+                                    <button type="submit" class="dropdown-item" name="profile">
                                         Perfil
                                     </button>
                                 </form>
@@ -143,6 +162,9 @@ $(document).ready(function(){
                                     </button>
                                 </form>
                             </div>
+                            <?php
+                            }
+                            ?>
                             <div class="dropdown-item">
                                 <form method="post">
                                     <button type="submit" class="dropdown-item register_button" name="logoutButton">
@@ -180,12 +202,14 @@ $(document).ready(function(){
                                     <small class="warning d-none" id="email-warning">El mail debe contar con un @</small>
                                     <input type="email" class="form-control mt-2" name="email" placeholder="email@ejemplo.com" required>
                                 </div>
-                                <div class="form-group mt-auto">
-                                    <label>Contraseña</label>
-                                    <br>
-                                    <small class="warning d-none" id="password-warning">La contraseña debe tener 8 caracteres por lo menos</small>
-                                    <input type="password" class="form-control mt-2" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
+                                <small class="warning d-none" id="password-warning">La contraseña debe tener 8 caracteres por lo menos</small>
+                                <br>
+                                <label>Contraseña</label>
+                                <div class="input-group mt-auto">
+                                    <input type="password" class="form-control" name="password" title="Ingrese una contraseña de al menos 8 caracteres" minlength="8" required>
+                                    <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
                                 </div>
+
                                 <div class="form-check mt-3">
                                     <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                     <label class="form-check-label" for="dropdownCheck">

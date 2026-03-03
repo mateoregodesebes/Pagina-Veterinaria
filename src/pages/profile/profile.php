@@ -30,28 +30,38 @@ if (!isset($_SESSION["user"])) {
       exit();
     }
   }
+  switch($_SESSION['user_role']) {
+    case 'cliente':
+      $pfpImage = '../assets/defaultImages/default-client.png';
+      break;
+    case 'Veterinario':
+    case 'Estudiante':
+      $pfpImage = '../assets/defaultImages/default-vet.png';
+      break;
+    case 'Peluquero':
+      $pfpImage = '../assets/defaultImages/default-hair-dresser.png';
+      break;
+  }
 ?>
   <div class="container-fluid px-3">
     <div class="row py-5">
       <div class="col-3">
-        <?php
-        /* TODO: Agregar foto de perfil para el usuario.
-        *   <img src="../assets/userImages/<?php echo $_SESSION['user_image'] ?>" class="img-fluid rounded-circle" alt="Imagen de perfil de <?php echo $_SESSION['user_name'] ?>">
-        */
-        ?>
+        <img src="<?= $pfpImage ?>" class="img-fluid rounded-circle" alt="Imagen de perfil de <?php echo $_SESSION['user_name'] ?>">
       </div>
       <div class="col-9">
-        <div class="col-12">
+        <div class="col-12 d-flex justify-content-center flex-column">
           <h1>
-            <?php echo 'Hola ' . $_SESSION["user_name"]
+            <?php echo 'Hola ' . $_SESSION["user_name"];
             ?>
           </h1>
+          <h2>
+            Tu ID de usuario es: <b><?=$_SESSION["user_id"] ?></b> !
+          </h2>
         </div>
         <div class="col-12 d-flex justify-content-end">
           <form action="index.php" method="post">
             <button class="btn btn-sm btn-outline-warning" type="submit" name="change_psw">Cambiar contraseña</button>
-            </form>
-          
+          </form>
         </div>
       </div>
       <div class="col-12 my-3 actions-section d-flex flex-column justify-content-around">

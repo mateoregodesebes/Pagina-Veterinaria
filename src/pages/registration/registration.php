@@ -153,7 +153,7 @@ $(document).ready(function(){
                 <small>No es necesario el prefijo +54</small>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="tel" class="form-control reg-required" name="telefono" placeholder="123456789" required/>
+                <input type="tel" class="form-control reg-required" maxlength="10" name="telefono" placeholder="341XXXXXX" required/>
             </div>
             <div class="form-group">
                 <label>Contraseña</label>
@@ -161,13 +161,19 @@ $(document).ready(function(){
                 <small id="reg-password-warning" class="d-none">La contraseña debe tener al menos 8 caracteres</small>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="password" minlength="8" required/>
+                <div class="input-group mt-auto">
+                    <input type="password" class="form-control reg-required" name="password" minlength="8" required/>
+                    <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
+                </div>
             </div>
             <div class="form-group">
                 <label>Repetir Contraseña</label>
                 <br>
                 <small class="d-none">Campo obligatorio (*)</small>
-                <input type="password" class="form-control reg-required" name="repeat_password" minlength="8" required/>
+                <div class="input-group mt-auto">
+                    <input type="password" class="form-control reg-required" name="repeat_password" minlength="8" required/>
+                    <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-eye"></i></button>
+                </div>
             </div>
             <div class="form-btn">
                 <input class="btn btn-outline-danger" type="reset" value="Borrar información">
