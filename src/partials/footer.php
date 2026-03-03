@@ -36,6 +36,14 @@ $sitemap = array(
             "Mi perfil" => "profile"
             )
     ),
+    "Estudiante" => array(
+        "Turnos" => array(
+            "Ver mis turnos" => "viewAppointments"
+            ),
+        "Usuario" => array(
+            "Mi perfil" => "profile"
+            )
+    ),
     'Asistente' => array()
 );
 

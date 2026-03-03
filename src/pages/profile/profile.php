@@ -35,6 +35,7 @@ if (!isset($_SESSION["user"])) {
       $pfpImage = '../assets/defaultImages/default-client.png';
       break;
     case 'Veterinario':
+    case 'Estudiante':
       $pfpImage = '../assets/defaultImages/default-vet.png';
       break;
     case 'Peluquero':
