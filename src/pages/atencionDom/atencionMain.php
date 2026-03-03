@@ -35,29 +35,99 @@ if (isset($_SESSION['alerta'])) {
       alert.style.display = "none";
     }, 10000); // 10 seconds
   </script>';
-  $_SESSION['error'] = null;
-}
+  unset($_SESSION['alerta']);
+
+  }
+require_once __DIR__ . '/../../entity-dbs/clientes/getClientes.php';
 ?>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('Search dropdown script loaded')
+    const form = document.querySelector('form')
+    const searchInput = document.getElementById('clienteSearchInput')
+    const list = document.getElementById('clienteList')
+    const items = Array.from(document.querySelectorAll('.cliente-item'))
+    const hidden = document.getElementById('idClienteHidden')
+    const btn = document.getElementById('clienteDropdownBtn')
+
+    searchInput?.addEventListener('input', function () {
+        const q = this.value.trim().toLowerCase()
+        items.forEach((item) => {
+            const text = item.textContent.toLowerCase()
+            item.style.display = text.includes(q) ? '' : 'none'
+        })
+    })
+
+    list?.addEventListener('click', function (e) {
+        const item = e.target.closest('.cliente-item')
+        if (!item) return
+
+        hidden.value = item.dataset.id
+        btn.textContent = item.dataset.label
+        searchInput.value = ''
+
+        items.forEach((i) => (i.style.display = ''))
+    })
+
+    form?.addEventListener('submit', function (e) {
+        if (!hidden.value) {
+            e.preventDefault()
+            alert('Debe seleccionar un cliente.')
+        }
+    })
+})
+</script>
 <form method="post">
-  <div class="mt-4">
-    <div class="d-flex justify-content-center">
-      <h2>Atencion</h2>
-    </div>
+  <div class="my-4 form-container">
+    <div class="main-form">
+      <div class="d-flex justify-content-center">
+        <h1>Atención Domiciliaria</h1>
+      </div>      
 
-    <div class="d-flex justify-content-center">
-      <h2>Domiciliaria</h2>
-    </div>
+      <div class="my-3">
+  <label class="form-label">Id de cliente:</label>
 
-    <div class="my-3">
-      <label class="form-label">Id de cliente:</label>
-      <input type="text" name="idCliente" class="form-control" placeholder="Id de cliente" required>
+  <input type="hidden" name="idCliente" id="idClienteHidden">
+
+  <div class="dropdown w-100">
+    <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button"
+            id="clienteDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+      Seleccione un cliente
+    </button>
+
+    <div class="dropdown-menu p-2 w-100" aria-labelledby="clienteDropdownBtn">
+      <input type="text" class="form-control mb-2" id="clienteSearchInput" placeholder="Buscar por ID o nombre...">
+
+      <div id="clienteList" style="max-height: 240px; overflow-y: auto;">
+        <?php if (isset($clientes)): ?>
+          <?php foreach ($clientes as $cliente): ?>
+            <?php
+              $id = (int)$cliente['id'];
+              $nombre = htmlspecialchars($cliente['nombre'], ENT_QUOTES, 'UTF-8');
+              $label = "ID: {$id} - {$nombre}";
+            ?>
+            <button type="button"
+                    class="dropdown-item cliente-item"
+                    data-id="<?= $id ?>"
+                    data-label="<?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?>">
+              <?= $label ?>
+            </button>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
     </div>
-    <div class="mb-5">
-      <label class="form-label">Nueva Mascota?</label>
-      <input name="petCheckbox" type="checkbox">
-    </div>
-    <div class="mb-3 d-flex justify-content-center">
-      <button class="btn btn-primary" type="submit">Siguiente</button>
+  </div>
+
+  <div class="form-text">Escriba para filtrar y seleccione un cliente.</div>
+</div>
+      <div class="mb-5 form-switch">
+        <input class="form-check-input" name="petCheckbox" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Se trata de una nueva mascota del cliente?</label>  
+    
+      </div>
+      <div class="mb-3 d-flex justify-content-center">
+        <button class="btn btn-primary" type="submit">Siguiente</button>
+      </div>
     </div>
   </div>
 </form>

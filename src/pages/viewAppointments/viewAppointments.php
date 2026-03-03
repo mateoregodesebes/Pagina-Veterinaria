@@ -5,8 +5,20 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 else {
-  include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorUsuario.php';
+  $esPersonal = $_SESSION['user_role'] === 'Veterinario' || $_SESSION['user_role'] === 'Peluquero';
 
+  if ($_SESSION['user_role'] === 'cliente') {
+    include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorUsuario.php';
+  }
+  else{
+    include __DIR__ . '/../../entity-dbs/atenciones/consultaTurnosPorProfesional.php';
+  }
+  if(isset($_POST['editAppointment'])) {
+    $_SESSION['appointmentToEdit'] = $_POST['appointmentId'];
+    $_SESSION['currentPage'] = '../src/pages/editAppointment/editAppointment.php';
+    echo '<script>window.location.replace("index.php");</script>';
+    exit();
+  }
   if(isset($_POST['cancelAppointment'])) {
     $appointmentIdsForUser = array_column($appointments, 'id');
     if(!in_array($_POST['formAppointmentId'], $appointmentIdsForUser)) {
@@ -15,7 +27,6 @@ else {
     else {
       $appointmentId = $_POST['formAppointmentId'];
       include __DIR__ . '/../../entity-dbs/atenciones/cancelarTurno.php';
-      echo '<script>console.log("Viva Perón");</script>';
       echo "<br><div class='alert alert-success mx-5 my-2' role='alert'>Turno cancelado correctamente.</div>";
     }
     echo "<script>
@@ -63,7 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 <th>Hora</th>
                 <th>Mascota</th>
                 <th>Servicio</th>
-                <th>Personal</th>
+                <th><?= ($esPersonal) ? "Dueño" : "Personal" ?></th>
+                <?=
+                ($esPersonal) ? "<th>Titulo</th><th>Descripcion</th>" : ""
+                ?>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -74,10 +88,13 @@ document.addEventListener('DOMContentLoaded', function () {
               <td><?= htmlspecialchars(substr($appointment['fecha_hora'], 11, 5)) ?></td>
               <td><?= htmlspecialchars($appointment['mascota_nombre']) ?></td>
               <td><?= htmlspecialchars($appointment['servicio_nombre']) ?></td>
-              <td><?= htmlspecialchars($appointment['personal_nombre']) ?></td>
-              <td class="d-flex justify-content-center">
-                <input type="hidden" id="appointmentId" value="<?= $appointment['id'] ?>">
-                  <button name="cancelAppointment" id="cancelAppointmentBtn" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal" class="btn btn-danger btn-sm">Cancelar Turno</button>
+              <?= ($esPersonal) ? "<td>" . htmlspecialchars($appointment['dueño_nombre']) . "</td>" : "<td>" . htmlspecialchars($appointment['personal_nombre']) . "</td>" ?>
+              <?= ($esPersonal) ? "<td>" . htmlspecialchars($appointment['titulo']) . "</td><td>" . htmlspecialchars($appointment['descripcion']) . "</td>" : "" ?>
+              <td class="align-middle">
+                <form method="POST" action="index.php">
+                  <input type="hidden" id="appointmentId" name="appointmentId" value="<?= $appointment['id'] ?>">
+                  <?= ($esPersonal) ? '<button name="editAppointment" type="submit" class="btn btn-warning btn-sm">Editar Turno</button>' : '<button name="cancelAppointment" id="cancelAppointmentBtn" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal" class="btn btn-danger btn-sm">Cancelar Turno</button>' ?>
+                </form>
               </td>
             </tr>
           <?php endforeach; ?>

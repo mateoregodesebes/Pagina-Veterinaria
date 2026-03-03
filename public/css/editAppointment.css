@@ -1,24 +1,23 @@
-.appointment-container {
+.form-container {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     background-color: var(--main-color);
     padding: 2vw 2vw;
     border-radius: 10px;
 }
 
-.appointment-container h2 {
+.form-container h2 {
     text-align: center;
     color: white;
     font-weight: 600;
 }
 
-.main-info {
+.main-inputs {
     background-color: white;
     padding: 2vw 2vw;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
-
 .button-back {
     background-color: var(--secondary-color);
     border: none;
