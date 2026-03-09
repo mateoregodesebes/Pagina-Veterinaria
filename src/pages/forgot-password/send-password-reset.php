@@ -1,4 +1,9 @@
 <?php
+require_once(__DIR__ . '/../../../vendor/autoload.php');
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../includes/');
+$dotenv->load();
+$baseURL = $_ENV['APP_URL'];
 
 $email = $_POST['email'];
 
@@ -35,7 +40,7 @@ if ($conn->affected_rows === 0) {
     //! Recordar cambiar el link cuando se suba al servidor
     $mail->Body = <<<END
     <p>Hemos recibido una solicitud para restablecer la contraseña de su cuenta.</p>
-    <a href="http://localhost/Pagina-Veterinaria/public/index.php?reset_psw_token=$token">Haga click en este enlace para restablecer su contraseña</a>
+    <a href="$baseURL/Pagina-Veterinaria/public/index.php?reset_psw_token=$token">Haga click en este enlace para restablecer su contraseña</a>
     <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 

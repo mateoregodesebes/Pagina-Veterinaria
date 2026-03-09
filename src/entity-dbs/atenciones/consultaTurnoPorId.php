@@ -11,7 +11,7 @@ if (isset($appointmentId)) {
                                       s.nombre AS servicio_nombre,
                                       a.titulo AS titulo,
                                       a.descripcion AS descripcion,
-                                      CONCAT(p.nombre, ' ', p.apellido) AS dueño_nombre
+                                      CONCAT(p.nombre, ' ', p.apellido) AS dueno_nombre
                                 FROM atenciones a
                                 INNER JOIN mascotas m ON m.id = a.mascota_id 
                                 INNER JOIN servicios s ON s.id = a.servicio_id
