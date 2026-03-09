@@ -1,4 +1,10 @@
 <?php
+require_once(__DIR__ . '/../../../vendor/autoload.php');
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../includes/');
+$dotenv->load();
+$baseURL = $_ENV['APP_URL'];
+
 $email = $_POST['email'];
 
 $token = bin2hex(random_bytes(16));
@@ -35,7 +41,7 @@ if ($conn->affected_rows === 0) {
     //! Recordar cambiar el link cuando se suba al servidor
     $mail->Body = <<<END
     <p>Usted se ha registrado en la página de la veterinaria San Anton. Para verificar que su cuenta sea válida, haga click en el siguiente enlace:</p>
-    <a href="http://localhost/Pagina-Veterinaria/public/index.php?verification_token=$token">Haga click en este enlace para verificar su cuenta</a>
+    <a href="$baseURL/Pagina-Veterinaria/public/index.php?verification_token=$token">Haga click en este enlace para verificar su cuenta</a>
     <p>Si no solicitó este cambio, puede ignorar este correo electrónico.</p>
     END;
 

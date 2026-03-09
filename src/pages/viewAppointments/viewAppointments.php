@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <td><?= htmlspecialchars(substr($appointment['fecha_hora'], 11, 5)) ?></td>
               <td><?= htmlspecialchars($appointment['mascota_nombre']) ?></td>
               <td><?= htmlspecialchars($appointment['servicio_nombre']) ?></td>
-              <?= ($esPersonal) ? "<td>" . htmlspecialchars($appointment['dueño_nombre']) . "</td>" : "<td>" . htmlspecialchars($appointment['personal_nombre']) . "</td>" ?>
+              <?= ($esPersonal) ? "<td>" . htmlspecialchars($appointment['dueno_nombre']) . "</td>" : "<td>" . htmlspecialchars($appointment['personal_nombre']) . "</td>" ?>
               <?= ($esPersonal) ? "<td>" . htmlspecialchars($appointment['titulo']) . "</td><td>" . htmlspecialchars($appointment['descripcion']) . "</td>" : "" ?>
               <td class="align-middle">
                 <form method="POST" action="index.php">

@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
                                       a.fecha_hora AS fecha_hora, 
                                       m.nombre AS mascota_nombre,
                                       s.nombre AS servicio_nombre,
-                                      CONCAT(p.nombre, ' ', p.apellido) AS dueño_nombre,
+                                      CONCAT(p.nombre, ' ', p.apellido) AS dueno_nombre,
                                       a.titulo AS titulo,
                                       a.descripcion AS descripcion
                                 FROM atenciones a

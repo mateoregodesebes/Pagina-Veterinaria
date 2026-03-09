@@ -47,6 +47,10 @@ $sitemap = array(
     'Asistente' => array()
 );
 
+if (isset($_SESSION["user_role"])) {
+    unset($sitemap["cliente"]["Usuario"]["Registrarse"]);
+}
+
 $sitemap_col_length = $sitemap_role != 'Asistente' ? 12 / count($sitemap[$sitemap_role]) : 0; 
 
 $hasSitemap = $sitemap_role === 'Asistente' ? false : true;
