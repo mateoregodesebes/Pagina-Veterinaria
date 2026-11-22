@@ -15,69 +15,72 @@ Este repositorio contiene el trabajo relacionado con la página web de la veteri
 
 Los profesores responsables de esta materia son:
 
--   Teoría: Daniela Díaz
--   Práctica: Julián Butti
+- Teoría: Daniela Díaz
+- Práctica: Julián Butti
 
 ### Tecnologias utilizadas
 
 El sitio web fue realizado usando:
 
--   HTML
--   CSS
--   PHP
+- HTML
+- CSS
+- PHP
 
 ## Diagrama Entidad-Relación (DER/ERD)
 
+El modelo físico actual está en [`docs/veterinarias_db.sql`](docs/veterinarias_db.sql). Clientes y personal comparten la tabla `personas`: un cliente se identifica con `rol_id IS NULL` y el staff con un `rol_id` de 1 a 4.
+
 ```mermaid
 erDiagram
-    Cliente {
-        int id
+    Persona {
+        int id PK
         string nombre
         string apellido
         string email
+        string clave "hash bcrypt"
         string ciudad
         string direccion
         string telefono
+        int rol_id FK "NULL = cliente"
+        tinyint is_verified "DEFAULT 0"
+        string verification_token_hash
+        datetime verification_expires_at
+        string reset_token_hash
+        datetime reset_token_expires_at
     }
     Mascota {
-        int id
-        int cliente_id
+        int id PK
+        int cliente_id FK "histórico: Persona.id"
         string nombre
-        blob foto
+        string foto
         string raza
         string color
         date fecha_de_nac
-        date fecha_muerte(NULL)
+        date fecha_muerte "NULL = viva"
     }
     Atencion {
-      int id
-      int mascota_id
-      int servicio_id
-      int personal_id
-      datetime fecha_hora
-      string titulo
-      string descripcion
+        int id PK
+        int mascota_id FK
+        int servicio_id FK
+        int personal_id FK "histórico: Persona.id"
+        datetime fecha_hora
+        string titulo
+        string descripcion
     }
     Servicio {
-        int id
+        int id PK
         string nombre
         string tipo
-        int precio
-    }
-    Personal {
-      int id
-      int rol_id
-      string email
-      string clave
+        float precio
     }
     Rol {
-      int id
-      string nombre
+        int id PK
+        string nombre
     }
 
+    Rol ||--o{ Persona : clasifica
+    Persona ||--o{ Mascota : tiene
     Mascota ||--o{ Atencion : recibe
-    Cliente ||--|{ Mascota : tiene
-    Atencion }o--|| Servicio: con
-    Personal }o--|| Rol: tiene
-    Atencion }o--|| Personal: realiza
+    Servicio ||--o{ Atencion : se_aplica_en
+    Persona ||--o{ Atencion : registra
 ```
